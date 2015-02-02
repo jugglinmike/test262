@@ -8,15 +8,21 @@ format and place them in the DEST directory.
 HELP
 }
 
-read -r -d '' FRONTMATTER <<FRONTMATTER
-/*---
- includes: [v8-mjsunit.js]
- ---*/
-FRONTMATTER
-
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then help; exit; fi
 if [[ "$1" == "" || "$2" == "" ]]; then help; exit 1; fi
 
-for file in $(find $1 -type f); do
-	echo "$FRONTMATTER" | cat - $file > $2${file#$1}
+if [ ! -d "$1" ]; then
+	echo "No such directory: $1";
+	exit 1;
+fi
+
+if [ -d "$2" ]; then
+	echo "Directory already exists: $2";
+	exit 1;
+fi
+
+cp -r $1 $2
+
+for file in $(find $2 -type f); do
+	sed -i "1s;^;/*---\n includes: [v8-mjsunit.js]\n ---*/\n;" $file
 done

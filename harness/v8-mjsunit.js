@@ -25,23 +25,9 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-function MjsUnitAssertionError(message) {
-  this.message = message;
-  // This allows fetching the stack trace using TryCatch::StackTrace.
-  this.stack = new Error("").stack;
-}
+function debug() {}
 
-/*
- * This file is included in all mini jsunit test cases.  The test
- * framework expects lines that signal failed tests to start with
- * the f-word and ignore all other lines.
- */
-
-
-MjsUnitAssertionError.prototype.toString = function () {
-  return this.message;
-};
-
+MjsUnitAssertionError = Test262Error;
 
 // Expected and found values the same objects, or the same primitive
 // values.

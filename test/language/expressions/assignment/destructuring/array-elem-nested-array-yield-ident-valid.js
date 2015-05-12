@@ -17,5 +17,5 @@ var result;
 
 result = [[x[yield]]] = value;
 
-assert.sameValue(assignmentResult, value);
+assert.sameValue(result, value);
 assert.sameValue(x.prop, 22);

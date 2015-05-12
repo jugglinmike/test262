@@ -17,7 +17,7 @@ var g = function*() {
   yield;
   count += 1;
 }
-var iter;
+var iter, result, x;
 
 iter = g();
 result = [...x] = iter;

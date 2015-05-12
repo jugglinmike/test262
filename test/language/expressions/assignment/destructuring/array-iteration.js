@@ -9,7 +9,7 @@ es6id: 12.14.5.3
 features: [generators]
 ---*/
 
-var count, iter;
+var count, iter, result;
 var g = function*() {
   count += 1;
   yield;

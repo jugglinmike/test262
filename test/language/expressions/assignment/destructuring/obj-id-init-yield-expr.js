@@ -17,14 +17,14 @@ iter = (function*() {
   assignmentResult = { x = yield } = value;
 }());
 
-result = iter.next();
+iterationResult = iter.next();
 
 assert.sameValue(iterationResult.value, undefined);
 assert.sameValue(iterationResult.done, false);
 assert.sameValue(x, undefined);
 assert.sameValue(assignmentResult, undefined);
 
-result = iter.next(3);
+iterationResult = iter.next(3);
 
 assert.sameValue(iterationResult.value, undefined);
 assert.sameValue(iterationResult.done, true);

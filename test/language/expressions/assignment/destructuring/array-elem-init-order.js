@@ -9,7 +9,7 @@ es6id: 12.14.5.3
 
 var value = [];
 var x = 0;
-var result;
+var a, b, result;
 
 result = [ a = x += 1, b = x *= 2 ] = value;
 

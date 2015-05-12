@@ -11,5 +11,5 @@ es6id: 12.14.5.4
 var x;
 
 assert.throws(TypeError, function() {
-  ({ x: [ x ] }) = { x: null };
+  ({ x: [ x ] } = { x: null });
 });

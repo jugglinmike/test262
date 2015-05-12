@@ -15,5 +15,5 @@ var result, x, length;
 result = [...{ 0: x, length }] = value;
 
 assert.sameValue(result, value);
-assert.sameValue(x, null);
+assert.sameValue(x, undefined);
 assert.sameValue(length, 0);

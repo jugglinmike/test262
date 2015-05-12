@@ -3,14 +3,13 @@
 
 /*---
 description: >
-    The assignment target should obey `const` semantics in strict mode.
-es6id: 12.14.5.4
+    The assignment target should obey `const` semantics.
+es6id: 12.14.5.3
 features: [const]
-flags: [onlyStrict]
 ---*/
 
 const c = null;
 
 assert.throws(TypeError, function() {
-  ({ c } = { c: 1 });
+  [ c ] = [1];
 });

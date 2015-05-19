@@ -5,9 +5,9 @@
 description: >
     (Work in progress)
 es6id: 14.3.1
+flags: [noStrict]
+includes: [propertyHelper.js]
 ---*/
-
-
 
 // ## 14.3.1 Static Semantics: Early Errors
 //
@@ -30,6 +30,86 @@ es6id: 14.3.1
 //   5. Return DefinePropertyOrThrow(object, methodDef.[[key]], desc).
 //
 
+// step 1
+var value = {};
+function CustomError() {}
+var obj = {
+  method(param) {
+    assert.sameValue(param, value);
+    throw new CustomError();
+  }
+};
+assert.throws(CustomError, function() {
+  obj.method(value);
+});
+
+  // ## 14.3.8 Runtime Semantics: DefineMethod
+  // ...
+  // 6. Let closure be FunctionCreate(kind, StrictFormalParameters,
+  //    FunctionBody, scope, strict). If functionPrototype was passed as a
+  //    parameter then pass its value as the functionPrototype optional
+  //    argument of FunctionCreate.
+  // ...
+var obj = { method() {} };
+assert.throws(TypeError, function() {
+  new obj.method();
+});
+
+var obj = { method() {} };
+assert.sameValue(Object.getPrototypeOf(obj.method), Function.prototype);
+
+    // ## 9.2.4 FunctionInitialize (F, kind, ParameterList, Body, Scope)
+    // ...
+    // 3. Let status be DefinePropertyOrThrow(F, "length",
+    //   PropertyDescriptor{[[Value]]: len, [[Writable]]: false,
+    //   [[Enumerable]]: false, [[Configurable]]: true}).
+
+// includes: [propertyHelper.js]
+var method = { method(a, b, c) {} }.method;
+assert.sameValue(method.length, 3);
+verifyNotEnumerable(method, 'length');
+verifyNotWritable(method, 'length');
+verifyConfigurable(method, 'length');
+
+    // 10. Else if Strict is true, set the [[ThisMode]] internal slot of F to
+    //     strict.
+
+// flags: [noStrict]
+var method = { method() { 'use strict'; return this; } }.method;
+assert.sameValue(method(), undefined);
+
+    // 11. Else set the [[ThisMode]] internal slot of F to global.
+
+// flags: [noStrict]
+var global = (function() { return this; }());
+var method = { method() { return this; } }.method;
+assert.sameValue(method(), global);
+
+  // 7. Perform MakeMethod(closure, object).
+try {
+  Object.prototype.attr = {};
+  var obj = { attr: null, method() { return super.attr; } };
+  assert.sameValue(obj.method(), Object.prototype.attr);
+} finally {
+  delete Object.prototype.attr;
+}
+
+// step 2
+assert.throws(Test262Error, function() {
+  ({ [(function() { throw new Test262Error(); }())]() {} });
+});
+
+// step 3
+var obj = { method() {} };
+assert.sameValue(obj.method.name, 'method');
+
+// steps 4 & 5 (I don't think it's possible to get it to throw here)
+// includes: [propertyHelper.js]
+var obj = { method() {} };
+assert.sameValue(typeof obj.method, 'function');
+verifyEnumerable(obj, 'method');
+verifyWritable(obj, 'method');
+verifyConfigurable(obj, 'method');
 
 // ## 14.4.1 Static Semantics: Early Errors
 //

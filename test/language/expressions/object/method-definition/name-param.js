@@ -31,29 +31,40 @@ includes: [propertyHelper.js]
 //
 
 // step 1
-var value = {};
-function CustomError() {}
-var obj = {
-  method(param) {
-    assert.sameValue(param, value);
-    throw new CustomError();
-  }
-};
-assert.throws(CustomError, function() {
-  obj.method(value);
-});
 
   // ## 14.3.8 Runtime Semantics: DefineMethod
   // ...
+  // 5. If functionPrototype was passed as a parameter, let kind be Normal;
+  //    otherwise let kind be Method.
+
+var obj = { method() {} };
+assert.throws(TypeError, function() {
+  new obj.method();
+});
+
   // 6. Let closure be FunctionCreate(kind, StrictFormalParameters,
   //    FunctionBody, scope, strict). If functionPrototype was passed as a
   //    parameter then pass its value as the functionPrototype optional
   //    argument of FunctionCreate.
   // ...
-var obj = { method() {} };
-assert.throws(TypeError, function() {
-  new obj.method();
-});
+
+
+    // ## 9.2.3 FunctionAllocate (functionPrototype, strict [,functionKind] )
+    // ...
+    // 6. Let F be a newly created ECMAScript function object with the internal
+    //    slots listed in Table 27. All of those internal slots are initialized
+    //    to undefined.
+
+var value = {};
+var callCount = 0;
+var obj = {
+  method(param) {
+    assert.sameValue(param, value);
+    callCount += 1;
+  }
+};
+obj.method(value);
+assert.sameValue(callCount, 1);
 
 var obj = { method() {} };
 assert.sameValue(Object.getPrototypeOf(obj.method), Function.prototype);
@@ -86,6 +97,7 @@ var method = { method() { return this; } }.method;
 assert.sameValue(method(), global);
 
   // 7. Perform MakeMethod(closure, object).
+// Should this use Object.setPrototypeOf instead?
 try {
   Object.prototype.attr = {};
   var obj = { attr: null, method() { return super.attr; } };
@@ -100,13 +112,16 @@ assert.throws(Test262Error, function() {
 });
 
 // step 3
-var obj = { method() {} };
-assert.sameValue(obj.method.name, 'method');
+// includes: [propertyHelper.js]
+var method = { method() {} }.method;
+assert.sameValue(method.name, 'method');
+verifyNotEnumerable(method, 'name');
+verifyNotWritable(method, 'name');
+verifyConfigurable(method, 'name');
 
 // steps 4 & 5 (I don't think it's possible to get it to throw here)
 // includes: [propertyHelper.js]
 var obj = { method() {} };
-assert.sameValue(typeof obj.method, 'function');
 verifyEnumerable(obj, 'method');
 verifyWritable(obj, 'method');
 verifyConfigurable(obj, 'method');

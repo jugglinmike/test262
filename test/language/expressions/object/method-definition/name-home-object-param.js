@@ -3,23 +3,24 @@
 
 /*---
 description: >
-    The formal parameters of a function declared as a method may contain
-    SuperProperty expressions.
-es6id: 12.2.5.1
+    The HomeObject of Functions defined as methods is the Object prototype.
+es6id: 14.3.8
+features: [super]
 ---*/
 
-var val = {};
+var value = {};
 var obj;
 
 try {
-  Object.prototype.Test262Attr = val;
+  Object.prototype.Test262Attr = value;
   obj = {
+    Test262Attr: null,
     method(x = super.Test262Attr) {
       return x;
     }
   };
 
-  assert.sameValue(obj.method(), val);
+  assert.sameValue(obj.method(), value);
 } finally {
   delete Object.prototype.Test262Attr;
 }

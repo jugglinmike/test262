@@ -28,5 +28,5 @@ iterationResult = iter.next(3);
 
 assert.sameValue(iterationResult.value, undefined);
 assert.sameValue(iterationResult.done, true);
-assert.sameValue(x, undefined);
+assert.sameValue(x, 3);
 assert.sameValue(assignmentResult, value);

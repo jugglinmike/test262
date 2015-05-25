@@ -8,11 +8,11 @@
       should be accessible via iteration. When an item is added to the array
       after the iterator is "done", the new item should not be accessible via
       iteration.
-  es6id: 22.1.3.30
+  es6id: 22.1.3.29
  ---*/
 
 var array = [];
-var iterator = array[Symbol.iterator]();
+var iterator = array.values();
 var result;
 
 array.push('a');

@@ -8,6 +8,6 @@ description: >
 es6id: 22.1.5.2.2
 ---*/
 
-var iter = [][Symbol.iterator]();
+var iter = [].values();
 
 assert.sameValue("[object Array Iterator]", Object.prototype.toString.call(iter));

@@ -5,11 +5,11 @@
   description: >
       The method should return a valid iterator with the context as the
       IteratedObject.
-  es6id: 22.1.3.30
+  es6id: 22.1.3.29
  ---*/
 
 var array = ['a', 'b', 'c'];
-var iterator = array[Symbol.iterator]();
+var iterator = array.values();
 var result;
 
 result = iterator.next();

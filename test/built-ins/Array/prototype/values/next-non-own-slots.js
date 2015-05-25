@@ -9,7 +9,7 @@
  ---*/
 
 var array = [0];
-var iterator = array[Symbol.iterator]();
+var iterator = array.values();
 var object = Object.create(iterator);
 
 assert.throws(TypeError, function() {

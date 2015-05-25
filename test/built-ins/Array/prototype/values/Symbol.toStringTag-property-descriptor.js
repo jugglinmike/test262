@@ -9,7 +9,7 @@ includes: [propertyHelper.js]
 es6id: 22.1.5.2.2
 ---*/
 
-var ArrayIteratorProto = Object.getPrototypeOf([][Symbol.iterator]());
+var ArrayIteratorProto = Object.getPrototypeOf([].values());
 
 assert.sameValue("Array Iterator", ArrayIteratorProto[Symbol.toStringTag]);
 

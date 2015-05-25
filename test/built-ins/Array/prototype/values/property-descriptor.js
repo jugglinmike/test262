@@ -6,9 +6,9 @@ description: >
     The method should exist on the Array prototype, and it should be writable
     and configurable, but not enumerable.
 includes: [propertyHelper.js]
-es6id: 22.1.3.4
+es6id: 22.1.3.30
 ---*/
 
-verifyNotEnumerable(Array.prototype, Symbol.iterator);
-verifyWritable(Array.prototype, Symbol.iterator);
-verifyConfigurable(Array.prototype, Symbol.iterator);
+verifyNotEnumerable(Array.prototype, 'values');
+verifyWritable(Array.prototype, 'values');
+verifyConfigurable(Array.prototype, 'values');

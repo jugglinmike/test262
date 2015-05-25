@@ -158,38 +158,24 @@ var NotEarlyError = new Error(...);
 
 ## Handling Errors and Negative Test Cases
 
-The following patterns are considered the best practice:
+Expectations for **parsing errors** should be declared using [the `negative` frontmatter flag](#negative):
 
-### Runtime Error:
 ```javascript
 /*---
- negative: ReferenceError
+negative: SyntaxError
 ---*/
-
-1 += 1; // expect this to throw ReferenceError
-```
-The example uses ReferenceError however it's also possible to use any of the following errors:
-
-- EvalError
-- RangeError
-- ReferenceError
-- TypeError
-- URIError
-
-### Syntax Error & Early Error:
-
-To assert that an error is thrown during lexing or parsing, before any lines of JavaScript are executed, use the following pattern:
-
-```javascript
-/*
- * @negative ^((?!NotEarlyError).)*$
- */
 
 throw NotEarlyError;
 var var = var;
 ```
 
-There are *very* few cases where a syntax error is **not** an early error. In those cases use the Runtime Error pattern but wrap the test code in an eval statement. Be careful, eval code is not global code!
+Expectations for **runtime errors** should be defined using the `assert.throws` method and the appropriate JavaScript Error constructor function:
+
+```javascript
+assert.throws(ReferenceError, function() {
+  1 += 1; // expect this to throw ReferenceError
+});
+```
 
 ## Writing Asynchronous Tests
 

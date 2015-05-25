@@ -2,12 +2,12 @@
 // This code is governed by the BSD license found in the LICENSE file.
 
 /*---
-  description: >
-      The method should exist on the Array prototype, and it should be writable
-      and configurable, but not enumerable.
-  includes: [propertyHelper.js]
-  es6id: 22.1.3.4
- ---*/
+description: >
+    The method should exist on the Array prototype, and it should be writable
+    and configurable, but not enumerable.
+includes: [propertyHelper.js]
+es6id: 22.1.3.4
+---*/
 
 verifyNotEnumerable(Array.prototype, Symbol.iterator);
 verifyWritable(Array.prototype, Symbol.iterator);

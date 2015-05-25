@@ -46,6 +46,7 @@ Test262 supports the following tags:
  - [**info**](#info)
  - [**negative**](#negative)
  - [**es5id**](#es5id)
+ - [**es6id**](#es6id)
  - [**includes**](#includes)
  - [**timeout**](#timeout)
  - [**author**](#author)
@@ -82,7 +83,12 @@ For best practices on how to use the negative tag please see Handling Errors and
 
 This tag identifies the portion of the ECMAScript 5.1 standard that is tested by this test.  It was automatically generated for tests that were originally written for the ES5 version of the test suite and are now part of the ES6 version.
 
-When writing a new test for ES6, it is only necessary to include this tag when the test covers a part of the ES5 spec that is incorporated into ES6.
+When writing a new test for ES6, it is only necessary to include this tag when the test covers a part of the ES5 spec that is incorporated into ES6. All other tests should specify the `es6id` (see below) instead.
+
+#### es6id
+**es6id**: [es6-test-id]
+
+This tag identifies the portion of the ECMAScript 6 standard that is tested by this test.
 
 #### includes
 **includes**: [file-list]

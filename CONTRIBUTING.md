@@ -115,26 +115,8 @@ This tag is used to identify the author of a test case. It's optional.
 
 This tag is for boolean properties associated with the test.
 
-Flags are not honored in all runners.  For example, the browser runner does
-not supply a `strict` context to tests marked **onlyStrict**.
-
-The included python console runner honors both **onlyStrict**, and **noStrict**.
-
-The experimental [node console runner](https://github.com/bterlson/test262-harness) also honors both flags.
-
-- **`onlyStrict`**
-Will only run the test in strict mode
-
-- **`noStrict`**
-Will only run the test in "sloppy" mode
-
-### Obsolete Tags
-
-#### path
-This tag is obsolete. Do not manually enter this tag.
-
-#### flags: [negative]
-This is an old-style way of documenting a negative test.  New tests should use the **negative: [errortype]** style documented above.
+- **`onlyStrict`** - only run the test in strict mode (*not supported by the browser runner*)
+- **`noStrict`** - only run the test in "sloppy" mode
 
 ## Test Environment
 

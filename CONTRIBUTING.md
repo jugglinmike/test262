@@ -38,7 +38,7 @@ The copyright block must be the first section of the test.  The copyright block 
 
 ### Frontmatter
 
-The Test262 frontmatter is a string of YAML enclosed by the comment start tag `/*---` and end tag `---*/`.  There must be exactly one Frontmatter per test.
+The Test262 frontmatter is a string of [YAML](https://en.wikipedia.org/wiki/YAML) enclosed by the comment start tag `/*---` and end tag `---*/`.  There must be exactly one Frontmatter per test.
 
 Test262 supports the following tags:
 
@@ -96,14 +96,6 @@ This tag identifies the portion of the ECMAScript 6 standard that is tested by t
 This tag names a list of helper files that will be included in the test environment prior to running the test.  Filenames **must** include the `.js` extension.
 
 The helper files are found in `test/harness/`.
-
-You can compactly include one or more like this: `includes: [helperFile.js]` ; `includes: [helper1.js, helper2.js]`, or use the full YAML list syntax
-
-```
-includes:
- - helperOne.js
- - helperTwo.js
-```
 
 #### timeout
 **timeout**: [integer]

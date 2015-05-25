@@ -40,7 +40,7 @@ The Test262 frontmatter is a string of [YAML](https://en.wikipedia.org/wiki/YAML
 
 Test262 supports the following tags:
 
- - [**description**](#description)
+ - [**description**](#description) (required)
  - [**info**](#info)
  - [**negative**](#negative)
  - [**es5id**](#es5id)
@@ -54,8 +54,9 @@ Test262 supports the following tags:
 #### description
 **description**: [string]
 
-This should be a short, one-line description of the purpose of this
-testcase.  This is the string displayed by the browser runnner.
+This is the only required frontmatter tag. It should be a short, one-line
+description of the purpose of this testcase.  This is the string displayed by
+the browser runnner.
 
 Eg: Insert &lt;LS&gt; between chunks of one string
 
@@ -105,7 +106,7 @@ Test authors **should not** use this tag except as a last resort.  Each runner i
 #### author
 **author**: [string]
 
-This tag is used to identify the author of a test case. It's optional.
+This tag is used to identify the author of a test case.
 
 #### flags
 **flags**: [list]

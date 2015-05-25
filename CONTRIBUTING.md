@@ -4,7 +4,7 @@
 
 There is a substantial amount of variation in existing test names and that's ok.
 
-Test cases should be created in files that are named to identify a feature, API (or aspect of either), that's being tested. Previously, there was a naming system based on the specification section and algorithm step that was the focus of the test. This protocol doesn't work if the section or algorithm step changes. 
+Test cases should be created in files that are named to identify a feature, API (or aspect of either), that's being tested. Previously, there was a naming system based on the specification section and algorithm step that was the focus of the test. This protocol doesn't work if the section or algorithm step changes.
 
 Take a look at these examples:
 
@@ -22,13 +22,13 @@ A test file has three sections: Copyright, Frontmatter, and Body.  A test looks 
 // Copyright (C) 2015 [Contributor Name]. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 
-/*--- 
+/*---
  description: brief description
  info: >
    verbose test description, multiple lines OK.
    (this is rarely necessary, usually description is enough)
 ---*/
- 
+
 [Test Code]
 ```
 
@@ -40,7 +40,7 @@ The copyright block must be the first section of the test.  The copyright block 
 
 The Test262 frontmatter is a string of YAML enclosed by the comment start tag `/*---` and end tag `---*/`.  There must be exactly one Frontmatter per test.
 
-Test262 supports the following tags: 
+Test262 supports the following tags:
 
  - [**description**](#description)
  - [**info**](#info)
@@ -103,7 +103,7 @@ includes:
 
 This tag specifies the number of milliseconds to wait before the test runner declares an [asynchronous test](#writing-asynchronous-tests) to have timed out.  It has no effect on synchronous tests.
 
-Test authors **should not** use this tag except as a last resort.  Each runner is allowed to provide its own default timeout, and the user may be permitted to override this in order to account for unusually fast or slow hardware, network delays, etc. 
+Test authors **should not** use this tag except as a last resort.  Each runner is allowed to provide its own default timeout, and the user may be permitted to override this in order to account for unusually fast or slow hardware, network delays, etc.
 
 #### author
 **author**: [string]
@@ -115,7 +115,7 @@ This tag is used to identify the author of a test case. It's optional.
 
 This tag is for boolean properties associated with the test.
 
-Flags are not honored in all runners.  For example, the browser runner does 
+Flags are not honored in all runners.  For example, the browser runner does
 not supply a `strict` context to tests marked **onlyStrict**.
 
 The included python console runner honors both **onlyStrict**, and **noStrict**.
@@ -131,7 +131,7 @@ Will only run the test in "sloppy" mode
 ### Obsolete Tags
 
 #### path
-This tag is obsolete. Do not manually enter this tag.  
+This tag is obsolete. Do not manually enter this tag.
 
 #### flags: [negative]
 This is an old-style way of documenting a negative test.  New tests should use the **negative: [errortype]** style documented above.
@@ -170,7 +170,7 @@ var NotEarlyError = new Error(...);
 
 When some code is used repeatedly across a group of tests, a new helper function (or group of helpers) can be defined.  To define new helpers, create a file in `test/harness/` with extension `.js`.
 
-To use a custom helper file, name it in the `includes` directive of the Frontmatter, e.g., 
+To use a custom helper file, name it in the `includes` directive of the Frontmatter, e.g.,
 
 ```
 /*---
@@ -208,8 +208,8 @@ To assert that an error is thrown during lexing or parsing, before any lines of 
 /*
  * @negative ^((?!NotEarlyError).)*$
  */
- 
-throw NotEarlyError; 
+
+throw NotEarlyError;
 var var = var;
 ```
 
@@ -238,7 +238,7 @@ p.then(function checkAssertions(arg) {
 
 Function `checkAssertions` implicitly returns `undefined` if the expected condition is observed.  The return value of function `checkAssertions` is then used to asynchronously invoke the first function of the final `then` call, resulting in a call to `$DONE(undefined)`, which signals a passing test.
 
-If the expected condition is not observed, function `checkAssertions` throws a `Test262Error` via function $ERROR.  This is caught by the Promise and then used to asynchronously invoke the second function in the call -- which is also `$DONE` -- resulting in a call to `$DONE(error_object)`, which signals a failing test. 
+If the expected condition is not observed, function `checkAssertions` throws a `Test262Error` via function $ERROR.  This is caught by the Promise and then used to asynchronously invoke the second function in the call -- which is also `$DONE` -- resulting in a call to `$DONE(error_object)`, which signals a failing test.
 
 ### Checking Exception Type and Message in Asynchronous Tests
 
@@ -262,5 +262,4 @@ p.then(function () {
 
 ```
 
-As above, exceptions that are thrown from a `then` clause are passed to a later `$DONE` function and reported asynchronously.  
-
+As above, exceptions that are thrown from a `then` clause are passed to a later `$DONE` function and reported asynchronously.

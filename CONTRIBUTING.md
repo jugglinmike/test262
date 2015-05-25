@@ -50,6 +50,7 @@ Test262 supports the following tags:
  - [**timeout**](#timeout)
  - [**author**](#author)
  - [**flags**](#flags)
+ - [**features**](#features)
 
 #### description
 **description**: [string]
@@ -117,6 +118,11 @@ This tag is for boolean properties associated with the test.
 
 - **`onlyStrict`** - only run the test in strict mode (*not supported by the browser runner*)
 - **`noStrict`** - only run the test in "sloppy" mode
+
+#### features
+**features**: [list]
+
+Some tests require the use of language features that are not directly described by the test file's location in the directory structure. These features features should be formally listed here.
 
 ## Test Environment
 

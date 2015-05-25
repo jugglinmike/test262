@@ -95,7 +95,7 @@ This tag identifies the portion of the ECMAScript 6 standard that is tested by t
 
 This tag names a list of helper files that will be included in the test environment prior to running the test.  Filenames **must** include the `.js` extension.
 
-The helper files are found in `test/harness/`.
+The helper files are found in the `test/harness/` directory. When some code is used repeatedly across a group of tests, a new helper function (or group of helpers) can be defined. Helpers increase test complexity, so they should be created and used sparingly.
 
 #### timeout
 **timeout**: [integer]
@@ -151,20 +151,6 @@ function $DONE(arg) {
 
 var NotEarlyError = new Error(...);
 ```
-
-## Custom Helpers
-
-When some code is used repeatedly across a group of tests, a new helper function (or group of helpers) can be defined.  To define new helpers, create a file in `test/harness/` with extension `.js`.
-
-To use a custom helper file, name it in the `includes` directive of the Frontmatter, e.g.,
-
-```
-/*---
-  includes: [helper.js]
----*/
-```
-
-**Style Note:** Avoid the use of helpers, if possible.
 
 ## Handling Errors and Negative Test Cases
 

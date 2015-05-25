@@ -95,7 +95,7 @@ This tag identifies the portion of the ECMAScript 6 standard that is tested by t
 
 This tag names a list of helper files that will be included in the test environment prior to running the test.  Filenames **must** include the `.js` extension.
 
-The helper files are found in `test/harness/`.  The packaging script will ensure that files from `test/harness` will be copied to `website/harness` when it prepares the `website/` directory for publishing.
+The helper files are found in `test/harness/`.
 
 You can compactly include one or more like this: `includes: [helperFile.js]` ; `includes: [helper1.js, helper2.js]`, or use the full YAML list syntax
 

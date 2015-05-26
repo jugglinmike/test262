@@ -132,6 +132,10 @@ Test262Error(message) | constructor for an error object that indicates a test fa
 $ERROR(message) | helper function: construct a Test262Error object and throw it
 $DONE(arg) | helper function for asynchronous tests; see Writing Asynchronous Tests, below
 NotEarlyError | preconstructed error object used for testing syntax and other early errors; see Syntax Error & Early Error, below
+assert(value, message) | helper function that will throw a new Test262Error instance if the specified value is not strictly equal to the JavaScript `true` value; accepts an optional string message for use in creating the error
+assert.sameValue(actual, expected, message) | helper function that will throw a new Test262Error instance if the first two arguments are not the same value (see implementation for specifics); accepts an optional string message for use in creating the error
+assert.notSameValue(actual, unexpected, message) | helper function that will throw a new Test262Error instance if the first two arguments are the same value (see implementation for specifics); accepts an optional string message for use in creating the error
+assert.throws(expectedErrorConstructor, fn) | helper function that will throw a new Test262Error instance if the provided function does not throw an error, or if the constructor of the value thrown does not match the provided constructor
 
 ```
 /// error class

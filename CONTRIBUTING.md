@@ -131,8 +131,8 @@ Test262Error(message) | constructor for an error object that indicates a test fa
 $ERROR(message) | construct a Test262Error object and throw it
 $DONE(arg) | see Writing Asynchronous Tests, below
 assert(value, message) | throw a new Test262Error instance if the specified value is not strictly equal to the JavaScript `true` value; accepts an optional string message for use in creating the error
-assert.sameValue(actual, expected, message) | throw a new Test262Error instance if the first two arguments are not the same value (see implementation for specifics); accepts an optional string message for use in creating the error
-assert.notSameValue(actual, unexpected, message) | throw a new Test262Error instance if the first two arguments are the same value (see implementation for specifics); accepts an optional string message for use in creating the error
+assert.sameValue(actual, expected, message) | throw a new Test262Error instance if the first two arguments are not [the same value](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevalue); accepts an optional string message for use in creating the error
+assert.notSameValue(actual, unexpected, message) | throw a new Test262Error instance if the first two arguments are [the same value](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevalue); accepts an optional string message for use in creating the error
 assert.throws(expectedErrorConstructor, fn) | throw a new Test262Error instance if the provided function does not throw an error, or if the constructor of the value thrown does not match the provided constructor
 
 The test harness also defines the following objects:

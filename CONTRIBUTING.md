@@ -128,13 +128,18 @@ Each test case is run in a fresh JavaScript environment; in a browser, this will
 Function | Purpose
 ---------|--------
 Test262Error(message) | constructor for an error object that indicates a test failure
-$ERROR(message) | helper function: construct a Test262Error object and throw it
-$DONE(arg) | helper function for asynchronous tests; see Writing Asynchronous Tests, below
+$ERROR(message) | construct a Test262Error object and throw it
+$DONE(arg) | see Writing Asynchronous Tests, below
+assert(value, message) | throw a new Test262Error instance if the specified value is not strictly equal to the JavaScript `true` value; accepts an optional string message for use in creating the error
+assert.sameValue(actual, expected, message) | throw a new Test262Error instance if the first two arguments are not the same value (see implementation for specifics); accepts an optional string message for use in creating the error
+assert.notSameValue(actual, unexpected, message) | throw a new Test262Error instance if the first two arguments are the same value (see implementation for specifics); accepts an optional string message for use in creating the error
+assert.throws(expectedErrorConstructor, fn) | throw a new Test262Error instance if the provided function does not throw an error, or if the constructor of the value thrown does not match the provided constructor
+
+The test harness also defines the following objects:
+
+Identifier | Purpose
+-----------|--------
 NotEarlyError | preconstructed error object used for testing syntax and other early errors; see Syntax Error & Early Error, below
-assert(value, message) | helper function that will throw a new Test262Error instance if the specified value is not strictly equal to the JavaScript `true` value; accepts an optional string message for use in creating the error
-assert.sameValue(actual, expected, message) | helper function that will throw a new Test262Error instance if the first two arguments are not the same value (see implementation for specifics); accepts an optional string message for use in creating the error
-assert.notSameValue(actual, unexpected, message) | helper function that will throw a new Test262Error instance if the first two arguments are the same value (see implementation for specifics); accepts an optional string message for use in creating the error
-assert.throws(expectedErrorConstructor, fn) | helper function that will throw a new Test262Error instance if the provided function does not throw an error, or if the constructor of the value thrown does not match the provided constructor
 
 ```
 /// error class

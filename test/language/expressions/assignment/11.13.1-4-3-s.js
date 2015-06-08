@@ -16,7 +16,6 @@ includes:
 ---*/
 
 function testcase() {
-    'use strict';
 
     try {
       fnGlobalObject().Infinity = 42;

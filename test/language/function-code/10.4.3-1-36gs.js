@@ -14,7 +14,6 @@ flags: [onlyStrict]
 ---*/
 
 function f1() {
-    "use strict";
     function f() {
         return typeof this;
     }

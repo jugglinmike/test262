@@ -11,7 +11,6 @@ includes: [$FAIL.js]
 
 var global = this;
 'x'.replace(/x/, function() {
-  "use strict";
 
   if (this === global) {
     $FAIL('#1: String replace leaks global');

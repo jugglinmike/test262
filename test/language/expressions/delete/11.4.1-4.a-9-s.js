@@ -17,7 +17,6 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
-  'use strict';
   
   try {
     delete Math.LN2;

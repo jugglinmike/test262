@@ -4,7 +4,6 @@
 es6id: 19.4
 description: >
     Symbol property get and set, strict
-flags: [onlyStrict]
 ---*/
 
 var sym = Symbol("66");

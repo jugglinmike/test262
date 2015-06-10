@@ -9,7 +9,6 @@ es5id: 10.4.3-1-59-s
 description: >
     Strict Mode - checking 'this' (Injected getter includes strict
     directive prologue)
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

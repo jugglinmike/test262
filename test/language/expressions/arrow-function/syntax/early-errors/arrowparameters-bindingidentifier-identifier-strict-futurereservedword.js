@@ -18,6 +18,5 @@ description: >
     Strict Mode
 
 negative: SyntaxError
-flags: [onlyStrict]
 ---*/
 var af = package => 1;

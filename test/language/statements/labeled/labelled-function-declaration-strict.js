@@ -5,7 +5,6 @@ es6id: 13.1
 description: >
     function declarations in statement position in strict mode:
     label: Statement
-flags: [onlyStrict]
 negative: SyntaxError
 ---*/
 label: function g() {}

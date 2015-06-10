@@ -6,7 +6,6 @@ description: >
     ECMAScript Function objects defined using syntactic constructors
     in strict mode code do not have own properties "caller" or
     "arguments", but inherit them from %FunctionPrototype%.
-flags: [onlyStrict]
 es6id: 16.1
 ---*/
 

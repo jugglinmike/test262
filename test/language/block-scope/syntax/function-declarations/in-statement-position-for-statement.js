@@ -6,7 +6,6 @@ description: >
     function declarations in statement position in strict mode:
     for ( ;;) Statement
 negative: SyntaxError
-flags: [onlyStrict]
 ---*/
 for (;false;) function g() {}
 

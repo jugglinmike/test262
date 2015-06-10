@@ -5,7 +5,6 @@ es6id: 12.3.7
 description: >
     The first argument to a tagged template should be frozen and define a `raw`
     property that is also frozen.
-flags: [onlyStrict]
 ---*/
 
 var templateObject = null;

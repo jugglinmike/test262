@@ -6,7 +6,6 @@ description: >
     In strict mode, if the the assignment target is an unresolvable reference,
     a ReferenceError should be thrown.
 es6id: 12.14.5.4
-flags: [onlyStrict]
 ---*/
 
 assert.throws(ReferenceError, function() {

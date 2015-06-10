@@ -10,7 +10,6 @@ description: >
     Strict Mode - Strict mode eval code cannot instantiate functions
     in the variable environment of the caller to eval which is
     contained in strict mode code
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

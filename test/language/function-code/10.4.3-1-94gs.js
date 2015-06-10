@@ -9,7 +9,6 @@ es5id: 10.4.3-1-94gs
 description: >
     Strict - checking 'this' from a global scope (non-strict function
     declaration called by strict Function.prototype.call(globalObject))
-flags: [onlyStrict]
 includes: [fnGlobalObject.js]
 ---*/
 

@@ -9,7 +9,6 @@ es5id: 10.4.3-1-20-s
 description: >
     Strict Mode - checking 'this' (indirect eval includes strict
     directive prologue)
-flags: [onlyStrict]
 includes:
     - runTestCase.js
     - fnGlobalObject.js

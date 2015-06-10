@@ -10,7 +10,6 @@ description: >
     Strict Mode - SyntaxError is thrown when  'evals'  occurs as the
     Identifier in a PropertySetParameterList of a PropertyAssignment
     if its FunctionBody is strict code
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

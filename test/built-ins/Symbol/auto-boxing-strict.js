@@ -4,7 +4,6 @@
 es6id: 19.4
 description: >
     Symbol ToObject auto-boxing
-flags: [onlyStrict]
 ---*/
 
 assert.throws(TypeError, function() {

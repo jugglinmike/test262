@@ -13,7 +13,6 @@ es5id: 13.1-34-s
 description: >
     Strict Mode - SyntaxError is thrown if a function declaration has
     three identical parameters with a strict mode body
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

@@ -7,7 +7,6 @@ description: >
     nested destructuring assignment outside of strict mode, it behaves as an
     IdentifierReference.
 es6id: 12.14.5.3
-flags: [onlyStrict]
 negative: SyntaxError
 ---*/
 

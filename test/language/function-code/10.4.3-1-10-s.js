@@ -9,7 +9,6 @@ es5id: 10.4.3-1-10-s
 description: >
     Strict Mode - checking 'this' (FunctionExpression includes strict
     directive prologue)
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

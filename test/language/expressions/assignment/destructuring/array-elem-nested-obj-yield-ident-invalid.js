@@ -7,7 +7,6 @@ description: >
     destructuring assignment outside of a generator function body, it behaves
     as a IdentifierReference.
 es6id: 12.14.5.3
-flags: [onlyStrict]
 negative: SyntaxError
 ---*/
 

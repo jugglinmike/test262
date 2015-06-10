@@ -8,7 +8,6 @@ description: >
     IsValidSimpleAssignmentTarget(LeftHandSideExpression) is
     false.
 es6id: 12.14.5.1
-flags: [onlyStrict]
 negative: SyntaxError
 ---*/
 

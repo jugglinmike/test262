@@ -10,7 +10,6 @@ description: >
     Strict - checking 'this' from a global scope (non-strict function
     declaration called by strict
     Function.prototype.bind(globalObject)())
-flags: [onlyStrict]
 includes: [fnGlobalObject.js]
 ---*/
 

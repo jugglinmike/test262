@@ -13,7 +13,6 @@ description: >
     descriptor, test updating multiple attribute values of 'name'
     (10.6 [[DefineOwnProperty]] step 3 and 5.b)
 includes: [propertyHelper.js]
-flags: [onlyStrict]
 ---*/
 
 (function (a, b, c) {

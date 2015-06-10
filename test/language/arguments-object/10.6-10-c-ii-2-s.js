@@ -7,7 +7,6 @@
 /*---
 es5id: 10.6-10-c-ii-2-s
 description: arguments[i] doesn't map to actual parameters in strict mode
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

@@ -9,7 +9,6 @@ es5id: 12.10.1-9-s
 description: >
     with statement in strict mode throws SyntaxError (strict function
     expression)
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

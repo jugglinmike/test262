@@ -6,7 +6,6 @@ description: >
     It is a Syntax Error if IsValidSimpleAssignmentTarget of
     IdentifierReference is false.
 es6id: 12.14.5.1
-flags: [onlyStrict]
 negative: SyntaxError
 ---*/
 

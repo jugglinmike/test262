@@ -12,7 +12,6 @@ description: >
     the accessor property, fails to convert accessor property from
     accessor property to data property (15.4.5.1 step 4.c)
 includes: [propertyHelper.js]
-flags: [onlyStrict]
 ---*/
 
 

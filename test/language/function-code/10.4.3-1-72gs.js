@@ -9,7 +9,6 @@ es5id: 10.4.3-1-72gs
 description: >
     Strict - checking 'this' from a global scope (strict function
     declaration called by Function.prototype.call(null))
-flags: [onlyStrict]
 ---*/
 
 function f() { "use strict"; return this===null;};

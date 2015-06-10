@@ -9,7 +9,6 @@ es5id: 10.4.3-1-62-s
 description: >
     Strict Mode - checking 'this' (strict function declaration called
     by non-strict function declaration)
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

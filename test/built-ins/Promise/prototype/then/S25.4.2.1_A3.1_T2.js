@@ -7,7 +7,6 @@ info: >
 es6id: S25.4.2.1_A3.1_T2
 author: Sam Mikes
 description: Promise.onFulfilled gets undefined as 'this'
-flags: [onlyStrict]
 ---*/
 
 var expectedThis = undefined,

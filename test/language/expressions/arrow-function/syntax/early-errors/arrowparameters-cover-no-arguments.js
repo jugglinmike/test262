@@ -15,6 +15,5 @@ description: >
     No parameters named "arguments"
 
 negative: SyntaxError
-flags: [onlyStrict]
 ---*/
 var af = (arguments) => 1;

@@ -6,7 +6,6 @@ description: >
     function declarations in statement position in strict mode:
     if ( Expression ) Statement
 negative: SyntaxError
-flags: [onlyStrict]
 ---*/
 if (true) function g() {}
 

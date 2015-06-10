@@ -15,6 +15,5 @@ description: >
     No parameters named "eval"
 
 negative: SyntaxError
-flags: [onlyStrict]
 ---*/
 var af = (eval) => 1;

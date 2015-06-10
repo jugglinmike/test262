@@ -9,7 +9,6 @@ info: >
 es6id: S25.4.2.1_A3.2_T2
 author: Sam Mikes
 description: onRejected gets default 'this'
-flags: [onlyStrict]
 ---*/
 
 var expectedThis = undefined,

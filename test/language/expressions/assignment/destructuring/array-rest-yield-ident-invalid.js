@@ -7,7 +7,6 @@ description: >
     AssignmentRestElement and outside of a generator function body, it should
     behave as an IdentifierReference.
 es6id: 12.14.5
-flags: [onlyStrict]
 negative: SyntaxError
 ---*/
 

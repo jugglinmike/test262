@@ -9,7 +9,6 @@ description: >
       let strict be true. Otherwise let strict be false.
     ...
 
-flags: [onlyStrict]
 ---*/
 assert.throws(ReferenceError, function() {
   var af = _ => {

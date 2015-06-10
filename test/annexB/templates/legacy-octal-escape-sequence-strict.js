@@ -8,7 +8,6 @@ description: >
     The SV of EscapeSequence :: HexEscapeSequence is the SV of the
     HexEscapeSequence.
 negative: SyntaxError
-flags: [onlyStrict]
 ---*/
 
 `${'\07'}`;

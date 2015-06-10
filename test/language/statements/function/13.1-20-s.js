@@ -14,7 +14,6 @@ description: >
     StrictMode - SyntaxError is thrown if the identifier 'arguments'
     appears within a FormalParameterList of a strict mode
     FunctionDeclaration when FuctionBody is strict code
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

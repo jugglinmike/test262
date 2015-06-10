@@ -7,7 +7,6 @@
       as an identifier.
   es6id: 12.1.1
   negative: SyntaxError
-  flags: [onlyStrict]
  ---*/
 
 var yield = 13;

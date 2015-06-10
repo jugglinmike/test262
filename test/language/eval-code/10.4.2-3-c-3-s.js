@@ -9,7 +9,6 @@ es5id: 10.4.2-3-c-3-s
 description: >
     Calling code in strict mode - eval cannot instantiate variable in
     the global context
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

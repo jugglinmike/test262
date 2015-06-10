@@ -10,7 +10,6 @@ description: >
     Strict Mode - SyntaxError is thrown when an assignment to a
     reserved word or a future reserved word is made inside a strict
     mode FunctionBody of a PropertyAssignment
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

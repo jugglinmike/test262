@@ -4,7 +4,6 @@
 es6id: 19.4
 description: >
     Object.seal(obj) where obj contains symbol properties.
-flags: [onlyStrict]
 ---*/
 var symA = Symbol("A");
 var symB = Symbol("B");

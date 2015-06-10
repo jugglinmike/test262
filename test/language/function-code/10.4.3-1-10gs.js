@@ -9,7 +9,6 @@ es5id: 10.4.3-1-10gs
 description: >
     Strict - checking 'this' from a global scope (FunctionExpression
     includes strict directive prologue)
-flags: [onlyStrict]
 ---*/
 
 var f = function () {

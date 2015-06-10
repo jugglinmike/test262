@@ -11,6 +11,5 @@ description: >
     No parameter named "yield"
 
 negative: SyntaxError
-flags: [onlyStrict]
 ---*/
 var af = yield => 1;

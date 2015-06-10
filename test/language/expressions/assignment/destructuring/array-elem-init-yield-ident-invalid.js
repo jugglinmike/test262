@@ -6,7 +6,6 @@ description: >
     When a `yield` token appears within the Initializer of an AssignmentElement
     outside of a generator function body, it behaves as an IdentifierReference.
 es6id: 12.14.5.4
-flags: [onlyStrict]
 negative: SyntaxError
 ---*/
 

@@ -6,7 +6,6 @@ description: >
     function declarations in statement position in strict mode:
     do Statement while ( Expression )
 negative: SyntaxError
-flags: [onlyStrict]
 ---*/
 do function g() {} while (false)
 

@@ -13,7 +13,6 @@ description: >
     Strict Mode - SourceElements is evaluated as strict mode code when
     the function body of a Function constructor contains a Strict
     Directive
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

@@ -9,7 +9,6 @@ es5id: 10.4.3-1-65-s
 description: >
     Strict Mode - checking 'this' (strict function declaration called
     by non-strict new'ed Function constructor)
-flags: [onlyStrict]
 includes:
     - runTestCase.js
     - fnGlobalObject.js

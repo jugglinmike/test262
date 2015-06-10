@@ -9,7 +9,6 @@ es5id: 12.10.1-2-s
 description: >
     with statement in strict mode throws SyntaxError (nested function
     where container is strict)
-flags: [onlyStrict]
 includes: [runTestCase.js]
 ---*/
 

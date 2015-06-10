@@ -11,7 +11,6 @@ description: >
     Function constructor has two identical parameters in (local)
     strict mode
 negative: Test262Error
-flags: [onlyStrict]
 includes: [Test262Error.js]
 ---*/
 

@@ -5,7 +5,6 @@
 es6id: 22.1.3.9
 description: >
     In strict mode primitive value thisArg should not be coerced to an object.
-flags: [onlyStrict]
 ---*/
 var a = [];
 [1, 2].findIndex(function() { "use strict"; a.push(this); }, "");

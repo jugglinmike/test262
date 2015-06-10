@@ -9,7 +9,6 @@ description: >
     5. If thisArg was supplied, let T be thisArg; else let T be undefined.
     ...
 
-flags: [onlyStrict]
 ---*/
 
 var s = new Set([1]);

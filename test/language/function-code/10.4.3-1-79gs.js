@@ -9,7 +9,6 @@ es5id: 10.4.3-1-79gs
 description: >
     Strict - checking 'this' from a global scope (strict function
     declaration called by Function.prototype.bind(someObject)())
-flags: [onlyStrict]
 ---*/
 
 var o = {};

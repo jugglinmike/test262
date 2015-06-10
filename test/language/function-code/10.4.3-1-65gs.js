@@ -9,7 +9,6 @@ es5id: 10.4.3-1-65gs
 description: >
     Strict - checking 'this' from a global scope (strict function
     declaration called by non-strict new'ed Function constructor)
-flags: [onlyStrict]
 ---*/
 
 function f() { "use strict"; return this===undefined;};

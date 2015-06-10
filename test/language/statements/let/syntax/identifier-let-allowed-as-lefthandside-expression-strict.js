@@ -5,7 +5,6 @@ es6id: 13.6.0.1
 description: >
     for declaration:
     identifier "let" disallowed as lefthandside expression in strict mode
-flags: [onlyStrict]
 negative: SyntaxError
 ---*/
 var o = { a: 1 };

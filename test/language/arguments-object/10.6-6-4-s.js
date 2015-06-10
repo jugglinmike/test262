@@ -14,7 +14,6 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
-  'use strict';
 	return (function (a,b,c) {return arguments.length === 0})();
  }
 runTestCase(testcase);

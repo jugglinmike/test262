@@ -14,7 +14,6 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
-        "use strict";
         var _8_7_2_7 = {};
         var _8_7_2_7_bValue = 1;
         Object.defineProperty(_8_7_2_7, "b", {

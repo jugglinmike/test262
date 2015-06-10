@@ -13,4 +13,5 @@ negative: TypeError
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 Math.PI = 20;

@@ -9,4 +9,5 @@ negative: SyntaxError
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 var interface = 1;

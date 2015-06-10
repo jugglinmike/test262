@@ -14,6 +14,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+        "use strict";
         var obj = {};
         Object.defineProperty(obj, "prop", {
             get: function () {

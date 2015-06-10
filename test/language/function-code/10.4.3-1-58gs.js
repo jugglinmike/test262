@@ -12,6 +12,7 @@ description: >
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 var o = {};
 Object.defineProperty(o, "foo",  { get : function() { return this; } });
 if (o.foo!==o) {

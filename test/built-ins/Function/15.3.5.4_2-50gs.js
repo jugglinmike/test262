@@ -13,6 +13,7 @@ negative: TypeError
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 var o = { set foo(stuff) { return gNonStrict(); } }
 o.foo = 7; 
 

@@ -14,5 +14,6 @@ negative: SyntaxError
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 throw NotEarlyError;
 try { } catch (eval) { }

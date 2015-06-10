@@ -12,6 +12,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+    "use strict";
     var a = new RegExp();
     var b = delete RegExp.length;
     return true;

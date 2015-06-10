@@ -10,6 +10,7 @@ description: Strict Mode - 'this' object at the global scope is not undefined
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 if (this===undefined) {
     throw NotEarlyError;
 }

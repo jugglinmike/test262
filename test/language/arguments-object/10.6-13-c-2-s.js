@@ -13,6 +13,7 @@ includes: [runTestCase.js]
 
 function testcase() {
   
+  'use strict';    
   var desc = Object.getOwnPropertyDescriptor(arguments,"callee");
   return desc !== undefined;
  }

@@ -14,6 +14,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+        "use strict";
 
         try {
             eval("delete Boolean;");

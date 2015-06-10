@@ -14,6 +14,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+        "use strict";
 
         function _10_5_7_b_4_fun() {
             var _10_5_7_b_4_1 = arguments[0] === 30 && arguments[1] === 12;

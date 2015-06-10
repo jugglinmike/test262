@@ -14,6 +14,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+"use strict";
 return (function () {
     return ((function () {
         return typeof this;

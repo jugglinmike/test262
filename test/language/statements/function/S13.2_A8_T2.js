@@ -7,4 +7,5 @@ description: check if "arguments" poisoning poisons  "in" too
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 'arguments' in function() {};

@@ -14,6 +14,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+        "use strict";
         var implement = 1;
         return implement === 1;
     }

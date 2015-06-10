@@ -7,4 +7,5 @@ description: check if "caller" poisoning poisons  getOwnPropertyDescriptor too
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 Object.getOwnPropertyDescriptor(function(){}, 'caller');

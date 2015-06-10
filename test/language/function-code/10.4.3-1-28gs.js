@@ -12,6 +12,7 @@ description: >
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 function f1() {
     var f = function () {
         return typeof this;

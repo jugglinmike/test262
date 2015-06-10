@@ -15,6 +15,7 @@ function testcase() {
 
   function foo()
   {
+    'use strict';
     return typeof(this);
   } 
 

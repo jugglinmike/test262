@@ -14,6 +14,7 @@ includes: [fnGlobalObject.js]
 ---*/
 
 var obj = new (function () {
+    "use strict";
     return this;
 });
 if ((obj === fnGlobalObject()) || (typeof obj === "undefined")) {

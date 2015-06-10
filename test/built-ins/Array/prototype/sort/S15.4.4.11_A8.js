@@ -11,6 +11,7 @@ includes: [$FAIL.js]
 
 var global = this;
 [2,3].sort(function(x,y) {
+  "use strict";
 
   if (this === global) {
     $FAIL('#1: Sort leaks global');

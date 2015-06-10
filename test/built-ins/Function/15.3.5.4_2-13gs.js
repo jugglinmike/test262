@@ -13,6 +13,7 @@ negative: TypeError
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 var my_eval = eval;
 my_eval("gNonStrict();");
 

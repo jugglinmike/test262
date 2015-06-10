@@ -13,6 +13,7 @@ flags: [onlyStrict]
 includes: [fnGlobalObject.js]
 ---*/
 
+"use strict";
 var my_eval = eval;
 if (my_eval("this") !== fnGlobalObject()) {
     throw "'this' had incorrect value!";

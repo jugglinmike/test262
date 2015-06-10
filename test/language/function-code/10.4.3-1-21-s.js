@@ -16,6 +16,7 @@ includes:
 ---*/
 
 function testcase() {
+"use strict";
 function f() {
     return this;
 }

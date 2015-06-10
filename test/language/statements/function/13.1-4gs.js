@@ -14,5 +14,6 @@ negative: SyntaxError
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 throw NotEarlyError;
 var _13_1_4_fun = function (arguments) { };

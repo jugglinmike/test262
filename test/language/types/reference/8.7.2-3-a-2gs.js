@@ -14,5 +14,6 @@ flags: [onlyStrict]
 includes: [Test262Error.js]
 ---*/
 
+"use strict";
 throw new Test262Error();
 b = 11;

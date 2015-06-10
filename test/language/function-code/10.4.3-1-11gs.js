@@ -12,6 +12,7 @@ description: >
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 if ((function () {
     return typeof this;
 })() !== "undefined") {

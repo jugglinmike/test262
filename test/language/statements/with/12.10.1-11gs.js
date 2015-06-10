@@ -11,5 +11,6 @@ negative: SyntaxError
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 throw NotEarlyError;
 with ({}) { }

@@ -9,4 +9,5 @@ description: >
 flags: [onlyStrict]
 ---*/
 
+"use strict";
 Object.getOwnPropertyDescriptor(function(){}, 'arguments');

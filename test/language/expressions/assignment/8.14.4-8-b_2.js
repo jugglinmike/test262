@@ -12,6 +12,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+    "use strict";
     
     function foo() {};
     Object.defineProperty(foo.prototype, "bar", {value: "unwritable"}); 

@@ -13,6 +13,7 @@ flags: [onlyStrict]
 ---*/
 
 function f() {
+    "use strict";
     return typeof this;
 }
 if (f() !== "undefined") {

@@ -20,6 +20,7 @@ includes: [runTestCase.js]
 function testcase() {
 
         function _13_0_11_fun() {
+            "use strict";
             function _13_0_11_inner() {
                 eval("eval = 42;");
             }

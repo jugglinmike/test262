@@ -14,6 +14,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+  'use strict';
   
   // wrapping it in eval since this needs to be a syntax error. The
   // exception thrown must be a SyntaxError exception. Note that eval

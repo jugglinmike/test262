@@ -16,6 +16,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+        "use strict";
         var obj = {};
         Object.preventExtensions(obj);
 

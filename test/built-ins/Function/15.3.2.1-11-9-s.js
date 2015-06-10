@@ -16,6 +16,7 @@ includes: [runTestCase.js]
 ---*/
 
 function testcase() {
+        "use strict";
 
         var foo = new Function("baz", "baz", "baz", "return 0;");
         return true;

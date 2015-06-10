@@ -14,7 +14,6 @@ flags: [onlyStrict]
 includes: [Test262Error.js]
 ---*/
 
-"use strict";
 function _15_3_5_1_gs() {}
 throw new Test262Error();
 _15_3_5_1_gs.caller;

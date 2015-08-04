@@ -3,7 +3,7 @@
 
 /*---
 description: >
-    Behavior when position is decremented during result accumulation
+    Behavior when position is incremented during result accumulation
 es6id: 21.2.5.8
 info: >
     16. Repeat, for each result in results,
@@ -29,13 +29,13 @@ r.exec = function() {
   callCount += 1;
 
   if (callCount === 1) {
-    return { index: 3, length: 1, 0: 0 };
-  } else if (callCount === 2) {
     return { index: 1, length: 1, 0: 0 };
+  } else if (callCount === 2) {
+    return { index: 3, length: 1, 0: 0 };
   }
 
   return null;
 };
 
-assert.sameValue(r[Symbol.replace]('abcde', 'X'), 'abcXe');
+assert.sameValue(r[Symbol.replace]('abcde', 'X'), 'aXcXe');
 assert.sameValue(callCount, 3);

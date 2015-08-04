@@ -21,7 +21,7 @@ var counter = 0;
 var coercibleIndex = {
   length: {
     valueOf: function() {
-      return 3;
+      return 3.9;
     }
   },
   0: '',

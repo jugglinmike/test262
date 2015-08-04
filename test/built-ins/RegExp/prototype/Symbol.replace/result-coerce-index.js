@@ -22,7 +22,7 @@ var counter = 0;
 var coercibleIndex = {
   index: {
     valueOf: function() {
-      return 2;
+      return 2.9;
     }
   }
 };

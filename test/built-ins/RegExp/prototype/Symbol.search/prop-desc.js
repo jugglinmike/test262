@@ -2,7 +2,7 @@
 // This code is governed by the BSD license found in the LICENSE file.
 
 /*---
-es6id: 21.2.5.11
+es6id: 21.2.5.9
 description: RegExp.prototype[Symbol.search] property descriptor
 info: >
     ES6 Section 17

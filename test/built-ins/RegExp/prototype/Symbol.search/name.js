@@ -1,7 +1,7 @@
 // Copyright (C) 2015 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-es6id: 21.2.5.11
+es6id: 21.2.5.9
 description: RegExp.prototype[Symbol.search] `name` property
 info: >
     The value of the name property of this function is "[Symbol.search]".

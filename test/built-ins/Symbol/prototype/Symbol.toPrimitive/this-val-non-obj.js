@@ -10,28 +10,28 @@ info: >
 features: [Symbol.toPrimitive]
 ---*/
 
-Symbol.prototype.[Symbol.toPrimitive]();
+assert.sameValue(typeof Symbol.prototype[Symbol.toPrimitive], 'function');
 
 assert.throws(TypeError, function() {
-  Symbol.prototype.toPrimitive.call(undefined);
+  Symbol.prototype[Symbol.toPrimitive].call(undefined);
 });
 
 assert.throws(TypeError, function() {
-  Symbol.prototype.toPrimitive.call(null);
+  Symbol.prototype[Symbol.toPrimitive].call(null);
 });
 
 assert.throws(TypeError, function() {
-  Symbol.prototype.toPrimitive.call(86);
+  Symbol.prototype[Symbol.toPrimitive].call(86);
 });
 
 assert.throws(TypeError, function() {
-  Symbol.prototype.toPrimitive.call('');
+  Symbol.prototype[Symbol.toPrimitive].call('');
 });
 
 assert.throws(TypeError, function() {
-  Symbol.prototype.toPrimitive.call(true);
+  Symbol.prototype[Symbol.toPrimitive].call(true);
 });
 
 assert.throws(TypeError, function() {
-  Symbol.prototype.toPrimitive.call({});
+  Symbol.prototype[Symbol.toPrimitive].call({});
 });

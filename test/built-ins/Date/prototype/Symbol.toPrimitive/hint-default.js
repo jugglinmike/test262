@@ -13,7 +13,6 @@ info: >
     5. Else, throw a TypeError exception.
     6. Return OrdinaryToPrimitive(O, tryFirst).
 features: [Symbol.toPrimitive]
-includes: [propertyHelper.js]
 ---*/
 
 var voCallCount, tsCallCount;

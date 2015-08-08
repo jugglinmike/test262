@@ -12,7 +12,6 @@ info: >
        a. Let tryFirst be "number".
     5. Else, throw a TypeError exception.
 features: [Symbol.toPrimitive]
-includes: [propertyHelper.js]
 ---*/
 
 var d = new Date();

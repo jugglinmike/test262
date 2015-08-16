@@ -12,25 +12,21 @@ features: [Symbol.toPrimitive]
 assert.sameValue(typeof Date.prototype[Symbol.toPrimitive], 'function');
 
 assert.throws(TypeError, function() {
-  Date.prototype[Symbol.toPrimitive].call(undefined);
+  Date.prototype[Symbol.toPrimitive].call(undefined, 'string');
 });
 
 assert.throws(TypeError, function() {
-  Date.prototype[Symbol.toPrimitive].call(null);
+  Date.prototype[Symbol.toPrimitive].call(null, 'string');
 });
 
 assert.throws(TypeError, function() {
-  Date.prototype[Symbol.toPrimitive].call(86);
+  Date.prototype[Symbol.toPrimitive].call(86, 'string');
 });
 
 assert.throws(TypeError, function() {
-  Date.prototype[Symbol.toPrimitive].call('');
+  Date.prototype[Symbol.toPrimitive].call('', 'string');
 });
 
 assert.throws(TypeError, function() {
-  Date.prototype[Symbol.toPrimitive].call(true);
-});
-
-assert.throws(TypeError, function() {
-  Date.prototype[Symbol.toPrimitive].call({});
+  Date.prototype[Symbol.toPrimitive].call(true, 'string');
 });

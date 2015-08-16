@@ -15,12 +15,12 @@ info: >
 features: [Symbol.toPrimitive]
 ---*/
 
-var voCallCount, tsCallCount;
+var voAccessCount, voCallCount, tsCallCount;
 var obj;
 
 obj = {
   get valueOf() {
-    voCallCount += 1;
+    voAccessCount += 1;
   },
   toString: function() {
     tsCallCount += 1;
@@ -28,13 +28,13 @@ obj = {
   }
 };
 
-voCallCount = 0;
+voAccessCount = 0;
 tsCallCount = 0;
 assert.sameValue(
   Date.prototype[Symbol.toPrimitive].call(obj, 'default'),
   'toString test262'
 );
-assert.sameValue(voCallCount, 0, '`valueOf` method was not referenced');
+assert.sameValue(voAccessCount, 0, '`valueOf` method was not referenced');
 assert.sameValue(tsCallCount, 1, '`toString` method was invoked exactly once');
 
 obj = {

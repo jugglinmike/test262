@@ -16,6 +16,7 @@ info: >
 
     ES6 Section 7.1.1 ToPrimitive ( input [, PreferredType] )
 
+    1. If PreferredType was not passed, let hint be "default".
     [...]
     4. Let exoticToPrim be GetMethod(input, @@toPrimitive).
     5. ReturnIfAbrupt(exoticToPrim).

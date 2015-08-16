@@ -2,7 +2,7 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 es6id: 19.4.3.4
-description: Behavior when `this` value is not an Object
+description: Behavior when `this` value is neither a Symbol nor an Object
 info: >
     1. Let s be the this value.
     2. If Type(s) is Symbol, return s.
@@ -30,8 +30,4 @@ assert.throws(TypeError, function() {
 
 assert.throws(TypeError, function() {
   Symbol.prototype[Symbol.toPrimitive].call(true);
-});
-
-assert.throws(TypeError, function() {
-  Symbol.prototype[Symbol.toPrimitive].call({});
 });

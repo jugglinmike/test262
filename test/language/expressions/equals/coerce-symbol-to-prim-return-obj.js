@@ -35,12 +35,17 @@ y[Symbol.toPrimitive] = function() {
   return retVal;
 };
 
+retVal = {};
+assert.throws(TypeError, function() {
+  0 == y;
+});
+
 retVal = new Number();
 assert.throws(TypeError, function() {
-    0 == y;
+  0 == y;
 });
 
 retVal = new String();
 assert.throws(TypeError, function() {
-    0 == y;
+  0 == y;
 });

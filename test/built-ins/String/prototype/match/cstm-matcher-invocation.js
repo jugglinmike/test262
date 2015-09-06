@@ -27,6 +27,7 @@ obj[Symbol.match] = function() {
 };
 
 assert.sameValue(''.match(obj), returnVal);
+assert.sameValue(callCount, 1, 'Invokes the method exactly once');
 assert.sameValue(thisVal, obj);
 assert.notSameValue(args, undefined);
 assert.sameValue(args.length, 1);

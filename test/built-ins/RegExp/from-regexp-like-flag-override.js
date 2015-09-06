@@ -31,25 +31,37 @@ Object.defineProperty(obj, 'flags', {
 
 obj[Symbol.match] = true;
 result = new RegExp(obj, 'g');
-assert.sameValue(result.source, 'source text');
-assert.sameValue(result.flags, 'g');
+assert.sameValue(
+  result.source, 'source text', '@@match specified as a primitive boolean'
+);
+assert.sameValue(
+  result.flags, 'g', '@@match specified as a primitive boolean'
+);
 
 obj[Symbol.match] = 'string';
 result = new RegExp(obj, 'g');
-assert.sameValue(result.source, 'source text');
-assert.sameValue(result.flags, 'g');
+assert.sameValue(
+  result.source, 'source text', '@@match specified as a primitive string'
+);
+assert.sameValue(result.flags, 'g', '@@match specified as a primitive string');
 
 obj[Symbol.match] = [];
 result = new RegExp(obj, 'g');
-assert.sameValue(result.source, 'source text');
-assert.sameValue(result.flags, 'g');
+assert.sameValue(
+  result.source, 'source text', '@@match specified as an array'
+);
+assert.sameValue(result.flags, 'g', '@@match specified as an array');
 
 obj[Symbol.match] = Symbol();
 result = new RegExp(obj, 'g');
-assert.sameValue(result.source, 'source text');
-assert.sameValue(result.flags, 'g');
+assert.sameValue(
+  result.source, 'source text', '@@match specified as a Symbol'
+);
+assert.sameValue(result.flags, 'g', '@@match specified as a Symbol');
 
 obj[Symbol.match] = 86;
 result = new RegExp(obj, 'g');
-assert.sameValue(result.source, 'source text');
-assert.sameValue(result.flags, 'g');
+assert.sameValue(
+  result.source, 'source text', '@@match specified as a primitive number'
+);
+assert.sameValue(result.flags, 'g', '@@match specified as a primitive number');

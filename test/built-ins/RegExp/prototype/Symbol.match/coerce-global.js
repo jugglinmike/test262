@@ -24,6 +24,8 @@ assert.sameValue(result.length, 1);
 
 r.global = null;
 result = r[Symbol.match]('aa');
+assert.notSameValue(result, null);
+assert.sameValue(result.length, 1);
 
 r.global = true;
 result = r[Symbol.match]('aa');

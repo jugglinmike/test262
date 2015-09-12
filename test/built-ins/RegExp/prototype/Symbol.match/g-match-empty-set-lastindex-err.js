@@ -41,11 +41,6 @@ var r, nextMatch;
 
 r = /./g;
 r.exec = exec;
-nextMatch = 'a non-empty string';
-r[Symbol.match]('');
-
-r = /./g;
-r.exec = exec;
 nextMatch = '';
 assert.throws(TypeError, function() {
   r[Symbol.match]('');

@@ -32,11 +32,7 @@ var callCount = 0;
 Object.defineProperty(r, 'global', {
   get: function() {
     callCount += 1;
-    if (callCount === 1) {
-      return false;
-    }
-
-    return true;
+    return callCount > 1;
   }
 });
 

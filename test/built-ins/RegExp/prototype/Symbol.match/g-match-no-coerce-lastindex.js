@@ -1,10 +1,9 @@
-// Copyright (C) 2015 the V8 project authors. All rights reserved.
+// Copyright (C) 2015 Mike Pennisi. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 
 /*---
 description: >
-    Behavior when error is thrown while type coercing `lastIndex` of zero-width
-    match
+    The `lastIndex` property is not coerced for a non-empty string match
 es6id: 21.2.5.6
 info: >
     7. If global is false, then
@@ -36,7 +35,7 @@ r.exec = function() {
     get 0() {
       r.lastIndex = {
         valueOf: function() {
-          throw new Test262Error();
+          $ERROR('This function should not be invoked.');
         }
       };
       return thisMatch;
@@ -44,7 +43,5 @@ r.exec = function() {
   };
 };
 
-nextMatch = '';
-assert.throws(Test262Error, function() {
-  r[Symbol.match]('');
-});
+nextMatch = 'a non-empty string';
+r[Symbol.match]('');

@@ -39,5 +39,3 @@ Object.defineProperty(r, 'global', {
 assert.throws(Test262Error, function() {
   r[Symbol.match]('');
 });
-
-assert.sameValue(callCount, 2);

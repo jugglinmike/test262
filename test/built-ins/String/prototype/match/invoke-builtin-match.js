@@ -28,6 +28,7 @@ try {
   assert(thisVal instanceof RegExp);
   assert.sameValue(thisVal.source, 'string source');
   assert.sameValue(thisVal.flags, '');
+  assert.sameValue(thisVal.lastIndex, 0);
   assert.sameValue(args.length, 1);
   assert.sameValue(args[0], 'target');
   assert.sameValue(result, returnVal);

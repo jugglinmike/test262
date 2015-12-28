@@ -14,6 +14,8 @@ var obj = {};
 var p = Promise.resolve(obj).then(/*Identity, Thrower*/)
         .then(function (arg) {
             if (arg !== obj) {
-                $ERROR("Expected promise to be fulfilled with obj, actually " + arg);
+                $DONE("Expected promise to be fulfilled with obj, actually " + arg);
+                return;
             }
-        }).then($DONE, $DONE);
+            $DONE();
+        }, $DONE);

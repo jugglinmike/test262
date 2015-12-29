@@ -1,4 +1,4 @@
-// Copyright (C) 2015 the V8 project authors. All rights reserved.
+// Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 es6id: 25.4.5.3
@@ -53,9 +53,9 @@ promise.then(function() {
 
     then1Counter += 1;
 
-    return new Promise(function(_, reject) {
+    return new Promise(function(resolve) {
       promise.then(function() {
-        reject();
+        resolve();
 
         assert.sameValue(executor1Counter, 1);
         assert.sameValue(then1Counter, 1);
@@ -73,12 +73,12 @@ promise.then(function() {
       executor2Counter += 1;
     });
   }).then(function() {
-    $DONE('The promise should not be fulfilled');
-  }, function() {
     assert.sameValue(executor1Counter, 1);
     assert.sameValue(then1Counter, 1);
     assert.sameValue(executor2Counter, 1);
     assert.sameValue(then2Counter, 1);
 
     $DONE();
+  }, function() {
+    $DONE('The promise should not be rejected');
   });

@@ -1,8 +1,8 @@
-// Copyright (C) 2015 the V8 project authors. All rights reserved.
+// Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 es6id: 25.4.5.3
-description: The return value of the `onFulfilled` method is a "thenable" object
+description: The `onFulfilled` method throws an error
 info: >
     7. Return PerformPromiseThen(promise, onFulfilled, onRejected,
        resultCapability).
@@ -28,43 +28,30 @@ info: >
     12. Perform EnqueueJob ("PromiseJobs", PromiseResolveThenableJob, «promise,
         resolution, thenAction»)
     13. Return undefined.
+
+    25.4.2.2 PromiseResolveThenableJob
+
+    2. Let thenCallResult be Call(then, thenable,
+       «resolvingFunctions.[[Resolve]], resolvingFunctions.[[Reject]]»).
+    3. If thenCallResult is an abrupt completion,
+       a. Let status be Call(resolvingFunctions.[[Reject]], undefined,
+          «thenCallResult.[[value]]»).
+       b. NextJob Completion(status).
 ---*/
 
-var callCount = 0;
+var error = new Test262Error();
+var promiseFulfilled = false;
+var promiseRejected = false;
 var promise = new Promise(function(resolve) {
-  resolve();
-});
-
-var thenable = {
-  then: function(resolve, reject) {
-    assert.sameValue(
-      this, thenable, 'method invoked with correct `this` value'
-    );
-    assert.sameValue(typeof resolve, 'function', 'type of first argument');
-    assert.sameValue(
-      resolve.length,
-      1,
-      'ES6 25.4.1.3.2: The length property of a promise resolve function is 1.'
-    );
-    assert.sameValue(typeof reject, 'function', 'type of second argument');
-    assert.sameValue(
-      reject.length,
-      1,
-      'ES6 25.4.1.3.1: The length property of a promise reject function is 1.'
-    );
-    assert.sameValue(arguments.length, 2, 'total number of arguments');
     resolve();
-
-    callCount += 1;
-  }
-};
+  });
 
 promise.then(function() {
-  return thenable;
-}).then(function() {
-  assert.sameValue(callCount, 1);
+    throw error;
+  }).then(function() {
+    $DONE('This promise should not be fulfilled');
+  }, function(reason) {
+    assert.sameValue(reason, error);
 
-  $DONE();
-}, function() {
-  $DONE('This promise should not be rejected');
-});
+    $DONE();
+  });

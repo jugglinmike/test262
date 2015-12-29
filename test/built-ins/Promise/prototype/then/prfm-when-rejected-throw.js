@@ -1,8 +1,8 @@
-// Copyright (C) 2015 the V8 project authors. All rights reserved.
+// Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 es6id: 25.4.5.3
-description: The return value of the `onRejected` method
+description: The `onRejected` method throws an error
 info: >
     7. Return PerformPromiseThen(promise, onFulfilled, onRejected,
        resultCapability).
@@ -17,17 +17,17 @@ info: >
           «rejectReaction, reason»).
 ---*/
 
-var returnVal = {};
+var error = new Test262Error();
 var promise = new Promise(function(_, reject) {
   reject();
 });
 
 promise.then(null, function() {
-  return returnVal;
-}).then(function(result) {
-  assert.sameValue(result, returnVal);
+  throw error;
+  }).then(function(result) {
+    $DONE('This promise should not be fulfilled');
+  }, function(reason) {
+    assert.sameValue(reason, error);
 
-  $DONE();
-}, function() {
-  $DONE('The promise should not be rejected');
-});
+    $DONE();
+  });

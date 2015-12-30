@@ -2,7 +2,7 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 es6id: 25.4.5.3
-description: The `onRejected` method throws an error
+description: PerformPromiseThen on a rejected promise
 info: >
     7. Return PerformPromiseThen(promise, onFulfilled, onRejected,
        resultCapability).
@@ -15,19 +15,18 @@ info: >
        a. Let reason be the value of promise's [[PromiseResult]] internal slot.
        b. Perform EnqueueJob("PromiseJobs", PromiseReactionJob,
           «rejectReaction, reason»).
+    [...]
 ---*/
 
-var error = new Test262Error();
-var promise = new Promise(function(_, reject) {
-  reject();
-});
+var value = {};
+var p = new Promise(function(_, reject) { reject(value); });
 
-promise.then(null, function() {
-  throw error;
-  }).then(function(result) {
-    $DONE('This promise should not be fulfilled');
-  }, function(reason) {
-    assert.sameValue(reason, error);
-
+p.then(function() {
+    $DONE('The `onFulfilled` handler should not be invoked.');
+  }, function(x) {
+    if (x !== value) {
+      $DONE('The `onRejected` handler should be invoked with the promise result.');
+      return;
+    }
     $DONE();
   });

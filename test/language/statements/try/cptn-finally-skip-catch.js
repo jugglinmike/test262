@@ -21,8 +21,10 @@ info: >
 ---*/
 
 assert.sameValue(eval('1; try { } catch (err) { } finally { }'), undefined);
-assert.sameValue(eval('1; try { 2; } catch (err) { 3; } finally { }'), 2);
-assert.sameValue(
-  eval('1; try { } catch (err) { 2; } finally { 3; }'), undefined
-);
-assert.sameValue(eval('1; try { 2; } catch (err) { 3; } finally { 4; }'), 2);
+assert.sameValue(eval('2; try { } catch (err) { 3; } finally { }'), undefined);
+assert.sameValue(eval('4; try { } catch (err) { } finally { 5; }'), undefined);
+assert.sameValue(eval('6; try { } catch (err) { 7; } finally { 8; }'), undefined);
+assert.sameValue(eval('9; try { 10; } catch (err) { } finally { }'), 10);
+assert.sameValue(eval('12; try { 13; } catch (err) { 14; } finally { }'), 13);
+assert.sameValue(eval('15; try { 16; } catch (err) { } finally { 17; }'), 16);
+assert.sameValue(eval('18; try { 19; } catch (err) { 20; } finally { 21; }'), 19);

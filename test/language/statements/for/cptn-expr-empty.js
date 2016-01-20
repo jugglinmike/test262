@@ -33,8 +33,14 @@ info: >
 ---*/
 
 assert.sameValue(eval('1; for ( ; ; ) { break; }'), undefined);
+assert.sameValue(eval('2; for ( ; ; ) { 3; break; }'), 3);
 assert.sameValue(
-  eval('1; var first = true; for ( ; ; ) { if (!first) { break; } first = true; 2; break; }'),
-  2,
+  eval('var first = true; 4; for ( ; ; ) { if (!first) { 5; break; } first = false; }'),
+  5,
+  'Updating an empty completion from a prior iteration.'
+);
+assert.sameValue(
+  eval('var first = true; 6; for ( ; ; ) { if (!first) { break; } first = false; 7; }'),
+  7,
   'Updating an empty completion from a prior iteration.'
 );

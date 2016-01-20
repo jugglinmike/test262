@@ -21,4 +21,4 @@ info: >
     1. Return NormalCompletion(undefined).
 ---*/
 
-assert.sameValue(eval('switch(null) {}'), undefined);
+assert.sameValue(eval('1; switch(null) {}'), undefined);

@@ -33,11 +33,11 @@ assert.sameValue(
   eval('1; try { throw null; } catch (err) { } finally { }'), undefined
 );
 assert.sameValue(
-  eval('1; try { throw null; } catch (err) { 2; } finally { }'), 2
+  eval('2; try { throw null; } catch (err) { 3; } finally { }'), 3
 );
 assert.sameValue(
-  eval('1; try { throw null; } catch (err) { } finally { 2; }'), undefined
+  eval('4; try { throw null; } catch (err) { } finally { 5; }'), undefined
 );
 assert.sameValue(
-  eval('1; try { throw null; } catch (err) { 2; } finally { 3; }'), 2
+  eval('6; try { throw null; } catch (err) { 7; } finally { 8; }'), 7
 );

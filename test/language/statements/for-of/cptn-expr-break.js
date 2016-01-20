@@ -31,4 +31,4 @@ info: >
 ---*/
 
 assert.sameValue(eval('var a; 1; for (a of [0]) { break; }'), undefined);
-assert.sameValue(eval('var b; 1; for (b of [0]) { 2; break; }'), 2);
+assert.sameValue(eval('var b; 2; for (b of [0]) { 3; break; }'), 3);

@@ -36,4 +36,4 @@ info: >
 ---*/
 
 assert.sameValue(eval('1; switch ("a") { default: break; }'), undefined);
-assert.sameValue(eval('1; switch ("a") { default: { 2; break; } }'), 2);
+assert.sameValue(eval('2; switch ("a") { default: { 3; break; } }'), 3);

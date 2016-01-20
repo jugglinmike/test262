@@ -32,7 +32,7 @@ info: >
 
 assert.sameValue(eval('1; for (var run = true; ; ) { break; }'), undefined);
 assert.sameValue(
-  eval('1; for (var first = true; ; ) { if (!first) { break; } first = true; 2; break; }'),
-  2,
+  eval('2; for (var first = true; ; ) { if (!first) { break; } first = true; 3; break; }'),
+  3,
   'Updating an empty completion from a prior iteration.'
 );

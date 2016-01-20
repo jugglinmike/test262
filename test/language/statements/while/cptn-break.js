@@ -19,4 +19,4 @@ info: >
 ---*/
 
 assert.sameValue(eval('1; while (true) { break; }'), undefined);
-assert.sameValue(eval('1; while (true) { 2; break; }'), 2);
+assert.sameValue(eval('2; while (true) { 3; break; }'), 3);

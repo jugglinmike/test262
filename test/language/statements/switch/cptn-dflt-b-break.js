@@ -52,5 +52,5 @@ assert.sameValue(
   eval('1; switch ("a") { default: case "b": break; }'), undefined
 );
 assert.sameValue(
-  eval('1; switch ("a") { default: case "b": { 2; break; } }'), 2
+  eval('2; switch ("a") { default: case "b": { 3; break; } }'), 3
 );

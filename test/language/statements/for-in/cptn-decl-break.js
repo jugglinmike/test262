@@ -29,4 +29,4 @@ info: >
 ---*/
 
 assert.sameValue(eval('1; for (var a in { x: 0 }) { break; }'), undefined);
-assert.sameValue(eval('1; for (var b in { x: 0 }) { 2; break; }'), 2);
+assert.sameValue(eval('2; for (var b in { x: 0 }) { 3; break; }'), 3);

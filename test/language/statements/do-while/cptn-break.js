@@ -15,4 +15,4 @@ info: >
 ---*/
 
 assert.sameValue(eval('1; do { break; } while (false)'), undefined);
-assert.sameValue(eval('1; do { 2; break; } while (false)'), 2);
+assert.sameValue(eval('2; do { 3; break; } while (false)'), 3);

@@ -42,12 +42,12 @@ assert.sameValue(
   'Non-empty value replaces previous non-empty value'
 );
 assert.sameValue(
-  eval('1; switch ("a") { case "a": default: 2; break; }'),
-  2,
+  eval('4; switch ("a") { case "a": default: 5; break; }'),
+  5,
   'Non-empty value replaces empty value'
 );
 assert.sameValue(
-  eval('1; switch ("a") { case "a": 2; default: break; }'),
-  2,
+  eval('6; switch ("a") { case "a": 7; default: break; }'),
+  7,
   'Empty value does not replace previous non-empty value'
 );

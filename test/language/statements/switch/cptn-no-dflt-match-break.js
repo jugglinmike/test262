@@ -40,4 +40,4 @@ info: >
 ---*/
 
 assert.sameValue(eval('1; switch ("a") { case "a": break; }'), undefined);
-assert.sameValue(eval('1; switch ("a") { case "a": { 2; break; } }'), 2);
+assert.sameValue(eval('2; switch ("a") { case "a": { 3; break; } }'), 3);

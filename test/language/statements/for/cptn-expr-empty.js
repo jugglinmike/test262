@@ -44,3 +44,16 @@ assert.sameValue(
   7,
   'Updating an empty completion from a prior iteration.'
 );
+
+assert.sameValue(eval('8; outer: do { for ( ; ; ) { continue outer; } } while (false)'), undefined);
+assert.sameValue(eval('9; outer: do { for ( ; ; ) { 10; continue outer; } } while (false)'), 10);
+assert.sameValue(
+  eval('var first = true; 11; outer: do { for ( ; ; ) { if (!first) { 12; continue outer; } first = false; } } while (false)'),
+  12,
+  'Updating an empty completion from a prior iteration.'
+);
+assert.sameValue(
+  eval('var first = true; 13; outer: do { for ( ; ; ) { if (!first) { continue outer; } first = false; 14; } } while (false)'),
+  14,
+  'Updating an empty completion from a prior iteration.'
+);

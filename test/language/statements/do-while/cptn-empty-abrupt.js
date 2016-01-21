@@ -3,7 +3,7 @@
 /*---
 es6id: 13.7.2.6
 description: >
-    Completion value when iteration completes due to a `break` statement
+    Completion value when iteration completes due to an empty abrupt completion
 info: >
     IterationStatement : do Statement while ( Expression ) ;
 
@@ -16,3 +16,6 @@ info: >
 
 assert.sameValue(eval('1; do { break; } while (false)'), undefined);
 assert.sameValue(eval('2; do { 3; break; } while (false)'), 3);
+
+assert.sameValue(eval('4; do { continue; } while (false)'), undefined);
+assert.sameValue(eval('5; do { 6; continue; } while (false)'), 6);

@@ -3,8 +3,8 @@
 /*---
 es6id: 13.12.11
 description: >
-    Completion value when execution continues through multiple cases and ends
-    with an empty abrupt completion
+    Completion value when the matching case is exited via an empty abrupt
+    completion
 info: >
     SwitchStatement : switch ( Expression ) CaseBlock
 
@@ -24,7 +24,14 @@ info: >
     3. Let found be false.
     4. Repeat for each CaseClause C in A
        a. If found is false, then
-          [...]
+          i. Let clauseSelector be the result of CaseSelectorEvaluation of C.
+          ii. If clauseSelector is an abrupt completion, then
+              1. If clauseSelector.[[value]] is empty, return
+                 Completion{[[type]]: clauseSelector.[[type]], [[value]]:
+                 undefined, [[target]]: clauseSelector.[[target]]}.
+              2. Else, return Completion(clauseSelector).
+          iii. Let found be the result of performing Strict Equality Comparison
+               input === clauseSelector.[[value]].
        b. If found is true, then
           i. Let R be the result of evaluating C.
           ii. If R.[[value]] is not empty, let V = R.[[value]].
@@ -33,17 +40,17 @@ info: >
 ---*/
 
 assert.sameValue(
-  eval('1; switch ("a") { case "a": 2; case "b": 3; break; default: }'),
-  3,
-  'Non-empty value replaces previous non-empty value'
+  eval('1; switch ("a") { case "a": break; default: }'), undefined
 );
 assert.sameValue(
-  eval('4; switch ("a") { case "a": case "b": 5; break; default: }'),
-  5,
-  'Non-empty value replaces empty value'
+  eval('2; switch ("a") { case "a": { 3; break; } default: }'), 3
+);
+
+assert.sameValue(
+  eval('4; do { switch ("a") { case "a": continue; default: } } while (false)'),
+  undefined
 );
 assert.sameValue(
-  eval('6; switch ("a") { case "a": 7; case "b": break; default: }'),
-  7,
-  'Empty value does not replace previous non-empty value'
+  eval('5; do { switch ("a") { case "a": { 6; continue; } default: } } while (false)'),
+  6
 );

@@ -3,8 +3,8 @@
 /*---
 es6id: 13.12.11
 description: >
-    Completion value when execution continues through multiple cases and ends
-    with an empty abrupt completion
+    Completion value when the matching case is exited via an empty abrupt
+    completion
 info: >
     SwitchStatement : switch ( Expression ) CaseBlock
 
@@ -48,17 +48,17 @@ info: >
 ---*/
 
 assert.sameValue(
-  eval('1; switch ("a") { default: case "a": 2; case "b": 3; break; }'),
-  3,
-  'Non-empty value replaces previous non-empty value'
+  eval('1; switch ("a") { default: case "a": break; }'), undefined
 );
 assert.sameValue(
-  eval('4; switch ("a") { default: case "a": case "b": 5; break; }'),
-  5,
-  'Non-empty value replaces empty value'
+  eval('2; switch ("a") { default: case "a": { 3; break; } }'), 3
+);
+
+assert.sameValue(
+  eval('4; do { switch ("a") { default: case "a": continue; } } while (false)'),
+  undefined
 );
 assert.sameValue(
-  eval('6; switch ("a") { default: case "a": 7; case "b": break; }'),
-  7,
-  'Empty value does not replace previous non-empty value'
+  eval('5; do { switch ("a") { default: case "a": { 6; continue; } } } while (false)'),
+  6
 );

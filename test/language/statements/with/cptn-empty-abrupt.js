@@ -23,8 +23,8 @@ assert.sameValue(
 );
 
 assert.sameValue(
-  eval('8; do { 9; with({}) { 10; continue; } 11; } while (false);'), 10
+  eval('8; do { 9; with({}) { 10; continue; } 11; } while (false)'), 10
 );
 assert.sameValue(
-  eval('12; do { 13; with({}) { continue; } 14; } while (false);'), 13
+  eval('12; do { 13; with({}) { continue; } 14; } while (false)'), 13
 );

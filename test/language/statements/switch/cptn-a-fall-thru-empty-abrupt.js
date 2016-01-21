@@ -16,13 +16,13 @@ info: >
 
     13.12.9 Runtime Semantics: CaseBlockEvaluation
 
-    CaseBlock : { CaseClauses }
+    CaseBlock : { CaseClausesopt DefaultClause CaseClausesopt }
 
     1. Let V = undefined.
-    2. Let A be the List of CaseClause items in CaseClauses, in source text
-       order.
+    2. Let A be the list of CaseClause items in the first CaseClauses, in
+       source text order. If the first CaseClauses is not present A is « ».
     3. Let found be false.
-    4. Repeat for each CaseClause C in A,
+    4. Repeat for each CaseClause C in A
        a. If found is false, then
           [...]
        b. If found is true, then
@@ -33,17 +33,33 @@ info: >
 ---*/
 
 assert.sameValue(
-  eval('1; switch ("a") { case "a": 2; case "b": 3; break; }'),
+  eval('1; switch ("a") { case "a": 2; case "b": 3; break; default: }'),
   3,
   'Non-empty value replaces previous non-empty value'
 );
 assert.sameValue(
-  eval('4; switch ("a") { case "a": case "b": 5; break; }'),
+  eval('4; switch ("a") { case "a": case "b": 5; break; default: }'),
   5,
   'Non-empty value replaces empty value'
 );
 assert.sameValue(
-  eval('6; switch ("a") { case "a": 7; case "b": break; }'),
+  eval('6; switch ("a") { case "a": 7; case "b": break; default: }'),
   7,
+  'Empty value does not replace previous non-empty value'
+);
+
+assert.sameValue(
+  eval('8; do { switch ("a") { case "a": 9; case "b": 10; continue; default: } } while (false)'),
+  10,
+  'Non-empty value replaces previous non-empty value'
+);
+assert.sameValue(
+  eval('11; do { switch ("a") { case "a": case "b": 12; continue; default: } } while (false)'),
+  12,
+  'Non-empty value replaces empty value'
+);
+assert.sameValue(
+  eval('13; do { switch ("a") { case "a": 14; case "b": continue; default: } } while (false)'),
+  14,
   'Empty value does not replace previous non-empty value'
 );

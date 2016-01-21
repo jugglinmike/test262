@@ -3,7 +3,8 @@
 /*---
 es6id: 13.12.11
 description: >
-    Completion value when the matching case is exited via a `break` statement
+    Completion value when the matching case is exited via an empty abrupt
+    completion
 info: >
     SwitchStatement : switch ( Expression ) CaseBlock
 
@@ -53,4 +54,13 @@ assert.sameValue(
 );
 assert.sameValue(
   eval('2; switch ("a") { default: case "b": { 3; break; } }'), 3
+);
+
+assert.sameValue(
+  eval('4; do { switch ("a") { default: case "b": continue; } } while (false)'),
+  undefined
+);
+assert.sameValue(
+  eval('5; do { switch ("a") { default: case "b": { 6; continue; } } } while (false)'),
+  6
 );

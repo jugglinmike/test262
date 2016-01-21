@@ -2,7 +2,9 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 es6id: 13.6.7
-description: Completion value when expression is true with an `else` clause
+description: >
+    Completion value when expression is true with an `else` clause and body
+    returns a normal completion
 info: >
     IfStatement : if ( Expression ) Statement else Statement
 

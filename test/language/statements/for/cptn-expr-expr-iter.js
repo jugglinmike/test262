@@ -3,7 +3,8 @@
 /*---
 es6id: 13.7.4.7
 description: >
-    Completion value when head has no declaration and a "test" expression and iteration occurs
+    Completion value when head has no declaration and a "test" expression and
+    iteration occurs
 info: >
     IterationStatement :
       for ( Expressionopt ; Expressionopt ; Expressionopt ) Statement

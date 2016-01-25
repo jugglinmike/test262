@@ -363,6 +363,9 @@
     } else {
       print('FAIL: ' + testCase.fileName);
       print('Actual: ' + result + ' ||| Expected: ' + testCase.expected);
+      if (exception) {
+        print(exception.message);
+      }
       print(testCase.source + '\n\n');
     }
   }

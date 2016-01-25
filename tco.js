@@ -229,7 +229,55 @@
       // MemberExpression . IdentifierName
       { expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr'] },
       // SuperProperty
-      // TODO: Special case (needs to be wrapped in a class)
+      { d: 'super', f: 'brkt', expected: false, source: [
+        '(function() {',
+        '  "use strict";',
+        '  var finished = false;',
+        '  class Parent {}',
+        '  class Child extends Parent {',
+        '    method(n) {',
+        '      Object.defineProperty(Parent.prototype, "prop", {',
+        '        configurable: true,',
+        '        get: function() {',
+        '          if (n === 0) {',
+        '            finished = true;',
+        '            return;',
+        '          }',
+        '          return this.method(n - 1);',
+        '        }',
+        '      });',
+        '      return super.prop;',
+        '    }',
+        '  }',
+        '  new Child().method(' + maxIterations + ');',
+        '  return finished;',
+        '}());'
+      ].join('\n') },
+      { d: 'super', f: 'dot', expected: false, source: [
+        '(function() {',
+        '  "use strict";',
+        '  var finished = false;',
+        '  class Parent {}',
+        '  class Child extends Parent {',
+        '    method(n) {',
+        '      Object.defineProperty(Parent.prototype, "prop", {',
+        '        configurable: true,',
+        '        get: function() {',
+        '          if (n === 0) {',
+        '            finished = true;',
+        '            return;',
+        '          }',
+        '          return this.method(n - 1);',
+        '        }',
+        '      });',
+        '      return super["prop"];',
+        '    }',
+        '  }',
+        '  new Child().method(' + maxIterations + ');',
+        '  return finished;',
+        '}());'
+      ].join('\n') },
+
       // MetaProperty
       // TODO: what?
       // new MemberExpression Arguments
@@ -323,6 +371,12 @@
       }
     },
     fromBody: function(testCase) {
+      // Special-case tests are defined with complete source text and may be
+      // passed over.
+      if (testCase.source) {
+        return;
+      }
+
       testCase.source = [
           '(function() {',
           '  var finished = false;',

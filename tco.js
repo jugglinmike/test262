@@ -9,88 +9,88 @@
   var p = typeof print === 'undefined' ? console.log.bind(console) : print;
   var stmts = [
     // BlockStatement
-    { expected: true, pattern: '{ S }' },
-    { expected: true, pattern: '{ void 0; S }' },
+    { f: 'block', expected: true, pattern: '{ S }' },
+    { f: 'block', expected: true, pattern: '{ void 0; S }' },
 
     // Declaration
-    { expected: false, pattern: 'function x() { S } x();' },
-    { expected: false, pattern: 'class C { method() { S } } new C().method();' },
+    { f: 'function', expected: false, pattern: 'function x() { S } x();' },
+    { f: 'class', expected: false, pattern: 'class C { method() { S } } new C().method();' },
 
     // VariableStatement
-    { expected: false, pattern: 'var x = E;' },
-    { expected: false, pattern: 'var x, y = E;' },
-    { expected: false, pattern: 'var [x] = [E];' },
-    { expected: false, pattern: 'let x = E;' },
-    { expected: false, pattern: 'let x, y = E;' },
-    { expected: false, pattern: 'let [x] = [E];' },
-    { expected: false, pattern: 'const x = E;' },
-    { expected: false, pattern: 'const x = 0, y = E;' },
-    { expected: false, pattern: 'const [x] = [E];' },
+    { f: 'variable', expected: false, pattern: 'var x = E;' },
+    { f: 'variable', expected: false, pattern: 'var x, y = E;' },
+    { f: 'variable', expected: false, pattern: 'var [x] = [E];' },
+    { f: 'variable', expected: false, pattern: 'let x = E;' },
+    { f: 'variable', expected: false, pattern: 'let x, y = E;' },
+    { f: 'variable', expected: false, pattern: 'let [x] = [E];' },
+    { f: 'variable', expected: false, pattern: 'const x = E;' },
+    { f: 'variable', expected: false, pattern: 'const x = 0, y = E;' },
+    { f: 'variable', expected: false, pattern: 'const [x] = [E];' },
 
     // ExpressionStatement
-    { expected: false, pattern: 'E;' },
+    { f: 'expression', expected: false, pattern: 'E;' },
 
     // IfStatement
-    { expected: true, pattern: 'if (true) { S }' },
-    { expected: false, pattern: 'if (E) {}' },
-    { expected: true, pattern: 'if (false) { } else { S }' },
-    { expected: false, pattern: 'if (E) { } else { }' },
+    { f: 'if', expected: true, pattern: 'if (true) { S }' },
+    { f: 'if', expected: false, pattern: 'if (E) {}' },
+    { f: 'if', expected: true, pattern: 'if (false) { } else { S }' },
+    { f: 'if', expected: false, pattern: 'if (E) { } else { }' },
 
     // BreakableStatement
       // SwitchStatement
-      { expected: false, pattern: 'switch(E) {}' },
-      { expected: false, pattern: 'switch(E) { default: }' },
-      { expected: false, pattern: 'switch(0) { case E: }' },
-      { expected: true, pattern: 'switch(0) { case 0: S }' },
-      { expected: true, pattern: 'switch(0) { default: S }' },
-      { expected: false, pattern: 'switch(0) { case E: default: }' },
-      { expected: true, pattern: 'switch(0) { case 0: S default: }' },
+      { f: 'switch', expected: false, pattern: 'switch(E) {}' },
+      { f: 'switch', expected: false, pattern: 'switch(E) { default: }' },
+      { f: 'switch', expected: false, pattern: 'switch(0) { case E: }' },
+      { f: 'switch', expected: true, pattern: 'switch(0) { case 0: S }' },
+      { f: 'switch', expected: true, pattern: 'switch(0) { default: S }' },
+      { f: 'switch', expected: false, pattern: 'switch(0) { case E: default: }' },
+      { f: 'switch', expected: true, pattern: 'switch(0) { case 0: S default: }' },
 
       // IterationStatement
-      { expected: false, pattern: 'var y; for (y in [0]) { S }' },
-      { expected: false, pattern: 'var y; for (y in E) { }' },
-      { expected: false, pattern: 'for (var y in [0]) { S }' },
-      { expected: false, pattern: 'for (var y in E) { }' },
-      { expected: false, pattern: 'for (let y in [0]) { S }' },
-      { expected: false, pattern: 'for (let y in E) { }' },
-      { expected: false, pattern: 'for (const y in [0]) { S }' },
-      { expected: false, pattern: 'for (const y in E) { }' },
+      { f: 'for-in', expected: false, pattern: 'var y; for (y in [0]) { S }' },
+      { f: 'for-in', expected: false, pattern: 'var y; for (y in E) { }' },
+      { f: 'for-in', expected: false, pattern: 'for (var y in [0]) { S }' },
+      { f: 'for-in', expected: false, pattern: 'for (var y in E) { }' },
+      { f: 'for-in', expected: false, pattern: 'for (let y in [0]) { S }' },
+      { f: 'for-in', expected: false, pattern: 'for (let y in E) { }' },
+      { f: 'for-in', expected: false, pattern: 'for (const y in [0]) { S }' },
+      { f: 'for-in', expected: false, pattern: 'for (const y in E) { }' },
 
-      { expected: false, pattern: 'var y; for (y of [0]) { S }' },
-      { expected: false, pattern: 'var y; for (y of E) { }' },
-      { expected: false, pattern: 'for (var y of [0]) { S }' },
-      { expected: false, pattern: 'for (var y of E) { }' },
-      { expected: false, pattern: 'for (let y of [0]) { S }' },
-      { expected: false, pattern: 'for (let y of E) { }' },
-      { expected: false, pattern: 'for (const y of [0]) { S }' },
-      { expected: false, pattern: 'for (const y of E) { }' },
+      { f: 'for-of', expected: false, pattern: 'var y; for (y of [0]) { S }' },
+      { f: 'for-of', expected: false, pattern: 'var y; for (y of E) { }' },
+      { f: 'for-of', expected: false, pattern: 'for (var y of [0]) { S }' },
+      { f: 'for-of', expected: false, pattern: 'for (var y of E) { }' },
+      { f: 'for-of', expected: false, pattern: 'for (let y of [0]) { S }' },
+      { f: 'for-of', expected: false, pattern: 'for (let y of E) { }' },
+      { f: 'for-of', expected: false, pattern: 'for (const y of [0]) { S }' },
+      { f: 'for-of', expected: false, pattern: 'for (const y of E) { }' },
 
-      { expected: true, pattern: 'var x; for (x = 0; x < 1; ++x) { S }' },
-      { expected: false, pattern: 'for (E; ;) { }' },
-      { expected: false, pattern: 'for (; E;) { }' },
-      { expected: false, pattern: 'for (; ; E) { }' },
-      { expected: true, pattern: 'for (var x = 0; ;) { S }' },
-      { expected: false, pattern: 'for (var x = E; ;) { }' },
-      { expected: false, pattern: 'for (var x = 0; E;) { }' },
-      { expected: false, pattern: 'for (var x = 0; ; E) { }' },
-      { expected: true, pattern: 'for (let x = 0; ;) { S }' },
-      { expected: false, pattern: 'for (let x = E; ;) { }' },
-      { expected: false, pattern: 'for (let x = 0; E;) { }' },
-      { expected: false, pattern: 'for (let x = 0; ; E) { }' },
-      { expected: true, pattern: 'for (const x = 0; ;) { S }' },
-      { expected: false, pattern: 'for (const x = E; ;) { }' },
-      { expected: false, pattern: 'for (const x = 0; E;) { }' },
-      { expected: false, pattern: 'for (const x = 0; ; E) { }' },
+      { f: 'for', expected: true, pattern: 'var x; for (x = 0; x < 1; ++x) { S }' },
+      { f: 'for', expected: false, pattern: 'for (E; ;) { }' },
+      { f: 'for', expected: false, pattern: 'for (; E;) { }' },
+      { f: 'for', expected: false, pattern: 'for (; ; E) { }' },
+      { f: 'for', expected: true, pattern: 'for (var x = 0; ;) { S }' },
+      { f: 'for', expected: false, pattern: 'for (var x = E; ;) { }' },
+      { f: 'for', expected: false, pattern: 'for (var x = 0; E;) { }' },
+      { f: 'for', expected: false, pattern: 'for (var x = 0; ; E) { }' },
+      { f: 'for', expected: true, pattern: 'for (let x = 0; ;) { S }' },
+      { f: 'for', expected: false, pattern: 'for (let x = E; ;) { }' },
+      { f: 'for', expected: false, pattern: 'for (let x = 0; E;) { }' },
+      { f: 'for', expected: false, pattern: 'for (let x = 0; ; E) { }' },
+      { f: 'for', expected: true, pattern: 'for (const x = 0; ;) { S }' },
+      { f: 'for', expected: false, pattern: 'for (const x = E; ;) { }' },
+      { f: 'for', expected: false, pattern: 'for (const x = 0; E;) { }' },
+      { f: 'for', expected: false, pattern: 'for (const x = 0; ; E) { }' },
 
-      { expected: true, pattern: 'do { S } while (false)' },
-      { expected: false, pattern: 'do { } while (E)' },
+      { f: 'do-while', expected: true, pattern: 'do { S } while (false)' },
+      { f: 'do-while', expected: false, pattern: 'do { } while (E)' },
 
-      { expected: false, pattern: 'while (E) { }' },
-      { expected: true, pattern: 'while (true) { S }' },
+      { f: 'while', expected: false, pattern: 'while (E) { }' },
+      { f: 'while', expected: true, pattern: 'while (true) { S }' },
 
     // ReturnStatement
     // (a little useless--all the other tests rely on this being correct)
-    { expected: true, pattern: 'return E;' },
+    { f: 'return', expected: true, pattern: 'return E;' },
 
     // WithStatement
     // (these are a special case and probably not worth testing since TCO
@@ -99,110 +99,109 @@
     //{ expected: false, pattern: 'with (E) { }' },
 
     // LabeledStatement
-    { expected: true, pattern: 'test262: S' },
+    { f: 'labeled', expected: true, pattern: 'test262: S' },
 
     // ThrowStatement
-    { expected: false, pattern: 'throw E;' },
+    { f: 'throw', expected: false, pattern: 'throw E;' },
 
     // TryStatement
-    { expected: false, pattern: 'try { S } catch (err) { throw err; }' },
-    { expected: true, pattern: 'try { throw null; } catch (err) { S }' },
-    { expected: true, pattern: 'try { } catch (err) { } finally { S }' },
-    { expected: true, pattern: 'try { } finally { S }' }
+    { f: 'try', expected: false, pattern: 'try { S } catch (err) { throw err; }' },
+    { f: 'try', expected: true, pattern: 'try { throw null; } catch (err) { S }' },
+    { f: 'try', expected: true, pattern: 'try { } catch (err) { } finally { S }' },
+    { f: 'try', expected: true, pattern: 'try { } finally { S }' }
   ];
   var exprs = [
     // AssignmentExpression
       // ArrowFunction
-      // TODO: TestSetup/AssertionSetup
-      { expected: false, pattern: ['var a = () => f(n - 1); a();', null] },
+      { f: 'arrow-function', expected: false, pattern: ['var a = () => f(n - 1); a();', null] },
       // LeftHandSideExpression = AssignmentExpression
-      { expected: false, pattern: ['var x;', 'x = f(n-1)'] },
-      { expected: false, pattern: ['var x;', '[x = f(n-1)] = []'] },
+      { f: 'assignment', expected: false, pre: 'var x;', pattern: 'x = f(n-1)' },
+      { f: 'assignment', expected: false, pre: 'var x;', pattern: '[x = f(n-1)] = []' },
       // LeftHandSideExpression AssignmentOperator AssignmentExpression
-      { expected: false, pattern: ['var x;', 'x += f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x -= f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x *= f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x /= f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x %= f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x <<= f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x >>= f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x >>>= f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x &= f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x |= f(n-1)'] },
-      { expected: false, pattern: ['var x;', 'x ^= f(n-1)'] },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x += f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x -= f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x *= f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x /= f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x %= f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x <<= f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x >>= f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x >>>= f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x &= f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x |= f(n-1)' },
+      { f: 'compound-assignment', expected: false, pre: 'var x;', pattern: 'x ^= f(n-1)' },
 
     // BitwiseANDExpression
-    { expected: false, pattern: '0 & f(n-1)' },
-    { expected: false, pattern: 'f(n-1) & 0' },
+    { f: 'bitwise-and', expected: false, pattern: '0 & f(n-1)' },
+    { f: 'bitwise-and', expected: false, pattern: 'f(n-1) & 0' },
 
     // BitwiseXORExpression
-    { expected: false, pattern: '0 ^ f(n-1)' },
-    { expected: false, pattern: 'f(n-1) ^ 0' },
+    { f: 'bitwise-xor', expected: false, pattern: '0 ^ f(n-1)' },
+    { f: 'bitwise-xor', expected: false, pattern: 'f(n-1) ^ 0' },
 
     // BitwiseORExpression
-    { expected: false, pattern: '0 | f(n-1)' },
-    { expected: false, pattern: 'f(n-1) | 0' },
+    { f: 'bitwise-or', expected: false, pattern: '0 | f(n-1)' },
+    { f: 'bitwise-or', expected: false, pattern: 'f(n-1) | 0' },
 
     // EqualityExpression
-    { expected: false, pattern: '0 == f(n-1)' },
-    { expected: false, pattern: 'f(n-1) == 0' },
-    { expected: false, pattern: '0 != f(n-1)' },
-    { expected: false, pattern: 'f(n-1) != 0' },
-    { expected: false, pattern: '0 === f(n-1)' },
-    { expected: false, pattern: 'f(n-1) === 0' },
-    { expected: false, pattern: '0 !== f(n-1)' },
-    { expected: false, pattern: 'f(n-1) !== 0' },
+    { f: 'equals', expected: false, pattern: '0 == f(n-1)' },
+    { f: 'equals', expected: false, pattern: 'f(n-1) == 0' },
+    { f: 'does-not-equals', expected: false, pattern: '0 != f(n-1)' },
+    { f: 'does-not-equals', expected: false, pattern: 'f(n-1) != 0' },
+    { f: 'strict-equals', expected: false, pattern: '0 === f(n-1)' },
+    { f: 'strict-equals', expected: false, pattern: 'f(n-1) === 0' },
+    { f: 'strict-does-not-equals', expected: false, pattern: '0 !== f(n-1)' },
+    { f: 'strict-does-not-equals', expected: false, pattern: 'f(n-1) !== 0' },
 
     // RelationalExpression
-    { expected: false, pattern: '0 < f(n-1)' },
-    { expected: false, pattern: 'f(n-1) < 0' },
-    { expected: false, pattern: '0 > f(n-1)' },
-    { expected: false, pattern: 'f(n-1) > 0' },
-    { expected: false, pattern: '0 <= f(n-1)' },
-    { expected: false, pattern: 'f(n-1) <= 0' },
-    { expected: false, pattern: '0 >= f(n-1)' },
-    { expected: false, pattern: 'f(n-1) >= 0' },
-    { expected: false, pattern: 'f(n-1) instanceof f' },
-    { expected: false, pattern: 'f instanceof f(n-1)' },
-    { expected: false, pattern: 'f(n-1) in f' },
-    { expected: false, pattern: 'f in f(n-1)' },
+    { f: 'less-than', expected: false, pattern: '0 < f(n-1)' },
+    { f: 'less-than', expected: false, pattern: 'f(n-1) < 0' },
+    { f: 'greater-than', expected: false, pattern: '0 > f(n-1)' },
+    { f: 'greater-than', expected: false, pattern: 'f(n-1) > 0' },
+    { f: 'less-than-or-equal-to', expected: false, pattern: '0 <= f(n-1)' },
+    { f: 'less-than-or-equal-to', expected: false, pattern: 'f(n-1) <= 0' },
+    { f: 'greater-than-or-equal-to', expected: false, pattern: '0 >= f(n-1)' },
+    { f: 'greater-than-or-equal-to', expected: false, pattern: 'f(n-1) >= 0' },
+    { f: 'instanceof', expected: false, pattern: 'f(n-1) instanceof f' },
+    { f: 'instanceof', expected: false, pattern: 'f instanceof f(n-1)' },
+    { f: 'in', expected: false, pattern: 'f(n-1) in f' },
+    { f: 'in', expected: false, pattern: 'f in f(n-1)' },
 
     // ShiftExpression
-    { expected: false, pattern: '0 << f(n-1)' },
-    { expected: false, pattern: 'f(n-1) << 0' },
-    { expected: false, pattern: '0 >> f(n-1)' },
-    { expected: false, pattern: 'f(n-1) >> 0' },
-    { expected: false, pattern: '0 >>> f(n-1)' },
-    { expected: false, pattern: 'f(n-1) >>> 0' },
+    { f: 'left-shift', expected: false, pattern: '0 << f(n-1)' },
+    { f: 'left-shift', expected: false, pattern: 'f(n-1) << 0' },
+    { f: 'right-shift', expected: false, pattern: '0 >> f(n-1)' },
+    { f: 'right-shift', expected: false, pattern: 'f(n-1) >> 0' },
+    { f: 'unsigned-right-shift', expected: false, pattern: '0 >>> f(n-1)' },
+    { f: 'unsigned-right-shift', expected: false, pattern: 'f(n-1) >>> 0' },
 
     // AdditiveExpression
-    { expected: false, pattern: '0 + f(n-1)' },
-    { expected: false, pattern: 'f(n-1) + 0' },
-    { expected: false, pattern: '0 - f(n-1)' },
-    { expected: false, pattern: 'f(n-1) - 0' },
+    { f: 'addition', expected: false, pattern: '0 + f(n-1)' },
+    { f: 'addition', expected: false, pattern: 'f(n-1) + 0' },
+    { f: 'subtraction', expected: false, pattern: '0 - f(n-1)' },
+    { f: 'subtraction', expected: false, pattern: 'f(n-1) - 0' },
 
     // MultiplicativeExpression
-    { expected: false, pattern: '0 * f(n-1)' },
-    { expected: false, pattern: 'f(n-1) * 0' },
-    { expected: false, pattern: '0 / f(n-1)' },
-    { expected: false, pattern: 'f(n-1) / 0' },
-    { expected: false, pattern: '0 % f(n-1)' },
-    { expected: false, pattern: 'f(n-1) % 0' },
+    { f: 'multiplication', expected: false, pattern: '0 * f(n-1)' },
+    { f: 'multiplication', expected: false, pattern: 'f(n-1) * 0' },
+    { f: 'division', expected: false, pattern: '0 / f(n-1)' },
+    { f: 'division', expected: false, pattern: 'f(n-1) / 0' },
+    { f: 'modulus', expected: false, pattern: '0 % f(n-1)' },
+    { f: 'modulus', expected: false, pattern: 'f(n-1) % 0' },
 
     // UnaryExpression
-    { expected: false, pattern: 'delete f(n-1)' },
-    { expected: false, pattern: 'void f(n-1)' },
-    { expected: false, pattern: 'typeof f(n-1)' },
-    { expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', '++o.attr'] },
-    { expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', '--o.attr'] },
-    { expected: false, pattern: '+f(n-1)' },
-    { expected: false, pattern: '-f(n-1)' },
-    { expected: false, pattern: '~f(n-1)' },
-    { expected: false, pattern: '!f(n-1)' },
+    { f: 'delete', expected: false, pattern: 'delete f(n-1)' },
+    { f: 'void', expected: false, pattern: 'void f(n-1)' },
+    { f: 'typeof', expected: false, pattern: 'typeof f(n-1)' },
+    { f: 'prefix-increment', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', '++o.attr'] },
+    { f: 'prefix-decrement', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', '--o.attr'] },
+    { f: 'unary-plus', expected: false, pattern: '+f(n-1)' },
+    { f: 'unary-minus', expected: false, pattern: '-f(n-1)' },
+    { f: 'bitwise-not', expected: false, pattern: '~f(n-1)' },
+    { f: 'logical-not', expected: false, pattern: '!f(n-1)' },
 
     // PostfixExpression
-    { expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr++'] },
-    { expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr--'] },
+    { f: 'postfix-increment', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr++'] },
+    { f: 'postfix-decrement', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr--'] },
 
     // CallExpression
       // SuperCall
@@ -210,18 +209,18 @@
       // super
       // MemberExpression CallExpression
       // CallExpression Arguments
-      { expected: true, pattern: 'f(n-1)' },
+      { f: 'call', expected: true, pattern: 'f(n-1)' },
       // CallExpression TemplateLiteral
       // TODO: special case (needs to modify the base case)
       //{ expected: true, pattern: 'f`${ n-1 }`' },
-      { expected: false, pattern: 'f`${ f(n-1) }`' },
+      { f: 'call', expected: false, pattern: 'f`${ f(n-1) }`' },
       // CallExpression [ Expression ]
-      { expected: false, pattern: 'f(0)[f(n-1)]' },
+      { f: 'call', expected: false, pattern: 'f(0)[f(n-1)]' },
       // CallExpression . IdentifierName
-      { expected: false, pattern: ['var o = function() { return { get attr() { return f(n-1); } }; };', 'o().attr'] },
+      { f: 'call', expected: false, pattern: ['var o = function() { return { get attr() { return f(n-1); } }; };', 'o().attr'] },
 
     // NewExpression
-    { expected: false, pattern: 'new f' },
+    { f: 'new', expected: false, pattern: 'new f' },
 
     // MemberExpression
       // MemberExpression [ Expression ]
@@ -247,39 +246,39 @@
       // Literal
       // TODO: What?
       // ArrayLiteral
-      { expected: false, pattern: '[f(n-1)]' },
+      { f: 'array', expected: false, pattern: '[f(n-1)]' },
       // ObjectLiteral
-      { expected: false, pattern: '{ [f(n-1)]: 0 }' },
-      { expected: false, pattern: '{ 0: f(n-1) }' },
+      { f: 'object', expected: false, pattern: '{ [f(n-1)]: 0 }' },
+      { f: 'object', expected: false, pattern: '{ 0: f(n-1) }' },
       // FunctionExpression
       // TODO: TestSetup/AssertionSetup
-      { expected: false, pattern: ['var e = function() { return f(n-1); }; e();', null] },
+      { f: 'function', expected: false, pattern: ['var e = function() { return f(n-1); }; e();', null] },
       // ClassExpression
       // TODO: TestSetup/AssertionSetup
-      { expected: false, pattern: ['var C = class { method() { return f(n-1); } }; new C().method();', null] },
+      { f: 'class', expected: false, pattern: ['var C = class { method() { return f(n-1); } }; new C().method();', null] },
       // GeneratorExpression
-      { expected: false, pattern: ['var g = function*() { return f(n-1); }; g().next();', null] },
+      { f: 'generators', expected: false, pattern: ['var g = function*() { return f(n-1); }; g().next();', null] },
       // RegularExpressionLiteral
       // TODO: What?
       // TemplateLiteral
-      { expected: false, pattern: '`${ f(n-1) }`' },
+      { f: 'template-literal', expected: false, pattern: '`${ f(n-1) }`' },
 
       // Expression
-      { expected: false, pattern: 'f(n-1), 0' },
-      { expected: true, pattern: '0, f(n-1)' },
+      { f: 'comma', expected: false, pattern: 'f(n-1), 0' },
+      { f: 'comma', expected: true, pattern: '0, f(n-1)' },
 
       // ConditionalExpression
-      { expected: true, pattern: 'true ? f(n-1) : 0' },
-      { expected: true, pattern: 'false ? 0 : f(n-1)' },
-      { expected: false, pattern: 'f(n-1) ? 1 : 0' },
+      { f: 'conditional', expected: true, pattern: 'true ? f(n-1) : 0' },
+      { f: 'conditional', expected: true, pattern: 'false ? 0 : f(n-1)' },
+      { f: 'conditional', expected: false, pattern: 'f(n-1) ? 1 : 0' },
 
       // LogicalANDExpression
-      { expected: true, pattern: 'true && f(n-1)' },
-      { expected: false, pattern: 'f(n-1) && true' },
+      { f: 'logical-and', expected: true, pattern: 'true && f(n-1)' },
+      { f: 'logical-and', expected: false, pattern: 'f(n-1) && true' },
 
       // LogicalORExpression
-      { expected: true, pattern: 'false || f(n-1)' },
-      { expected: false, pattern: 'f(n-1) || true' },
+      { f: 'logical-or', expected: true, pattern: 'false || f(n-1)' },
+      { f: 'logical-or', expected: false, pattern: 'f(n-1) || true' },
 
       // ParenthesizedExpression
       { expected: true, pattern: '(f(n-1))' },
@@ -288,12 +287,18 @@
 
   var testGenerators = {
     fromStatement: function(testCase) {
+
+      testCase.fileName = 'test/language/statements/' + testCase.f + '/tco.js';
+
       testCase.body = testCase.pattern
         .replace(/S/, 'return f(n - 1);')
         .replace(/E/, 'f(n - 1)');
     },
     fromExpression: function(testCase) {
       var pattern = testCase.pattern;
+
+      testCase.fileName = 'test/language/expressions/' + testCase.f + '/tco.js';
+
       if (Array.isArray(pattern)) {
         testCase.body = pattern[0];
         if (pattern[1] !== null) {
@@ -305,19 +310,22 @@
     },
     fromBody: function(testCase) {
       testCase.source = [
-        '(function() {',
-        '  var finished = false;',
-        '  (function f(n) {',
-        '    "use strict";',
-        '    if (n === 0) {',
-        '      finished = true;',
-        '      return f;',
-        '    }',
-        '    ' + testCase.body,
-        '  }(100000));',
-        '  return finished;',
-        '}());'
-      ].join('\n');
+          '(function() {',
+          '  var finished = false;',
+          testCase.pre ? '  ' + testCase.pre : null,
+          '  (function f(n) {',
+          '    "use strict";',
+          '    if (n === 0) {',
+          '      finished = true;',
+          '      return f;',
+          '    }',
+          '    ' + testCase.body,
+          '  }(100000));',
+          '  return finished;',
+          '}());'
+        ]
+        .filter(function(line) { return !!line; })
+        .join('\n');
     }
   };
 
@@ -345,6 +353,7 @@
         result = result ? 'success' : 'error';
       }
 
+      if (testCase.fileName) { print(testCase.fileName); }
       if (!(result === 'success' && testCase.expected) && !(result === 'overflow' && !testCase.expected)) {
         print('Actual: ' + result + ' ||| Expected: ' + testCase.expected + '\n' + testCase.source + '\n\n');
       }

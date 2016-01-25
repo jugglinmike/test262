@@ -65,28 +65,28 @@
       { expected: false, pattern: 'for (const y of [0]) { S }' },
       { expected: false, pattern: 'for (const y of E) { }' },
 
-      { expected: false, pattern: 'var x; for (x = 0; x < 1; ++x) { S }' },
+      { expected: true, pattern: 'var x; for (x = 0; x < 1; ++x) { S }' },
       { expected: false, pattern: 'for (E; ;) { }' },
       { expected: false, pattern: 'for (; E;) { }' },
       { expected: false, pattern: 'for (; ; E) { }' },
-      { expected: false, pattern: 'for (var x = 0; ;) { S }' },
+      { expected: true, pattern: 'for (var x = 0; ;) { S }' },
       { expected: false, pattern: 'for (var x = E; ;) { }' },
       { expected: false, pattern: 'for (var x = 0; E;) { }' },
       { expected: false, pattern: 'for (var x = 0; ; E) { }' },
-      { expected: false, pattern: 'for (let x = 0; ;) { S }' },
+      { expected: true, pattern: 'for (let x = 0; ;) { S }' },
       { expected: false, pattern: 'for (let x = E; ;) { }' },
       { expected: false, pattern: 'for (let x = 0; E;) { }' },
       { expected: false, pattern: 'for (let x = 0; ; E) { }' },
-      { expected: false, pattern: 'for (const x = 0; ;) { S }' },
+      { expected: true, pattern: 'for (const x = 0; ;) { S }' },
       { expected: false, pattern: 'for (const x = E; ;) { }' },
       { expected: false, pattern: 'for (const x = 0; E;) { }' },
       { expected: false, pattern: 'for (const x = 0; ; E) { }' },
 
-      { expected: false, pattern: 'do { S } while (false)' },
+      { expected: true, pattern: 'do { S } while (false)' },
       { expected: false, pattern: 'do { } while (E)' },
 
       { expected: false, pattern: 'while (E) { }' },
-      { expected: false, pattern: 'while (true) { S }' },
+      { expected: true, pattern: 'while (true) { S }' },
 
     // ReturnStatement
     // (a little useless--all the other tests rely on this being correct)

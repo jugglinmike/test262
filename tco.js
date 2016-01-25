@@ -228,7 +228,7 @@
       // MemberExpression . IdentifierName
       { expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr'] },
       // SuperProperty
-      // TOD: Special case (needs to be wrapped in a class)
+      // TODO: Special case (needs to be wrapped in a class)
       // MetaProperty
       // TODO: what?
       // new MemberExpression Arguments
@@ -242,7 +242,7 @@
       //' this',
       // IdentifierReference
       // TODO: special case (needs to be wrapped in a `with` statement)
-      // with ({ get foo() { console.log(1); } }) { (function() { 'use strict'; foo; }()) }
+      //{ f: '../identifier-resolution', expected: false, pattern: 'with ({ get foo() { /*something...*/ } }) { (function() { "use strict"; foo; }()) }' }
       // Literal
       // TODO: What?
       // ArrayLiteral
@@ -251,10 +251,8 @@
       { f: 'object', expected: false, pattern: '{ [f(n-1)]: 0 }' },
       { f: 'object', expected: false, pattern: '{ 0: f(n-1) }' },
       // FunctionExpression
-      // TODO: TestSetup/AssertionSetup
       { f: 'function', expected: false, pattern: ['var e = function() { return f(n-1); }; e();', null] },
       // ClassExpression
-      // TODO: TestSetup/AssertionSetup
       { f: 'class', expected: false, pattern: ['var C = class { method() { return f(n-1); } }; new C().method();', null] },
       // GeneratorExpression
       { f: 'generators', expected: false, pattern: ['var g = function*() { return f(n-1); }; g().next();', null] },
@@ -285,10 +283,21 @@
       { expected: false, pattern: '(f(n-1) || true)' }
   ];
 
+  function buildDir(subdir, name) {
+    var dir = 'test/language/statements/';
+    if (name && name.indexOf('../') === 0) {
+      name = name.slice(3);
+    } else {
+      dir += subdir + '/';
+    }
+
+    return dir + name + '/';
+  }
+
   var testGenerators = {
     fromStatement: function(testCase) {
 
-      testCase.fileName = 'test/language/statements/' + testCase.f + '/tco.js';
+      testCase.fileName = buildDir('statements', testCase.f) + 'tco.js';
 
       testCase.body = testCase.pattern
         .replace(/S/, 'return f(n - 1);')
@@ -297,7 +306,7 @@
     fromExpression: function(testCase) {
       var pattern = testCase.pattern;
 
-      testCase.fileName = 'test/language/expressions/' + testCase.f + '/tco.js';
+      testCase.fileName = buildDir('expressions', testCase.f) + 'tco.js';
 
       if (Array.isArray(pattern)) {
         testCase.body = pattern[0];

@@ -114,7 +114,7 @@
     // AssignmentExpression
       // ArrowFunction
       // TODO: TestSetup/AssertionSetup
-      { expected: false, pattern: ['var a = () => f(n - 1); a();', ''] },
+      { expected: false, pattern: ['var a = () => f(n - 1); a();', null] },
       // LeftHandSideExpression = AssignmentExpression
       { expected: false, pattern: ['var x;', 'x = f(n-1)'] },
       { expected: false, pattern: ['var x;', '[x = f(n-1)] = []'] },
@@ -253,12 +253,12 @@
       { expected: false, pattern: '{ 0: f(n-1) }' },
       // FunctionExpression
       // TODO: TestSetup/AssertionSetup
-      { expected: false, pattern: ['var e = function() { return f(n-1); }; e();', ''] },
+      { expected: false, pattern: ['var e = function() { return f(n-1); }; e();', null] },
       // ClassExpression
       // TODO: TestSetup/AssertionSetup
-      { expected: false, pattern: ['var C = class { method() { return f(n-1); } }; new C().method();', ''] },
+      { expected: false, pattern: ['var C = class { method() { return f(n-1); } }; new C().method();', null] },
       // GeneratorExpression
-      { expected: false, pattern: ['var g = function*() { return f(n-1); }; g().next();', ''] },
+      { expected: false, pattern: ['var g = function*() { return f(n-1); }; g().next();', null] },
       // RegularExpressionLiteral
       // TODO: What?
       // TemplateLiteral
@@ -295,7 +295,10 @@
     fromExpression: function(testCase) {
       var pattern = testCase.pattern;
       if (Array.isArray(pattern)) {
-        testCase.body = pattern[0] + 'return ' + pattern[1] + ';';
+        testCase.body = pattern[0];
+        if (pattern[1] !== null) {
+          testCase.body += '\n    return ' + pattern[1] + ';';
+        }
       } else {
         testCase.body = 'return ' + pattern + ';';
       }

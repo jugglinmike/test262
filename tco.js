@@ -7,6 +7,7 @@
  */
 (function() {
   var p = typeof print === 'undefined' ? console.log.bind(console) : print;
+  var maxIterations = 100000;
   var stmts = [
     // BlockStatement
     { d: 'block', f: 'stmt', expected: true, pattern: '{ S }' },
@@ -333,7 +334,7 @@
           '      return f;',
           '    }',
           '    ' + testCase.body,
-          '  }(100000));',
+          '  }(' + maxIterations + '));',
           '  return finished;',
           '}());'
         ]

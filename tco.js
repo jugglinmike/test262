@@ -206,23 +206,44 @@
 
     // CallExpression
       // SuperCall
-      // TODO: Special case
-      // CallExpression[Expression]
-      { expected: false, pattern: ['var o = {};', 'f(n-1)[0]'] },
-      { expected: false, pattern: ['var o = {};', 'f(0)[f(n-1)]'] },
-      // CallExpression.IdentifierName
-      { expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr'] },
+      // TODO: Special case (needs to be wrapped in a class)
+      // super
+      // MemberExpression CallExpression
+      // CallExpression Arguments
+      { expected: true, pattern: 'f(n-1)' },
+      // CallExpression TemplateLiteral
+      // TODO: special case (needs to modify the base case)
+      //{ expected: true, pattern: 'f`${ n-1 }`' },
+      { expected: false, pattern: 'f`${ f(n-1) }`' },
+      // CallExpression [ Expression ]
+      { expected: false, pattern: 'f(0)[f(n-1)]' },
+      // CallExpression . IdentifierName
+      { expected: false, pattern: ['var o = function() { return { get attr() { return f(n-1); } }; };', 'o().attr'] },
 
     // NewExpression
     { expected: false, pattern: 'new f' },
 
     // MemberExpression
+      // MemberExpression [ Expression ]
+      { expected: false, pattern: 'f[f(n-1)]' },
+      // MemberExpression . IdentifierName
+      { expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr'] },
+      // SuperProperty
+      // TOD: Special case (needs to be wrapped in a class)
+      // MetaProperty
+      // TODO: what?
+      // new MemberExpression Arguments
+      { expected: false, pattern: 'new f(n - 1)' },
+      // MemberExpression TemplateLiteral
+      // TODO: special case (needs to modify the base case)
+
+    // PrimaryExpression
       // this
       // TODO: what?
       //' this',
       // IdentifierReference
-      // TODO: extend generation architecture to support this:
-      // with ({ get foo() { console.log(1); } }) { (function() { 'use strict'; foo; }()) } //
+      // TODO: special case (needs to be wrapped in a `with` statement)
+      // with ({ get foo() { console.log(1); } }) { (function() { 'use strict'; foo; }()) }
       // Literal
       // TODO: What?
       // ArrayLiteral
@@ -241,7 +262,28 @@
       // RegularExpressionLiteral
       // TODO: What?
       // TemplateLiteral
-      { expected: false, pattern: '`${ f(n-1) }`' }
+      { expected: false, pattern: '`${ f(n-1) }`' },
+
+      // Expression
+      { expected: false, pattern: 'f(n-1), 0' },
+      { expected: true, pattern: '0, f(n-1)' },
+
+      // ConditionalExpression
+      { expected: true, pattern: 'true ? f(n-1) : 0' },
+      { expected: true, pattern: 'false ? 0 : f(n-1)' },
+      { expected: false, pattern: 'f(n-1) ? 1 : 0' },
+
+      // LogicalANDExpression
+      { expected: true, pattern: 'true && f(n-1)' },
+      { expected: false, pattern: 'f(n-1) && true' },
+
+      // LogicalORExpression
+      { expected: true, pattern: 'false || f(n-1)' },
+      { expected: false, pattern: 'f(n-1) || true' },
+
+      // ParenthesizedExpression
+      { expected: true, pattern: '(f(n-1))' },
+      { expected: false, pattern: '(f(n-1) || true)' }
   ];
 
   var testGenerators = {

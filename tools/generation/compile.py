@@ -3,56 +3,14 @@ import argparse
 import sys, os, re
 import yaml
 import codecs
+from find_comments import find_comments
 
-yamlPattern = re.compile(r'\---[\n\s]*((?:\s|\S)*)[\n\s*]---', flags=re.DOTALL|re.MULTILINE)
+yamlPattern = re.compile(r'\---[\n\s]*((?:\s|\S)*)[\n\s*]---',
+                         flags=re.DOTALL|re.MULTILINE)
 regionStartPattern = re.compile(r'\s*#\s*region\s+(\S+)\s*{')
 regionEndPattern = re.compile(r'\s*}')
 interpolatePattern = re.compile(r'\{\s*(\S+)\s*\}')
 indentPattern = re.compile(r'^(\s*)')
-
-def find_comments(source):
-    in_string = False
-    in_s_comment = False
-    in_m_comment = False
-    comment = ''
-    lineno = 0
-
-    for idx in xrange(len(source)):
-        if source[idx] == '\n':
-            lineno += 1
-
-        if in_s_comment:
-            if source[idx] == '\n':
-                in_s_comment = False
-                yield dict(
-                    source=comment,
-                    firstchar=idx - len(comment) - 2,
-                    lastchar=idx,
-                    lineno=lineno)
-        elif in_m_comment:
-            if source[idx] == '*' and source[idx + 1] == '/':
-                in_m_comment = False
-                yield dict(
-                    source=comment,
-                    firstchar=idx - len(comment) - 2,
-                    lastchar=idx + 2,
-                    lineno=lineno)
-        elif in_string:
-            if source[idx] == in_string:
-                in_string = False
-            continue
-
-        if in_m_comment or in_s_comment:
-            comment += source[idx]
-            continue
-
-        in_m_comment = source[idx - 1] == '/' and source[idx] == '*'
-        in_s_comment = source[idx - 1] == '/' and source[idx] == '/'
-
-        if in_m_comment or in_s_comment:
-            comment = ''
-        elif source[idx] == '\'' or source[idx] == '"':
-            in_string = source[idx]
 
 def read_case(source):
     case = dict(meta=None, regions=dict())

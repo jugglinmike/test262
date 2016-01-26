@@ -10,7 +10,6 @@ class Expander:
         self.templates = dict()
         self.case_dir = case_dir
 
-
     def _load_templates(self, template_class):
         directory = os.path.join(self.case_dir, template_class)
         file_names = map(

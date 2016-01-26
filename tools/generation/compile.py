@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import argparse
-import sys, os
-import yaml
+import os
 import codecs
 
 import find_files

@@ -145,7 +145,7 @@ parser.add_argument('cases', help='''Test cases to generate. May be a file or a
 args = parser.parse_args()
 
 if os.path.isdir(args.cases):
-    cases = find_files.tests(args.cases)
+    cases = find_files.cases(args.cases)
 else:
     cases = [args.cases]
 

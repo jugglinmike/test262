@@ -15,7 +15,7 @@ def forms(directory):
         with open(file_name) as template_file:
             yield (file_name, template_file.read())
 
-def tests(directory):
+def cases(directory):
     for subdirectory, _, file_names in os.walk(directory):
         file_names = map(
             lambda x: os.path.join(subdirectory, x),

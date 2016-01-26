@@ -35,13 +35,15 @@ class Expander:
                 yield full
 
     def expand(self, case_file = None):
-        caseValues = None
-        group = None
-
         if case_file:
-            return [self.expand_case(case_file)]
+            return [x for x in self.expand_case(case_file)]
 
-        return [self.expand_case(x) for x in self.list_cases()]
+        tests = []
+
+        for case_file in self.list_cases():
+            tests += self.expand_case(case_file)
+
+        return tests
 
     def expand_case(self, file_name):
         case = Case(file_name)

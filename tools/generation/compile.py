@@ -46,8 +46,7 @@ for caseDir in caseDirs:
     exp = Expander(caseDir)
     for tests in exp.expand(caseFile):
       for test in tests:
-       for t in test:
         if args.out:
-            write_test(args.out, t)
+            write_test(args.out, test)
         else:
-            print_test(t)
+            print_test(test)

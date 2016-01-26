@@ -1,0 +1,41 @@
+/*---
+path: language/expressions/array/spread-
+name: array initializer
+es6id: 12.2.5.2
+info: >
+    SpreadElement : ... AssignmentExpression
+
+    1. Let spreadRef be the result of evaluating AssignmentExpression.
+    2. Let spreadObj be GetValue(spreadRef).
+    3. Let iterator be GetIterator(spreadObj).
+    4. ReturnIfAbrupt(iterator).
+    5. Repeat
+       a. Let next be IteratorStep(iterator).
+       b. ReturnIfAbrupt(next).
+       c. If next is false, return nextIndex.
+       d. Let nextValue be IteratorValue(next).
+       e. ReturnIfAbrupt(nextValue).
+       f. Let status be CreateDataProperty(array, ToString(nextIndex),
+          nextValue).
+       g. Assert: status is true .
+       h. Let nextIndex be nextIndex + 1.
+---*/
+
+var /*{ binding }*/ = [/*{ elems }*/];
+
+/*{ body }*/
+
+
+// Call
+var /*{ binding }*/ = function () { return arguments; }(/*{ elems }*/);
+
+/*{ body }*/
+
+// new
+var /*{ binding }*/ = new function () { return arguments; }(/*{ elems }*/);
+
+/*{ body }*/
+
+// SuperCall
+var x = new class extends class { constructor() { return arguments; } } { constructor() { return super(...[1, 2, 3]); } }()
+

@@ -212,7 +212,21 @@
       // CallExpression Arguments
       { d: 'call', f: 'direct', expected: true, pattern: 'f(n-1)' },
       // CallExpression TemplateLiteral
-      // TODO: special case (needs to modify the base case)
+      { d: 'tagged-template', expected: true, source: [
+        '(function() {',
+        '  "use strict";',
+        '  var finished = false;',
+        '  function f(_, n) {',
+        '    if (n === 0) {',
+        '      finished = true;',
+        '      return;',
+        '    }',
+        '    return f`${n-1}`;',
+        '  }',
+        '  f(null, ' + maxIterations + ');',
+        '  return finished;',
+        '}());'
+      ].join('\n') },
       //{ expected: true, pattern: 'f`${ n-1 }`' },
       { d: 'tagged-template', expected: false, pattern: 'f`${ f(n-1) }`' },
       // CallExpression [ Expression ]

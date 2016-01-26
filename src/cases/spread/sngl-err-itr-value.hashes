@@ -32,12 +32,17 @@ info: |
 
 //# region setup {
 var iter = {};
+var poisonedValue = Object.defineProperty({}, 'value', {
+  get: function() {
+    throw new Test262Error();
+  }
+});
 iter[Symbol.iterator] = function() {
-  var poisonedValuse = Object.defineProperty({}, 'value', {
-    get: function() {
-      throw new Test262Error();
+  return {
+    next: function() {
+      return poisonedValue;
     }
-  });
+  };
 };
 //}
 

@@ -17,5 +17,5 @@ Test262Error
 // }
 
 //# region args {
-0, ...(function() { throw new Test262Error(); })
+0, ...function*() { throw new Test262Error(); }()
 // }

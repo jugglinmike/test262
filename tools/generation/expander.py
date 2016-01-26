@@ -1,25 +1,12 @@
-import re, os, yaml
+import re, os
+from parse_yaml import parse_yaml
 from find_comments import find_comments
+from template import Template
 
 hashesFilenamePattern = re.compile(r'^[^\.].*\.hashes$')
 
-yamlPattern = re.compile(r'\---[\n\s]*((?:\s|\S)*)[\n\s*]---',
-                         flags=re.DOTALL|re.MULTILINE)
 regionStartPattern = re.compile(r'\s*#\s*region\s+(\S+)\s*{')
 regionEndPattern = re.compile(r'\s*}')
-interpolatePattern = re.compile(r'\{\s*(\S+)\s*\}')
-indentPattern = re.compile(r'^(\s*)')
-
-def _indent(text, prefix = '    '):
-    '''Prefix a block of text (as defined by the "line break" control
-    character) with some character sequence.'''
-
-    if isinstance(text, list):
-        lines = text
-    else:
-        lines = text.split('\n')
-
-    return prefix + ('\n' + prefix).join(lines)
 
 def _parse(source):
     case = dict(meta=None, regions=dict())
@@ -28,9 +15,9 @@ def _parse(source):
     lines = source.split('\n')
 
     for comment in find_comments(source):
-        match = yamlPattern.match(comment['source'])
-        if match:
-            case['meta'] = yaml.safe_load(match.group(1))
+        meta = parse_yaml(comment['source'])
+        if meta:
+            case['meta'] = meta
             continue
 
         match = regionStartPattern.match(comment['source'])
@@ -48,86 +35,6 @@ def _parse(source):
                 region_start = 0
 
     return case
-
-class Template:
-    def __init__(self, file_name):
-        self.file_name = file_name
-
-        with open(file_name) as template_file:
-            self.source = template_file.read()
-
-        self.attribs = _parse(self.source)
-
-    def expand_regions(self, source, context):
-        replacements = []
-        lines = source.split('\n')
-
-        for comment in find_comments(source):
-            match = yamlPattern.match(comment['source'])
-            if match:
-                replacements.insert(0, dict(value='', **comment))
-                continue
-
-            match = interpolatePattern.match(comment['source'])
-
-            if match == None:
-                continue
-            value = context['regions'].get(match.group(1), '')
-            replacements.insert(0, dict(value=value, **comment))
-
-        for replacement in replacements:
-            whitespace = indentPattern.match(lines[replacement['lineno']]).group(1)
-            source = source[:replacement['firstchar']] + \
-                _indent(replacement['value'], whitespace).lstrip() + \
-                source[replacement['lastchar']:]
-        setup = context['regions'].get('setup')
-
-        if setup:
-            source = setup + '\n' + source
-
-        return source
-
-    def _frontmatter(self, case_values, form_values, sources):
-        sources = _indent(sources, '// - ')
-        description = case_values['meta']['desc'] + \
-            ' (' + form_values['meta']['name'] + ')'
-        lines = []
-
-        lines += [
-            '// This file was procedurally generated from the following sources:',
-            sources,
-            '/*---',
-            'description: ' + description,
-            'es6id: ' + form_values['meta']['es6id']
-        ]
-
-        if case_values['meta'].get('features'):
-            lines += ['features: ' + yaml.dump(case_values['meta'].get('features'))]
-
-        if case_values['meta'].get('negative'):
-            lines += ['negative: ' + case_values['meta'].get('negative')]
-
-        lines += [
-            'info: >',
-            _indent(case_values['meta']['info']),
-            '',
-            _indent(form_values['meta']['info']),
-            '---*/'
-        ]
-
-        return '\n'.join(lines)
-
-    def expand(self, case_filename, case_values):
-        output = []
-
-        form_location = os.path.join('src', 'forms', case_values['meta']['template'])
-
-        output.append(dict(
-            name = self.attribs['meta']['path'] + os.path.basename(case_filename[:-7]) + '.js',
-            source = self._frontmatter(case_values, self.attribs, [case_filename, self.file_name]) + '\n' + self.expand_regions(self.source, case_values)
-        ))
-
-        return output
 
 class Expander:
     def __init__(self, case_dir):

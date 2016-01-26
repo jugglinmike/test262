@@ -12,12 +12,20 @@ def find_comments(source):
     in_string = False
     in_s_comment = False
     in_m_comment = False
+    follows_escape = False
     comment = ''
     lineno = 0
 
     for idx in xrange(len(source)):
         if source[idx] == '\n':
             lineno += 1
+
+        # Within comments and strings, any odd number of back-slashes begins an
+        # escape sequence.
+        if source[idx - 1] == '\\':
+            follows_escape = not follows_escape
+        else:
+            follows_escape = False
 
         if in_s_comment:
             if source[idx] == '\n':
@@ -36,7 +44,9 @@ def find_comments(source):
                     lastchar=idx + 2,
                     lineno=lineno)
         elif in_string:
-            if source[idx] == in_string:
+            if source[idx] == in_string and not follows_escape:
+                in_string = False
+            elif source[idx] == '\n' and in_string != '`' and not follows_escape:
                 in_string = False
             continue
 
@@ -49,5 +59,5 @@ def find_comments(source):
 
         if in_m_comment or in_s_comment:
             comment = ''
-        elif source[idx] == '\'' or source[idx] == '"':
+        elif source[idx] == '\'' or source[idx] == '"' or source[idx] == '`':
             in_string = source[idx]

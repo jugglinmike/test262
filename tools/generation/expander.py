@@ -36,14 +36,13 @@ class Expander:
 
     def expand(self, case_file = None):
         if case_file:
-            return [x for x in self.expand_case(case_file)]
+            case_files = [case_file]
+        else:
+            case_files = self.list_cases()
 
-        tests = []
-
-        for case_file in self.list_cases():
-            tests += self.expand_case(case_file)
-
-        return tests
+        for case_file in case_files:
+            for test in self.expand_case(case_file):
+                yield test
 
     def expand_case(self, file_name):
         case = Case(file_name)

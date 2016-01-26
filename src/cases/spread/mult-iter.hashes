@@ -1,6 +1,6 @@
 /*---
 desc: Spread operator following other arguments with a valid iterator
-template: spread
+template: default
 features: [Symbol.iterator]
 info: |
     12.3.6.1 Runtime Semantics: ArgumentListEvaluation

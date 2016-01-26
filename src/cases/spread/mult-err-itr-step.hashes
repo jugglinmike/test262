@@ -1,6 +1,6 @@
 /*---
 desc: Spread operator following other arguments when IteratorStep fails
-template: spread-err
+template: error
 features: [Symbol.iterator]
 info: |
     12.3.6.1 Runtime Semantics: ArgumentListEvaluation

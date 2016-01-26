@@ -1,6 +1,6 @@
 /*---
 desc: Spread operator applied to the only argument when reference is unresolvable
-template: spread-err
+template: error
 info: |
     12.3.6.1 Runtime Semantics: ArgumentListEvaluation
 

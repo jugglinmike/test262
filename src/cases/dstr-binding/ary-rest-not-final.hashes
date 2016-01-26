@@ -1,5 +1,5 @@
 /*---
-template: 'dstr-binding'
+template: default
 desc: 'Rest element followed by an invalid element'
 negative: SyntaxError
 info: >

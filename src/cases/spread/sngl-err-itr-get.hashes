@@ -1,6 +1,6 @@
 /*---
 desc: Spread operator applied to the only argument when GetIterator fails
-template: spread-err
+template: error
 features: [Symbol.iterator]
 info: |
     12.3.6.1 Runtime Semantics: ArgumentListEvaluation

@@ -1,6 +1,6 @@
 /*---
 desc: SingleNameBinding assigns inferred name to anonymous functions
-template: dstr-binding
+template: default
 info: |
     13.3.3.6 Runtime Semantics: IteratorBindingInitialization
 

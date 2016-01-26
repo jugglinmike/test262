@@ -1,6 +1,6 @@
 /*---
 desc: Destructuring initializer with a "hole"
-template: dstr-binding
+template: default
 info: >
     13.3.3.6 Runtime Semantics: IteratorBindingInitialization
 

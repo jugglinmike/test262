@@ -1,6 +1,6 @@
 /*---
 desc: SingleNameBinding does not re-assign name to named functions
-template: dstr-binding
+template: default
 info: |
     13.3.3.6 Runtime Semantics: IteratorBindingInitialization
 

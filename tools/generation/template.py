@@ -1,4 +1,5 @@
 import os, re
+import yaml
 
 from util.find_comments import find_comments
 from util.parse_yaml import parse_yaml

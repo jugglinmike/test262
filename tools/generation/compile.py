@@ -3,7 +3,10 @@ import argparse
 import sys, os, re
 import yaml
 import codecs
+
 from find_comments import find_comments
+import find_files
+from indent import indent
 
 yamlPattern = re.compile(r'\---[\n\s]*((?:\s|\S)*)[\n\s*]---',
                          flags=re.DOTALL|re.MULTILINE)
@@ -69,14 +72,6 @@ def expand_regions(source, context):
 
     return source
 
-def indent(text, prefix = '    '):
-    if isinstance(text, list):
-        lines = text
-    else:
-        lines = text.split('\n')
-
-    return prefix + ('\n' + prefix).join(lines)
-
 def frontmatter(case_values, form_values, sources):
     sources = indent(sources, '// - ')
     description = case_values['meta']['desc'] + \
@@ -107,29 +102,6 @@ def frontmatter(case_values, form_values, sources):
 
     return '\n'.join(lines)
 
-def is_template_file(filename):
-  return re.match('^[^\.].*\.hashes', filename)
-
-def forms(directory):
-    file_names = map(
-        lambda x: directory + '/' + x,
-        filter(is_template_file, os.listdir(directory))
-    )
-
-    for file_name in file_names:
-        with open(file_name) as template_file:
-            yield (file_name, template_file.read())
-
-def tests(directory):
-    for subdirectory, _, file_names in os.walk(directory):
-        file_names = map(
-            lambda x: os.path.join(subdirectory, x),
-            filter(is_template_file, file_names)
-        )
-
-        for file_name in file_names:
-            yield file_name
-
 def expand(filename):
     case_values = None
     output = []
@@ -139,7 +111,7 @@ def expand(filename):
 
     form_location = os.path.join('src', 'forms', case_values['meta']['template'])
 
-    for form_filename, form_source in forms(form_location):
+    for form_filename, form_source in find_files.forms(form_location):
         form_values = read_case(form_source)
         output.append(dict(
             name = form_values['meta']['path'] + os.path.basename(filename[:-7]) + '.js',
@@ -173,7 +145,7 @@ parser.add_argument('cases', help='''Test cases to generate. May be a file or a
 args = parser.parse_args()
 
 if os.path.isdir(args.cases):
-    cases = tests(args.cases)
+    cases = find_files.tests(args.cases)
 else:
     cases = [args.cases]
 

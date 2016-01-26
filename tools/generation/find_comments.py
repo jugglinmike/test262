@@ -1,6 +1,7 @@
 def find_comments(source):
     '''Parse input string describing JavaScript source and yield dictionaries
     describing the JavaScript comments in the order they appear in the source.
+
     Each dictionary defines the following attributes:
 
     - source: the source text of the comment

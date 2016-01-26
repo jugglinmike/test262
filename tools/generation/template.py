@@ -1,7 +1,7 @@
 import os, re
 
-from find_comments import find_comments
-from parse_yaml import parse_yaml
+from util.find_comments import find_comments
+from util.parse_yaml import parse_yaml
 
 indentPattern = re.compile(r'^(\s*)')
 interpolatePattern = re.compile(r'\{\s*(\S+)\s*\}')

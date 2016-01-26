@@ -1,7 +1,7 @@
 import re
 
-from find_comments import find_comments
-from parse_yaml import parse_yaml
+from util.find_comments import find_comments
+from util.parse_yaml import parse_yaml
 
 regionStartPattern = re.compile(r'\s*#\s*region\s+(\S+)\s*{')
 regionEndPattern = re.compile(r'\s*}')

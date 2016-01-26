@@ -1,8 +1,6 @@
 import re, os
 
 from case import Case
-from parse_yaml import parse_yaml
-from find_comments import find_comments
 from template import Template
 
 hashesFilenamePattern = re.compile(r'^[^\.].*\.hashes$')

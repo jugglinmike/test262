@@ -206,8 +206,26 @@
 
     // CallExpression
       // SuperCall
-      // TODO: Special case (needs to be wrapped in a class)
-      // super
+      // TODO: This does not work; further research necessary.
+      //{ d: 'super', expected: false, source: [
+      //  'var finished = false;',
+      //  'var child;',
+      //  'class Parent {',
+      //  '  constructor(n) {',
+      //  '    if (n === 0) {',
+      //  '      finished = true;',
+      //  '      return;',
+      //  '    }',
+      //  '    return Child.prototype.constructor(n - 1);',
+      //  '  }',
+      //  '}',
+      //  'class Child extends Parent {',
+      //  '  constructor(n) {',
+      //  '    super(n);',
+      //  '  }',
+      //  '}',
+      //  'child = new Child();',
+      //].join('\n') },
       // MemberExpression CallExpression
       // CallExpression Arguments
       { d: 'call', f: 'direct', expected: true, pattern: 'f(n-1)' },

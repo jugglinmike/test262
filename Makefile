@@ -2,8 +2,14 @@ OUT_DIR ?= test
 SRC_DIR ?= src
 
 .PHONY: build
-build:
-	cp -r src/static $(OUT_DIR)
+build: build-static build-cases
+
+.PHONY: build-static
+build-static:
+	cp -r $(SRC_DIR)/static $(OUT_DIR)
+
+.PHONY: build-cases
+build-cases:
 	./tools/generation/compile.py \
 		--no-clobber $(SRC_DIR)/static \
 		-o $(OUT_DIR) \

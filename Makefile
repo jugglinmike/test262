@@ -47,7 +47,7 @@ travis:
 	rm github-deploy-key
 	git config --global user.email "contact@travis-ci.com"
 	git config --global user.name "Travis CI"
-	git fetch origin master
+	git fetch --unshallow origin master
 	git branch -v -a
 	git remote -v
 	git branch master origin/master

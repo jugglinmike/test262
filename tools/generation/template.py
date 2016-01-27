@@ -66,8 +66,8 @@ class Template:
 
     def _frontmatter(self, case_values, form_values, sources):
         sources = _indent(sources, '// - ')
-        description = case_values['meta']['desc'] + \
-            ' (' + form_values['meta']['name'] + ')'
+        description = case_values['meta']['desc'].strip() + \
+            ' (' + form_values['meta']['name'].strip() + ')'
         lines = []
 
         lines += [

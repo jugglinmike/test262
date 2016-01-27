@@ -35,4 +35,4 @@ info: >
 
 let [x = function() {}] = [];
 
-assert.sameValue(x.name, 'x');
+assert.sameValue(x.name, 'x');;

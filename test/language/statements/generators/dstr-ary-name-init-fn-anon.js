@@ -56,7 +56,7 @@ info: >
 
 var callCount = 0;
 function* f([x = function() {}]) {
-  assert.sameValue(x.name, 'x');
+  assert.sameValue(x.name, 'x');;
   callCount = callCount + 1;
 };
 f([]).next();

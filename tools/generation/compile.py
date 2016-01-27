@@ -43,8 +43,7 @@ else:
 
 for caseDir in caseDirs:
     exp = Expander(caseDir)
-    for tests in exp.expand('utf-8', caseFile):
-      for test in tests:
+    for test in exp.expand('utf-8', caseFile):
         if args.out:
             write_test(args.out, test)
         else:

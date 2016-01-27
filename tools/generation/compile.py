@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import argparse
 import os
-import codecs
 
 import find_files
 from expander import Expander
@@ -20,7 +19,7 @@ def write_test(prefix, test):
     path = os.path.dirname(location)
     if not os.path.exists(path):
         os.makedirs(path)
-    with codecs.open(location, 'w', 'utf-8') as handle:
+    with open(location, 'w') as handle:
         handle.write(test['source'])
 
 parser = argparse.ArgumentParser(description="foobar")
@@ -44,7 +43,7 @@ else:
 
 for caseDir in caseDirs:
     exp = Expander(caseDir)
-    for tests in exp.expand(caseFile):
+    for tests in exp.expand('utf-8', caseFile):
       for test in tests:
         if args.out:
             write_test(args.out, test)

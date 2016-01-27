@@ -34,21 +34,21 @@ class Expander:
             if os.path.isfile(full) and hashesFilenamePattern.match(name):
                 yield full
 
-    def expand(self, case_file = None):
+    def expand(self, encoding, case_file = None):
         if case_file:
             case_files = [case_file]
         else:
             case_files = self.list_cases()
 
         for case_file in case_files:
-            for test in self.expand_case(case_file):
+            for test in self.expand_case(case_file, encoding):
                 yield test
 
-    def expand_case(self, file_name):
+    def expand_case(self, file_name, encoding):
         case = Case(file_name)
 
         template_class = case.attribs['meta']['template']
         templates = self.templates.get(template_class)
 
         for template in self._get_templates(template_class):
-            yield template.expand(file_name, case.attribs)
+            yield template.expand(file_name, case.attribs, encoding)

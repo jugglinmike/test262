@@ -1,5 +1,5 @@
 import os, re
-import yaml
+import codecs, yaml
 
 from util.find_comments import find_comments
 from util.parse_yaml import parse_yaml
@@ -94,14 +94,15 @@ class Template:
 
         return '\n'.join(lines)
 
-    def expand(self, case_filename, case_values):
+    def expand(self, case_filename, case_values, encoding):
         output = []
-
-        form_location = os.path.join('src', 'forms', case_values['meta']['template'])
+        frontmatter = self._frontmatter(
+            case_values, self.attribs, [case_filename, self.file_name])
+        body = self.expand_regions(self.source, case_values)
 
         output.append(dict(
             name = self.attribs['meta']['path'] + os.path.basename(case_filename[:-7]) + '.js',
-            source = self._frontmatter(case_values, self.attribs, [case_filename, self.file_name]) + '\n' + self.expand_regions(self.source, case_values)
+            source = codecs.encode(frontmatter + '\n' + body, encoding)
         ))
 
         return output

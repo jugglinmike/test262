@@ -24,13 +24,6 @@ clean:
 .PHONY: deploy
 deploy: clean build
 	mv $(OUT_DIR) $(OUT_DIR).tmp
-	git remote -v
-	git branch -a -v
-	git checkout master
-	rm -r $(OUT_DIR)
-	mv $(OUT_DIR).tmp $(OUT_DIR)
-	git add --all $(OUT_DIR)
-	git commit -m 'Re-build from source'
 	
 	if [ "$TRAVIS" == true ]; then
 		openssl aes-256-cbc \
@@ -45,7 +38,16 @@ deploy: clean build
 		rm github-deploy-key
 		git config --global user.email "contact@travis-ci.com"
 		git config --global user.name "Travis CI"
+		git fetch origin
+		git checkout -b master origin/master
+	else
+		git checkout master
 	fi
+	
+	rm -r $(OUT_DIR)
+	mv $(OUT_DIR).tmp $(OUT_DIR)
+	git add --all $(OUT_DIR)
+	git commit -m 'Re-build from source'
 	
 	git push $(UPSTREAM) master
 	git checkout -

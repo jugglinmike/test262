@@ -44,6 +44,7 @@ travis:
 		-in github-deploy-key.enc \
 		-out github-deploy-key \
 		-d
+	git remote -v
 	env
 	chmod 600 github-deploy-key
 	bash -c '$(shell ssh-agent -s) ssh-add github-deploy-key'

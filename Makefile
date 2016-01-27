@@ -24,7 +24,8 @@ clean:
 .PHONY: deploy
 deploy: clean build
 	mv $(OUT_DIR) $(OUT_DIR).tmp
-	git remote -a -v
+	git remote -v
+	git branch -a -v
 	git checkout master
 	rm -r $(OUT_DIR)
 	mv $(OUT_DIR).tmp $(OUT_DIR)

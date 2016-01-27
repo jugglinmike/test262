@@ -37,8 +37,8 @@ deploy: clean build
 .PHONY: travis
 travis:
 	openssl aes-256-cbc \
-		-K $(encrypted_0a6446eb3ae3_key) \
-		-iv $(encrypted_0a6446eb3ae3_key) \
+		-K $(encrypted_7b3e5998334d_key) \
+		-iv $(encrypted_7b3e5998334d_key) \
 		-in github-deploy-key.enc \
 		-out github-deploy-key \
 		-d

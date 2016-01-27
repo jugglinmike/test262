@@ -2,7 +2,6 @@
 import argparse
 import os
 
-import find_files
 from expander import Expander
 
 def print_test(test):
@@ -22,6 +21,20 @@ def write_test(prefix, test):
     with open(location, 'w') as handle:
         handle.write(test['source'])
 
+def find_cases(location):
+    # When a file is specified, return the file name and its containing
+    # directory
+    if os.path.isfile(location):
+        return location, [os.path.dirname(location)]
+
+    # When a directory is specified, if that directory contains a sub-directory
+    # names "default" interpret it as a "case directory"
+    if (os.path.isdir(os.path.join(location, 'default'))):
+        return None, [location]
+    else:
+        return None, map(
+            lambda x: os.path.join(args.cases, x), os.listdir(args.cases))
+
 parser = argparse.ArgumentParser(description="foobar")
 parser.add_argument('-o', '--out', help='''The directory to write the
     compiled tests. If unspecified, tests will be written to standard out.''')
@@ -29,17 +42,7 @@ parser.add_argument('cases', help='''Test cases to generate. May be a file or a
     directory.''')
 args = parser.parse_args()
 
-caseFile = None
-if os.path.isdir(args.cases):
-    cases = find_files.cases(args.cases)
-    if (os.path.isdir(os.path.join(args.cases, 'default'))):
-        caseDirs = [args.cases]
-    else:
-        caseDirs = map(
-            lambda x: os.path.join(args.cases, x), os.listdir(args.cases))
-else:
-    caseFile = args.cases
-    caseDirs = [os.path.dirname(caseFile)]
+caseFile, caseDirs = find_cases(args.cases)
 
 for caseDir in caseDirs:
     exp = Expander(caseDir)

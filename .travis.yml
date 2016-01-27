@@ -2,3 +2,6 @@ language: python
 install: pip install pyyaml
 script: make
 after_success: make travis deploy
+branches:
+  only:
+      - dev-gen

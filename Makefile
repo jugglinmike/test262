@@ -1,8 +1,13 @@
 OUT_DIR ?= test
+SRC_DIR ?= src
 
 .PHONY: build
 build:
-	./tools/generation/compile.py -o $(OUT_DIR) src/cases/
+	cp -r src/static $(OUT_DIR)
+	./tools/generation/compile.py \
+		--no-clobber $(SRC_DIR)/static \
+		-o $(OUT_DIR) \
+		$(SRC_DIR)/cases/
 
 .PHONY: clean
 clean:

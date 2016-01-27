@@ -24,7 +24,7 @@ clean:
 deploy: clean build
 	mv $(OUT_DIR) $(OUT_DIR).tmp
 	git checkout master
-	git rm -r $(OUT_DIR)
+	rm -r $(OUT_DIR)
 	mv $(OUT_DIR).tmp $(OUT_DIR)
 	git add --all $(OUT_DIR)
 	git commit -m 'Re-build from source'

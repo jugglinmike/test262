@@ -1,4 +1,4 @@
 language: python
-install: apt-get install python-yaml
+install: pip install pyyaml
 script: make
 after_success: make deploy

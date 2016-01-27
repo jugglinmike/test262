@@ -1,6 +1,6 @@
 OUT_DIR ?= test
 SRC_DIR ?= src
-UPSTREAM ?= git@github.com:jugglinmike/test262.git
+UPSTREAM ?= https://github.com/jugglinmike/test262.git
 CI_COMMITTER_EMAIL ?= contact@travis-ci.com
 
 .PHONY: build
@@ -44,8 +44,6 @@ travis:
 		-in github-deploy-key.enc \
 		-out github-deploy-key \
 		-d
-	git remote -v
-	env
 	chmod 600 github-deploy-key
 	bash -c '$(shell ssh-agent -s) ssh-add github-deploy-key'
 	rm github-deploy-key

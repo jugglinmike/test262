@@ -19,30 +19,12 @@ build-cases:
 
 .PHONY: clean
 clean:
-	rm -rf $(OUT_DIR)
+	rm -rf $(OUT_DIR) $(OUT_DIR).tmp
 
 .PHONY: deploy
 deploy: clean build
 	mv $(OUT_DIR) $(OUT_DIR).tmp
-	
-	if [ "$TRAVIS" == true ]; then
-		openssl aes-256-cbc \
-			-K $(encrypted_0a6446eb3ae3_key) \
-			-iv $(encrypted_0a6446eb3ae3_key) \
-			-in github-depoly-key.enc \
-			-out github-depoly-key \
-			-d
-		chmod 600 github-deploy-key
-		eval "$(ssh-agent -s)"
-		ssh-add github-deploy-key
-		rm github-deploy-key
-		git config --global user.email "contact@travis-ci.com"
-		git config --global user.name "Travis CI"
-		git fetch origin
-		git checkout -b master origin/master
-	else
-		git checkout master
-	fi
+	git checkout master
 	
 	rm -r $(OUT_DIR)
 	mv $(OUT_DIR).tmp $(OUT_DIR)
@@ -51,6 +33,23 @@ deploy: clean build
 	
 	git push $(UPSTREAM) master
 	git checkout -
+
+.PHONY: travis
+travis:
+	openssl aes-256-cbc \
+		-K $(encrypted_0a6446eb3ae3_key) \
+		-iv $(encrypted_0a6446eb3ae3_key) \
+		-in github-depoly-key.enc \
+		-out github-depoly-key \
+		-d
+	chmod 600 github-deploy-key
+	eval "$(ssh-agent -s)"
+	ssh-add github-deploy-key
+	rm github-deploy-key
+	git config --global user.email "contact@travis-ci.com"
+	git config --global user.name "Travis CI"
+	git fetch origin
+	git branch master origin/master
 
 github-deploy-key:
 	ssh-keygen -t rsa -b 4096 -C $(MAINTAINER) -f github-deploy-key

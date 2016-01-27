@@ -1,4 +1,4 @@
 language: python
 install: pip install pyyaml
 script: make
-after_success: make deploy
+after_success: make travis deploy

@@ -1,5 +1,6 @@
 OUT_DIR ?= test
 SRC_DIR ?= src
+UPSTREAM ?= git@github.com:tc39/test262.git
 
 .PHONY: build
 build: build-static build-cases
@@ -18,3 +19,14 @@ build-cases:
 .PHONY: clean
 clean:
 	rm -r $(OUT_DIR)
+
+.PHONY: deploy
+deploy: clean build
+	mv $(OUT_DIR) $(OUT_DIR).tmp
+	git checkout master
+	git rm -r $(OUT_DIR)
+	mv $(OUT_DIR).tmp $(OUT_DIR)
+	git add --all $(OUT_DIR)
+	git commit -m 'Re-build from source'
+	git push $(UPSTREAM) master
+	git checkout -

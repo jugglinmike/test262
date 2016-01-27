@@ -36,7 +36,9 @@ deploy: clean build
 
 .PHONY: travis
 travis:
-	openssl aes-256-cbc \
+	# This command necessarily contains sensitive key information, so it's
+	# expanded form should not be output to the console.
+	@openssl aes-256-cbc \
 		-K $(encrypted_7b3e5998334d_key) \
 		-iv $(encrypted_7b3e5998334d_iv) \
 		-in github-deploy-key.enc \

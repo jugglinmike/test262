@@ -18,7 +18,7 @@ build-cases:
 
 .PHONY: clean
 clean:
-	rm -r $(OUT_DIR)
+	rm -rf $(OUT_DIR)
 
 .PHONY: deploy
 deploy: clean build

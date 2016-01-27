@@ -64,23 +64,23 @@ class Template:
 
         return source
 
-    def _frontmatter(self, case_values, form_values, sources):
-        sources = _indent(sources, '// - ')
+    def _frontmatter(self, case_filename, case_values):
         description = case_values['meta']['desc'].strip() + \
-            ' (' + form_values['meta']['name'].strip() + ')'
+            ' (' + self.attribs['meta']['name'].strip() + ')'
         lines = []
 
         lines += [
             '// This file was procedurally generated from the following sources:',
-            sources,
+            '// - ' + case_filename,
+            '// - ' + self.file_name,
             '/*---',
             'description: ' + description,
-            'es6id: ' + form_values['meta']['es6id']
+            'es6id: ' + self.attribs['meta']['es6id']
         ]
 
         features = []
         features += case_values['meta'].get('features', [])
-        features += form_values['meta'].get('features', [])
+        features += self.attribs['meta'].get('features', [])
         if len(features):
             lines += ['features: ' + yaml.dump(features)]
 
@@ -91,15 +91,14 @@ class Template:
             'info: >',
             _indent(case_values['meta']['info']),
             '',
-            _indent(form_values['meta']['info']),
+            _indent(self.attribs['meta']['info']),
             '---*/'
         ]
 
         return '\n'.join(lines)
 
     def expand(self, case_filename, case_values, encoding):
-        frontmatter = self._frontmatter(
-            case_values, self.attribs, [case_filename, self.file_name])
+        frontmatter = self._frontmatter(case_filename, case_values)
         body = self.expand_regions(self.source, case_values)
 
         return dict(

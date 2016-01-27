@@ -19,10 +19,10 @@ def _indent(text, prefix = '    '):
     return prefix + ('\n' + prefix).join(lines)
 
 class Template:
-    def __init__(self, file_name):
-        self.file_name = file_name
+    def __init__(self, filename):
+        self.filename = filename
 
-        with open(file_name) as template_file:
+        with open(filename) as template_file:
             self.source = template_file.read()
 
         self.attribs = dict()
@@ -72,7 +72,7 @@ class Template:
         lines += [
             '// This file was procedurally generated from the following sources:',
             '// - ' + case_filename,
-            '// - ' + self.file_name,
+            '// - ' + self.filename,
             '/*---',
             'description: ' + description,
             'es6id: ' + self.attribs['meta']['es6id']

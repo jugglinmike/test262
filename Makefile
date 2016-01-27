@@ -39,8 +39,8 @@ travis:
 	openssl aes-256-cbc \
 		-K $(encrypted_0a6446eb3ae3_key) \
 		-iv $(encrypted_0a6446eb3ae3_key) \
-		-in github-depoly-key.enc \
-		-out github-depoly-key \
+		-in github-deploy-key.enc \
+		-out github-deploy-key \
 		-d
 	chmod 600 github-deploy-key
 	eval "$(ssh-agent -s)"

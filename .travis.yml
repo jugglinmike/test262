@@ -1,0 +1,3 @@
+language: python
+script: make
+after_success: make deploy

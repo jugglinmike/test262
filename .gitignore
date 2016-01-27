@@ -4,3 +4,5 @@
 *.pyc
 console/TestCases
 test/
+github-deploy-key
+github-deploy-key.pub

@@ -78,8 +78,11 @@ class Template:
             'es6id: ' + form_values['meta']['es6id']
         ]
 
-        if case_values['meta'].get('features'):
-            lines += ['features: ' + yaml.dump(case_values['meta'].get('features'))]
+        features = []
+        features += case_values['meta'].get('features', [])
+        features += form_values['meta'].get('features', [])
+        if len(features):
+            lines += ['features: ' + yaml.dump(features)]
 
         if case_values['meta'].get('negative'):
             lines += ['negative: ' + case_values['meta'].get('negative')]

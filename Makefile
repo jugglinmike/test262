@@ -38,7 +38,7 @@ deploy: clean build
 travis:
 	openssl aes-256-cbc \
 		-K $(encrypted_7b3e5998334d_key) \
-		-iv $(encrypted_7b3e5998334d_key) \
+		-iv $(encrypted_7b3e5998334d_iv) \
 		-in github-deploy-key.enc \
 		-out github-deploy-key \
 		-d

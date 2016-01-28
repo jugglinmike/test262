@@ -59,7 +59,7 @@ info: >
 var callCount = 0;
 var obj = {
   method([x = function() {}]) {
-    assert.sameValue(x.name, 'x');;
+    assert.sameValue(x.name, 'x');
     callCount = callCount + 1;
   }
 };

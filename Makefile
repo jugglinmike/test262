@@ -1,7 +1,7 @@
 OUT_DIR ?= out
 SRC_DIR ?= src
 PUBLISH_DIR ?= test
-UPSTREAM ?= git@github.com:tc39/test262.git
+UPSTREAM ?= git@github.com:jugglinmike/test262.git
 MAINTAINER ?= goyakin@microsoft.com
 
 .PHONY: build

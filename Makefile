@@ -23,6 +23,7 @@ clean:
 
 .PHONY: deploy
 deploy: clean build
+	ssh-add -:
 	mv $(OUT_DIR) $(OUT_DIR).tmp
 	git checkout master
 	

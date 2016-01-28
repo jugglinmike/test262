@@ -1,7 +1,24 @@
 language: python
 install: pip install pyyaml
 script: make
-after_success: make travis deploy
+after_success:
+  # This command necessarily contains sensitive key information, so its
+  # expanded form should not be output to the console.
+  - "@openssl aes-256-cbc
+      -K $encrypted_7b3e5998334d_key
+      -iv $encrypted_7b3e5998334d_iv
+      -in github-deploy-key.enc
+      -out github-deploy-key
+      -d"
+  - chmod 600 github-deploy-key
+  - eval "$(ssh-agent -s)"
+  - ssh-add github-deploy-key
+  - rm github-deploy-key
+  - git config --global user.email "contact@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - git fetch origin master
+  - git branch master FETCH_HEAD
+  - make deploy
 branches:
   only:
-      - dev-gen
+    - dev-gen

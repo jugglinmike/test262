@@ -1,7 +1,7 @@
 OUT_DIR ?= test
 SRC_DIR ?= src
 UPSTREAM ?= https://github.com/jugglinmike/test262.git
-CI_COMMITTER_EMAIL ?= contact@travis-ci.com
+MAINTAINER ?= goyakin@microsoft.com
 
 .PHONY: build
 build: build-static build-cases
@@ -34,28 +34,8 @@ deploy: clean build
 	git push $(UPSTREAM) master
 	git checkout -
 
-.PHONY: travis
-travis:
-	# This command necessarily contains sensitive key information, so it's
-	# expanded form should not be output to the console.
-	@openssl aes-256-cbc \
-		-K $(encrypted_7b3e5998334d_key) \
-		-iv $(encrypted_7b3e5998334d_iv) \
-		-in github-deploy-key.enc \
-		-out github-deploy-key \
-		-d
-	chmod 600 github-deploy-key
-	$(shell ssh-agent -s > ~/.bashrc)
-	cat ~/.bashrc
-	ssh-add github-deploy-key
-	rm github-deploy-key
-	git config --global user.email "$(CI_COMMITTER_EMAIL)"
-	git config --global user.name "Travis CI"
-	git fetch origin master
-	git branch master FETCH_HEAD
-
 github-deploy-key:
-	ssh-keygen -t rsa -b 4096 -C $(CI_COMMITTER_EMAIL) -f github-deploy-key
+	ssh-keygen -t rsa -b 4096 -C $(MAINTAINER) -f github-deploy-key
 
 # This requires the "travis" Ruby gem to be installed
 # Source: https://docs.travis-ci.com/user/encrypting-files/

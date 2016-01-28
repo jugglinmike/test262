@@ -45,7 +45,8 @@ travis:
 		-out github-deploy-key \
 		-d
 	chmod 600 github-deploy-key
-	bash -c '$(shell ssh-agent -s) ssh-add github-deploy-key'
+	$(shell ssh-agent -s > ~/.bashrc)
+	ssh-add github-deploy-key
 	rm github-deploy-key
 	git config --global user.email "$(CI_COMMITTER_EMAIL)"
 	git config --global user.name "Travis CI"

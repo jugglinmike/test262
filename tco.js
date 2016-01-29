@@ -51,46 +51,46 @@
       { d: 'switch', f: 'case-body-dflt', expected: true, pattern: 'switch(0) { case 0: S default: }' },
 
       // IterationStatement
-      { d: 'for-in', f: 'lhs-body', expected: false, pattern: 'var y;\nfor (y in [0]) {\n  S\n}' },
-      { d: 'for-in', f: 'lhs-expr', expected: false, pattern: 'var y;\nfor (y in E) { }' },
-      { d: 'for-in', f: 'var-body', expected: false, pattern: 'for (var y in [0]) {\n  S\n}' },
+      { d: 'for-in', f: 'lhs-body', expected: false, pattern: ['var y;', 'for (y in [0]) {', '  S', '}'] },
+      { d: 'for-in', f: 'lhs-expr', expected: false, pattern: ['var y;', 'for (y in E) { }'] },
+      { d: 'for-in', f: 'var-body', expected: false, pattern: ['for (var y in [0]) {', '  S', '}'] },
       { d: 'for-in', f: 'var-expr', expected: false, pattern: 'for (var y in E) { }' },
-      { d: 'for-in', f: 'let-body', expected: false, pattern: 'for (let y in [0]) { S }' },
+      { d: 'for-in', f: 'let-body', expected: false, pattern: ['for (let y in [0]) {', '  S', '}'] },
       { d: 'for-in', f: 'let-expr', expected: false, pattern: 'for (let y in E) { }' },
-      { d: 'for-in', f: 'const-body', expected: false, pattern: 'for (const y in [0]) { S }' },
+      { d: 'for-in', f: 'const-body', expected: false, pattern: ['for (const y in [0]) {', '  S', '}'] },
       { d: 'for-in', f: 'const-expr', expected: false, pattern: 'for (const y in E) { }' },
 
-      { d: 'for-of', f: 'lhs-body', expected: false, pattern: 'var y; for (y of [0]) { S }' },
-      { d: 'for-of', f: 'lhs-expr', expected: false, pattern: 'var y; for (y of E) { }' },
-      { d: 'for-of', f: 'var-body', expected: false, pattern: 'for (var y of [0]) { S }' },
+      { d: 'for-of', f: 'lhs-body', expected: false, pattern: ['var y;', 'for (y of [0]) {', '  S', '}'] },
+      { d: 'for-of', f: 'lhs-expr', expected: false, pattern: ['var y;', 'for (y of E) { }'] },
+      { d: 'for-of', f: 'var-body', expected: false, pattern: ['for (var y of [0]) {', '  S', '}'] },
       { d: 'for-of', f: 'var-expr', expected: false, pattern: 'for (var y of E) { }' },
-      { d: 'for-of', f: 'let-body', expected: false, pattern: 'for (let y of [0]) { S }' },
+      { d: 'for-of', f: 'let-body', expected: false, pattern: ['for (let y of [0]) {', '  S', '}'] },
       { d: 'for-of', f: 'let-expr', expected: false, pattern: 'for (let y of E) { }' },
-      { d: 'for-of', f: 'const-body', expected: false, pattern: 'for (const y of [0]) { S }' },
+      { d: 'for-of', f: 'const-body', expected: false, pattern: ['for (const y of [0]) {', '  S', '}'] },
       { d: 'for-of', f: 'const-expr', expected: false, pattern: 'for (const y of E) { }' },
 
-      { d: 'for', f: 'lhs-body', expected: true, pattern: 'var x; for (x = 0; x < 1; ++x) { S }' },
+      { d: 'for', f: 'lhs-body', expected: true, pattern: ['var x;', 'for (x = 0; x < 1; ++x) {', '  S', '}'] },
       { d: 'for', f: 'lhs-init', expected: false, pattern: 'for (E; ;) { }' },
       { d: 'for', f: 'lhs-test', expected: false, pattern: 'for (; E;) { }' },
       { d: 'for', f: 'lhs-incr', expected: false, pattern: 'for (; ; E) { }' },
-      { d: 'for', f: 'var-body', expected: true, pattern: 'for (var x = 0; ;) { S }' },
+      { d: 'for', f: 'var-body', expected: true, pattern: ['for (var x = 0; ;) {', '  S', '}'] },
       { d: 'for', f: 'var-init', expected: false, pattern: 'for (var x = E; ;) { }' },
       { d: 'for', f: 'var-test', expected: false, pattern: 'for (var x = 0; E;) { }' },
       { d: 'for', f: 'var-incr', expected: false, pattern: 'for (var x = 0; ; E) { }' },
-      { d: 'for', f: 'let-body', expected: true, pattern: 'for (let x = 0; ;) { S }' },
+      { d: 'for', f: 'let-body', expected: true, pattern: ['for (let x = 0; ;) {', '  S', '}'] },
       { d: 'for', f: 'let-init', expected: false, pattern: 'for (let x = E; ;) { }' },
       { d: 'for', f: 'let-test', expected: false, pattern: 'for (let x = 0; E;) { }' },
       { d: 'for', f: 'let-incr', expected: false, pattern: 'for (let x = 0; ; E) { }' },
-      { d: 'for', f: 'const-body', expected: true, pattern: 'for (const x = 0; ;) { S }' },
+      { d: 'for', f: 'const-body', expected: true, pattern: ['for (const x = 0; ;) {', '  S', '}'] },
       { d: 'for', f: 'const-init', expected: false, pattern: 'for (const x = E; ;) { }' },
       { d: 'for', f: 'const-test', expected: false, pattern: 'for (const x = 0; E;) { }' },
       { d: 'for', f: 'const-incr', expected: false, pattern: 'for (const x = 0; ; E) { }' },
 
-      { d: 'do-while', f: 'body', expected: true, pattern: 'do { S } while (false)' },
+      { d: 'do-while', f: 'body', expected: true, pattern: ['do {', '  S', '} while (false)'] },
       { d: 'do-while', f: 'expr', expected: false, pattern: 'do { } while (E)' },
 
       { d: 'while', f: 'expr', expected: false, pattern: 'while (E) { }' },
-      { d: 'while', f: 'body', expected: true, pattern: 'while (true) { S }' },
+      { d: 'while', f: 'body', expected: true, pattern: ['while (true) {', '  S', '}'] },
 
     // ReturnStatement
     // (a little useless--all the other tests rely on this being correct)
@@ -109,10 +109,10 @@
     { d: 'throw', expected: false, pattern: 'throw E;' },
 
     // TryStatement
-    { d: 'try', f: 'try', expected: false, pattern: 'try { S } catch (err) { throw err; }' },
-    { d: 'try', f: 'catch', expected: true, pattern: 'try { throw null; } catch (err) { S }' },
-    { d: 'try', f: 'catch-finally', expected: true, pattern: 'try { } catch (err) { } finally { S }' },
-    { d: 'try', f: 'finally', expected: true, pattern: 'try { } finally { S }' }
+    { d: 'try', f: 'try', expected: false, pattern: ['try {', '  S', '} catch (err) {', '  throw err;', '}'] },
+    { d: 'try', f: 'catch', expected: true, pattern: ['try {', '  throw null;', '} catch (err) {', '  S', '}'] },
+    { d: 'try', f: 'catch-finally', expected: true, pattern: ['try { } catch (err) { } finally {', '  S', '}'] },
+    { d: 'try', f: 'finally', expected: true, pattern: ['try { } finally {', '  S', '}'] }
   ];
   var exprs = [
     // AssignmentExpression
@@ -435,23 +435,21 @@
     fromStatement: function(testCase) {
       testCase.fileName = buildName('statements', testCase);
       testCase.type = 'statement';
+      var pattern = Array.isArray(testCase.pattern) ?
+        testCase.pattern.join('\n') : testCase.pattern;
 
-      testCase.body = testCase.pattern
+      testCase.body = pattern
         .replace(/S/, 'return f(n - 1);')
         .replace(/E/, 'f(n - 1)');
     },
     fromExpression: function(testCase) {
       testCase.fileName = buildName('expressions', testCase);
       testCase.type = 'expression';
-      testCase.body = '';
-
-      if (testCase.pre) {
-        testCase.body += testCase.pre + '  \n';
-      }
-
+      var lines = [].concat(testCase.pre || []);
       if (testCase.pattern) {
-        testCase.body += 'return ' + testCase.pattern + ';';
+        lines.push('return ' + testCase.pattern + ';');
       }
+      testCase.body = lines.join('\n  ');
     },
     fromBody: function(testCase) {
       // Special-case tests are defined with complete source text and may be
@@ -459,12 +457,13 @@
       if (testCase.source) {
         return;
       }
-      var preCall, baseCase, postCall, srcLines;
+      var preCall, baseCase, call, postCall, srcLines, indent;
 
       if (testCase.expected) {
         preCall = ['var callCount = 0;'];
         baseCase = ['    callCount += 1'];
         postCall = ['assert.sameValue(callCount, 1)'];
+        indent = '';
       } else {
         preCall = [
           'var exception;',
@@ -477,25 +476,33 @@
           '}',
           'assert(exception);'
         ];
+        indent = '  ';
       }
 
       if (testCase.setup) {
         preCall = preCall.concat(testCase.setup);
       }
 
+      call = [
+          '(function f(n) {',
+          '  if (n === 0) {'
+        ]
+        .concat(baseCase)
+        .concat([
+          '    return f;',
+          '  }',
+        ])
+        .concat(testCase.body.split('\n').map(function(line) {
+          return '  ' + line;
+        }))
+        .concat('}($MAX_ITERATIONS));')
+        .map(function(line) {
+          return indent + line;
+        });
+
       srcLines = []
           .concat(preCall)
-          .concat([
-            '(function f(n) {',
-            '  if (n === 0) {'
-          ])
-          .concat(baseCase)
-          .concat([
-            '    return f;',
-            '  }',
-            '  ' + testCase.body,
-            '}($MAX_ITERATIONS));'
-          ])
+          .concat(call)
           .concat(postCall);
 
         testCase.source = srcLines.join('\n');

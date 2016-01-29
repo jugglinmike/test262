@@ -511,6 +511,7 @@
         'description: ' + description,
         'id: static-semantics-hasproductionintailposition',
         'flags: [' + (testCase.noStrict ? 'noStrict' : 'onlyStrict') + ']',
+        'includes: [tco-helper.js]',
         '---*/',
         '',
         ''

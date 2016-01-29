@@ -342,8 +342,33 @@
       // TODO: what?
       //' this',
       // IdentifierReference
-      // TODO: special case (needs to be wrapped in a `with` statement)
-      //{ d: '../identifier-resolution', expected: false, pattern: 'with ({ get foo() { /*something...*/ } }) { (function() { "use strict"; foo; }()) }' }
+      { d: 'with', expected: false, source: [
+        '(function() {',
+        '  var o = {};',
+        '  var finished = false;',
+        '  with (o) {',
+        '    (function() {',
+        '      "use strict";',
+        '      var oneless;',
+        '      Object.defineProperty(o, "prop", {',
+        '        get: function() {',
+        '          f(oneless);',
+        '        }',
+        '      });',
+        '      function f(n) {',
+        '        if (n === 0) {',
+        '          finished = true;',
+        '          return;',
+        '        }',
+        '        oneless = n - 1;',
+        '        return prop;',
+        '      }',
+        '      f(100000);',
+        '    }());',
+        '  }',
+        '  return finished;',
+        '}());'
+      ].join('\n') },
       // Literal
       // TODO: What?
       // ArrayLiteral

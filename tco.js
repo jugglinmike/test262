@@ -426,8 +426,8 @@
 
   var testGenerators = {
     fromStatement: function(testCase) {
-
       testCase.fileName = buildName('statements', testCase);
+      testCase.type = 'statement';
 
       testCase.body = testCase.pattern
         .replace(/S/, 'return f(n - 1);')
@@ -437,6 +437,7 @@
       var pattern = testCase.pattern;
 
       testCase.fileName = buildName('expressions', testCase);
+      testCase.type = 'expression';
 
       if (Array.isArray(pattern)) {
         testCase.body = pattern[0];
@@ -473,6 +474,20 @@
         .join('\n');
     }
   };
+  function addFrontmatter(testCase) {
+    var description = testCase.type + ' is '  + (testCase.expected ? '' : 'not ') +
+      'a candidate for tail-call optimization.';
+    testCase.source = [
+      '// Copyright (C) 2016 the V8 project authors. All rights reserved.',
+      '// This code is governed by the BSD license found in the LICENSE file.',
+      '/*---',
+      'description: ' + description,
+      'id: static-semantics-hasproductionintailposition',
+      '---*/',
+      '',
+      ''
+    ].join('\n') + testCase.source;
+  }
 
   function execute(testCase) {
     var exception, result;
@@ -507,6 +522,7 @@
   var testCases = [].concat(exprs).concat(stmts);
 
   testCases.forEach(testGenerators.fromBody);
+  testCases.forEach(addFrontmatter);
 
   testCases.forEach(execute);
 }());

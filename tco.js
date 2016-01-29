@@ -226,40 +226,46 @@
       //  '}',
       //  'child = new Child();',
       //].join('\n') },
-      // MemberExpression CallExpression
+      // MemberExpression Arguments
+      { d: 'call', f: 'member-args', expected: true, pattern: 'f(n-1)' },
       // CallExpression Arguments
-      { d: 'call', f: 'direct', expected: true, pattern: 'f(n-1)' },
+      { d: 'call', f: 'call-args', expected: true, pattern: ['function getF() { return f; }', 'getF()(n-1)' ] },
       // CallExpression TemplateLiteral
       { d: 'tagged-template', expected: true, source: [
         '(function() {',
         '  "use strict";',
         '  var finished = false;',
+        '  function getF() {',
+        '    return f;',
+        '  }',
         '  function f(_, n) {',
         '    if (n === 0) {',
         '      finished = true;',
         '      return;',
         '    }',
-        '    return f`${n-1}`;',
+        '    return getF()`${n-1}`;',
         '  }',
         '  f(null, ' + maxIterations + ');',
         '  return finished;',
         '}());'
       ].join('\n') },
-      //{ expected: true, pattern: 'f`${ n-1 }`' },
-      { d: 'tagged-template', expected: false, pattern: 'f`${ f(n-1) }`' },
       // CallExpression [ Expression ]
-      { d: 'call', f: 'brkt', expected: false, pattern: 'f(0)[f(n-1)]' },
+      { d: 'call', f: 'brkt-call', expected: false, pattern: 'f(n-1)["prop"]' },
+      { d: 'call', f: 'brkt-expr', expected: false, pattern: '[][f(n-1)]' },
       // CallExpression . IdentifierName
-      { d: 'call', f: 'dot', expected: false, pattern: ['var o = function() { return { get attr() { return f(n-1); } }; };', 'o().attr'] },
+      { d: 'call', f: 'dot-call', expected: false, pattern: 'f(n-1).attr' },
+      { d: 'call', f: 'dot-id', expected: false, pattern: ['var o = function() { return { get attr() { return f(n-1); } }; };', 'o().attr'] },
 
     // NewExpression
     { d: 'new', expected: false, pattern: 'new f' },
 
     // MemberExpression
       // MemberExpression [ Expression ]
-      { expected: false, pattern: 'f[f(n-1)]' },
+      { d: 'member', f: 'brkt-member', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr["prop"]'] },
+      { d: 'member', f: 'brkt-expr', expected: false, pattern: '[][f(n-1)]' },
       // MemberExpression . IdentifierName
-      { expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr'] },
+      { d: 'member', f: 'dot-member', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr.prop'] },
+      { d: 'member', f: 'dot-id', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr'] },
       // SuperProperty
       { d: 'super', f: 'brkt', expected: false, source: [
         '(function() {',

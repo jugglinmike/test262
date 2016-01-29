@@ -7,7 +7,7 @@
  */
 (function() {
   var p = typeof print === 'undefined' ? console.log.bind(console) : print;
-  var maxIterations = 100000;
+  if (typeof InternalError === 'undefined') { InternalError = Error; }
   var stmts = [
     // BlockStatement
     { d: 'block', f: 'stmt', expected: true, pattern: '{ S }' },
@@ -245,7 +245,7 @@
         '    }',
         '    return getF()`${n-1}`;',
         '  }',
-        '  f(null, ' + maxIterations + ');',
+        '  f(null, $MAX_ITERATIONS);',
         '  return finished;',
         '}());'
       ].join('\n') },
@@ -287,7 +287,7 @@
         '      return super.prop;',
         '    }',
         '  }',
-        '  new Child().method(' + maxIterations + ');',
+        '  new Child().method($MAX_ITERATIONS);',
         '  return finished;',
         '}());'
       ].join('\n') },
@@ -311,7 +311,7 @@
         '      return super["prop"];',
         '    }',
         '  }',
-        '  new Child().method(' + maxIterations + ');',
+        '  new Child().method($MAX_ITERATIONS);',
         '  return finished;',
         '}());'
       ].join('\n') },
@@ -332,7 +332,7 @@
         '    }',
         '    return f`${n-1}`;',
         '  }',
-        '  f(null, ' + maxIterations + ');',
+        '  f(null, $MAX_ITERATIONS);',
         '  return finished;',
         '}());'
       ].join('\n') },
@@ -490,7 +490,7 @@
             '    return f;',
             '  }',
             '  ' + testCase.body,
-            '}(' + maxIterations + '));'
+            '}($MAX_ITERATIONS));'
           ])
           .concat(postCall);
 
@@ -528,15 +528,16 @@
     }
 
     if ((result === 'success' && testCase.expected) || (result === 'overflow' && !testCase.expected)) {
-      print('PASS: ' + testCase.fileName);
+      p('PASS: ' + testCase.fileName);
     } else {
-      print('FAIL: ' + testCase.fileName);
-      print('Actual: ' + result + ' ||| Expected: ' + testCase.expected);
+      p('FAIL: ' + testCase.fileName);
+      p('Actual: ' + result + ' ||| Expected: ' + testCase.expected);
       if (exception) {
-        print(exception.message);
+        p(exception.message);
       }
-      print(testCase.source + '\n\n');
+      p(testCase.source + '\n\n');
     }
+    //p(testCase.source + '\n\n');
   }
 
   exprs.map(testGenerators.fromExpression);
@@ -548,6 +549,7 @@
   testCases.forEach(addFrontmatter);
 
   eval([
+    'var $MAX_ITERATIONS = 100000;',
     'assert = function(val) {',
     '  if (!val) {',
     '    throw new Error("Expected " + val + " to be truthy.");',

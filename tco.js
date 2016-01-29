@@ -231,7 +231,7 @@
       // CallExpression Arguments
       { d: 'call', f: 'call-args', expected: true, pattern: ['function getF() { return f; }', 'getF()(n-1)' ] },
       // CallExpression TemplateLiteral
-      { d: 'tagged-template', expected: true, source: [
+      { d: 'tagged-template', f: 'call', expected: true, source: [
         '(function() {',
         '  "use strict";',
         '  var finished = false;',
@@ -321,7 +321,21 @@
       // new MemberExpression Arguments
       { expected: false, pattern: 'new f(n - 1)' },
       // MemberExpression TemplateLiteral
-      // TODO: special case (needs to modify the base case)
+      { d: 'tagged-template', f: 'member', expected: true, source: [
+        '(function() {',
+        '  "use strict";',
+        '  var finished = false;',
+        '  function f(_, n) {',
+        '    if (n === 0) {',
+        '      finished = true;',
+        '      return;',
+        '    }',
+        '    return f`${n-1}`;',
+        '  }',
+        '  f(null, ' + maxIterations + ');',
+        '  return finished;',
+        '}());'
+      ].join('\n') },
 
     // PrimaryExpression
       // this

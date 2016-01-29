@@ -48,9 +48,9 @@
       { d: 'switch', f: 'case-body-dflt', expected: true, pattern: 'switch(0) { case 0: S default: }' },
 
       // IterationStatement
-      { d: 'for-in', f: 'lhs-body', expected: false, pattern: 'var y; for (y in [0]) { S }' },
-      { d: 'for-in', f: 'lhs-expr', expected: false, pattern: 'var y; for (y in E) { }' },
-      { d: 'for-in', f: 'var-body', expected: false, pattern: 'for (var y in [0]) { S }' },
+      { d: 'for-in', f: 'lhs-body', expected: false, pattern: 'var y;\nfor (y in [0]) {\n  S\n}' },
+      { d: 'for-in', f: 'lhs-expr', expected: false, pattern: 'var y;\nfor (y in E) { }' },
+      { d: 'for-in', f: 'var-body', expected: false, pattern: 'for (var y in [0]) {\n  S\n}' },
       { d: 'for-in', f: 'var-expr', expected: false, pattern: 'for (var y in E) { }' },
       { d: 'for-in', f: 'let-body', expected: false, pattern: 'for (let y in [0]) { S }' },
       { d: 'for-in', f: 'let-expr', expected: false, pattern: 'for (let y in E) { }' },
@@ -114,22 +114,22 @@
   var exprs = [
     // AssignmentExpression
       // ArrowFunction
-      { d: 'arrow-function', expected: false, pattern: ['var a = () => f(n - 1); a();', null] },
+      { d: 'arrow-function', expected: false, pre: 'var a = () => f(n - 1); a();', pattern: null },
       // LeftHandSideExpression = AssignmentExpression
-      { d: 'assignment', expected: false, pre: 'var x;', pattern: 'x = f(n-1)' },
-      { d: 'assignment', f: 'dstr', expected: false, pre: 'var x;', pattern: '[x = f(n-1)] = []' },
+      { d: 'assignment', expected: false, setup: 'var x;', pattern: 'x = f(n-1)' },
+      { d: 'assignment', f: 'dstr', expected: false, setup: 'var x;', pattern: '[x = f(n-1)] = []' },
       // LeftHandSideExpression AssignmentOperator AssignmentExpression
-      { d: 'compound-assignment', f: 'add', expected: false, pre: 'var x;', pattern: 'x += f(n-1)' },
-      { d: 'compound-assignment', f: 'sub', expected: false, pre: 'var x;', pattern: 'x -= f(n-1)' },
-      { d: 'compound-assignment', f: 'mlt', expected: false, pre: 'var x;', pattern: 'x *= f(n-1)' },
-      { d: 'compound-assignment', f: 'div', expected: false, pre: 'var x;', pattern: 'x /= f(n-1)' },
-      { d: 'compound-assignment', f: 'mod', expected: false, pre: 'var x;', pattern: 'x %= f(n-1)' },
-      { d: 'compound-assignment', f: 'lshft', expected: false, pre: 'var x;', pattern: 'x <<= f(n-1)' },
-      { d: 'compound-assignment', f: 'rshft', expected: false, pre: 'var x;', pattern: 'x >>= f(n-1)' },
-      { d: 'compound-assignment', f: 'urshft', expected: false, pre: 'var x;', pattern: 'x >>>= f(n-1)' },
-      { d: 'compound-assignment', f: 'and', expected: false, pre: 'var x;', pattern: 'x &= f(n-1)' },
-      { d: 'compound-assignment', f: 'or', expected: false, pre: 'var x;', pattern: 'x |= f(n-1)' },
-      { d: 'compound-assignment', f: 'not', expected: false, pre: 'var x;', pattern: 'x ^= f(n-1)' },
+      { d: 'compound-assignment', f: 'add', expected: false, setup: 'var x;', pattern: 'x += f(n-1)' },
+      { d: 'compound-assignment', f: 'sub', expected: false, setup: 'var x;', pattern: 'x -= f(n-1)' },
+      { d: 'compound-assignment', f: 'mlt', expected: false, setup: 'var x;', pattern: 'x *= f(n-1)' },
+      { d: 'compound-assignment', f: 'div', expected: false, setup: 'var x;', pattern: 'x /= f(n-1)' },
+      { d: 'compound-assignment', f: 'mod', expected: false, setup: 'var x;', pattern: 'x %= f(n-1)' },
+      { d: 'compound-assignment', f: 'lshft', expected: false, setup: 'var x;', pattern: 'x <<= f(n-1)' },
+      { d: 'compound-assignment', f: 'rshft', expected: false, setup: 'var x;', pattern: 'x >>= f(n-1)' },
+      { d: 'compound-assignment', f: 'urshft', expected: false, setup: 'var x;', pattern: 'x >>>= f(n-1)' },
+      { d: 'compound-assignment', f: 'and', expected: false, setup: 'var x;', pattern: 'x &= f(n-1)' },
+      { d: 'compound-assignment', f: 'or', expected: false, setup: 'var x;', pattern: 'x |= f(n-1)' },
+      { d: 'compound-assignment', f: 'not', expected: false, setup: 'var x;', pattern: 'x ^= f(n-1)' },
 
     // BitwiseANDExpression
     { d: 'bitwise-and', f: 'right', expected: false, pattern: '0 & f(n-1)' },
@@ -193,16 +193,16 @@
     { d: 'delete', expected: false, pattern: 'delete f(n-1)' },
     { d: 'void', expected: false, pattern: 'void f(n-1)' },
     { d: 'typeof', expected: false, pattern: 'typeof f(n-1)' },
-    { d: 'prefix-increment', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', '++o.attr'] },
-    { d: 'prefix-decrement', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', '--o.attr'] },
+    { d: 'prefix-increment', expected: false, pre: 'var o = { get attr() { return f(n-1); } };', pattern: '++o.attr' },
+    { d: 'prefix-decrement', expected: false, pre: 'var o = { get attr() { return f(n-1); } };', pattern: '--o.attr' },
     { d: 'unary-plus', expected: false, pattern: '+f(n-1)' },
     { d: 'unary-minus', expected: false, pattern: '-f(n-1)' },
     { d: 'bitwise-not', expected: false, pattern: '~f(n-1)' },
     { d: 'logical-not', expected: false, pattern: '!f(n-1)' },
 
     // PostfixExpression
-    { d: 'postfix-increment', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr++'] },
-    { d: 'postfix-decrement', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr--'] },
+    { d: 'postfix-increment', expected: false, pre: 'var o = { get attr() { return f(n-1); } };', pattern: 'o.attr++' },
+    { d: 'postfix-decrement', expected: false, pre: 'var o = { get attr() { return f(n-1); } };', pattern: 'o.attr--' },
 
     // CallExpression
       // SuperCall
@@ -229,7 +229,7 @@
       // MemberExpression Arguments
       { d: 'call', f: 'member-args', expected: true, pattern: 'f(n-1)' },
       // CallExpression Arguments
-      { d: 'call', f: 'call-args', expected: true, pattern: ['function getF() { return f; }', 'getF()(n-1)' ] },
+      { d: 'call', f: 'call-args', expected: true, pre: 'function getF() { return f; }', pattern: 'getF()(n-1)' },
       // CallExpression TemplateLiteral
       { d: 'tagged-template', f: 'call', expected: true, source: [
         '(function() {',
@@ -254,18 +254,18 @@
       { d: 'call', f: 'brkt-expr', expected: false, pattern: '[][f(n-1)]' },
       // CallExpression . IdentifierName
       { d: 'call', f: 'dot-call', expected: false, pattern: 'f(n-1).attr' },
-      { d: 'call', f: 'dot-id', expected: false, pattern: ['var o = function() { return { get attr() { return f(n-1); } }; };', 'o().attr'] },
+      { d: 'call', f: 'dot-id', expected: false, pre: 'var o = function() { return { get attr() { return f(n-1); } }; };', pattern: 'o().attr' },
 
     // NewExpression
     { d: 'new', expected: false, pattern: 'new f' },
 
     // MemberExpression
       // MemberExpression [ Expression ]
-      { d: 'member', f: 'brkt-member', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr["prop"]'] },
+      { d: 'member', f: 'brkt-member', expected: false, pre: 'var o = { get attr() { return f(n-1); } };', pattern: 'o.attr["prop"]' },
       { d: 'member', f: 'brkt-expr', expected: false, pattern: '[][f(n-1)]' },
       // MemberExpression . IdentifierName
-      { d: 'member', f: 'dot-member', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr.prop'] },
-      { d: 'member', f: 'dot-id', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr'] },
+      { d: 'member', f: 'dot-member', expected: false, pre: 'var o = { get attr() { return f(n-1); } };', pattern: 'o.attr.prop' },
+      { d: 'member', f: 'dot-id', expected: false, pre: 'var o = { get attr() { return f(n-1); } };', pattern: 'o.attr' },
       // SuperProperty
       { d: 'super', f: 'brkt', expected: false, source: [
         'var exception;',
@@ -381,11 +381,11 @@
       { d: 'object', f: 'prop', expected: false, pattern: '{ [f(n-1)]: 0 }' },
       { d: 'object', f: 'val', expected: false, pattern: '{ 0: f(n-1) }' },
       // FunctionExpression
-      { d: 'function', expected: false, pattern: ['var e = function() { return f(n-1); }; e();', null] },
+      { d: 'function', expected: false, pre: 'var e = function() { return f(n-1); }; e();', pattern: null },
       // ClassExpression
-      { d: 'class', expected: false, pattern: ['var C = class { method() { return f(n-1); } }; new C().method();', null] },
+      { d: 'class', expected: false, pre: 'var C = class { method() { return f(n-1); } }; new C().method();', pattern: null },
       // GeneratorExpression
-      { d: 'generators', expected: false, pattern: ['var g = function*() { return f(n-1); }; g().next();', null] },
+      { d: 'generators', expected: false, pre: 'var g = function*() { return f(n-1); }; g().next();', pattern: null },
       // RegularExpressionLiteral
       // TODO: What?
       // TemplateLiteral
@@ -438,18 +438,16 @@
         .replace(/E/, 'f(n - 1)');
     },
     fromExpression: function(testCase) {
-      var pattern = testCase.pattern;
-
       testCase.fileName = buildName('expressions', testCase);
       testCase.type = 'expression';
+      testCase.body = '';
 
-      if (Array.isArray(pattern)) {
-        testCase.body = pattern[0];
-        if (pattern[1] !== null) {
-          testCase.body += '\n    return ' + pattern[1] + ';';
-        }
-      } else {
-        testCase.body = 'return ' + pattern + ';';
+      if (testCase.pre) {
+        testCase.body += testCase.pre + '  \n';
+      }
+
+      if (testCase.pattern) {
+        testCase.body += 'return ' + testCase.pattern + ';';
       }
     },
     fromBody: function(testCase) {
@@ -478,8 +476,8 @@
         ];
       }
 
-      if (testCase.pre) {
-        preCall = preCall.concat(testCase.pre);
+      if (testCase.setup) {
+        preCall = preCall.concat(testCase.setup);
       }
 
       srcLines = []

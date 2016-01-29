@@ -458,7 +458,7 @@
 
       if (testCase.expected) {
         preCall = ['var callCount = 0;'];
-        baseCase = ['  callCount += 1'];
+        baseCase = ['    callCount += 1'];
         postCall = ['assert.sameValue(callCount, 1)'];
       } else {
         preCall = [

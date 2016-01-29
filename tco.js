@@ -501,7 +501,8 @@
     }
   };
   function addFrontmatter(testCase) {
-    var description = testCase.type + ' is '  + (testCase.expected ? '' : 'not ') +
+    var type = testCase.type[0].toUpperCase() + testCase.type.slice(1);
+    var description = type + ' is '  + (testCase.expected ? '' : 'not ') +
       'a candidate for tail-call optimization.';
     testCase.source = [
         '// Copyright (C) 2016 the V8 project authors. All rights reserved.',

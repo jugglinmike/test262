@@ -6,12 +6,6 @@ description: Rest element followed by an invalid element (`const` statement)
 es6id: 13.3.1.4
 negative: SyntaxError
 info: >
-    13.3.3 Destructuring Binding Patterns
-    ArrayBindingPattern[Yield] :
-        [ Elisionopt BindingRestElement[?Yield]opt ]
-        [ BindingElementList[?Yield] ]
-        [ BindingElementList[?Yield] , Elisionopt BindingRestElement[?Yield]opt ]
-
     LexicalBinding : BindingPattern Initializer
     
     1. Let rhs be the result of evaluating Initializer.
@@ -20,6 +14,12 @@ info: >
     4. Let env be the running execution context's LexicalEnvironment.
     5. Return the result of performing BindingInitialization for BindingPattern
        using value and env as the arguments.
+
+    13.3.3 Destructuring Binding Patterns
+    ArrayBindingPattern[Yield] :
+        [ Elisionopt BindingRestElement[?Yield]opt ]
+        [ BindingElementList[?Yield] ]
+        [ BindingElementList[?Yield] , Elisionopt BindingRestElement[?Yield]opt ]
 ---*/
 
 

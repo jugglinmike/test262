@@ -7,6 +7,15 @@ es6id: 12.3.5.1
 features: [Symbol.iterator]
 
 info: >
+    SuperCall : super Arguments
+    
+    1. Let newTarget be GetNewTarget().
+    2. If newTarget is undefined, throw a ReferenceError exception.
+    3. Let func be GetSuperConstructor().
+    4. ReturnIfAbrupt(func).
+    5. Let argList be ArgumentListEvaluation of Arguments.
+    [...]
+
     12.3.6.1 Runtime Semantics: ArgumentListEvaluation
     
     ArgumentList : ArgumentList , ... AssignmentExpression
@@ -27,15 +36,6 @@ info: >
        a. Let result be Invoke(iterator, "next", « »).
     [...]
     3. ReturnIfAbrupt(result).
-
-    SuperCall : super Arguments
-    
-    1. Let newTarget be GetNewTarget().
-    2. If newTarget is undefined, throw a ReferenceError exception.
-    3. Let func be GetSuperConstructor().
-    4. ReturnIfAbrupt(func).
-    5. Let argList be ArgumentListEvaluation of Arguments.
-    [...]
 ---*/
 var iter = {};
 iter[Symbol.iterator] = function() {

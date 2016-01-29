@@ -5,15 +5,6 @@
 description: Spread operator following other arguments when evaluation throws (SuperCall)
 es6id: 12.3.5.1
 info: >
-    12.3.6.1 Runtime Semantics: ArgumentListEvaluation
-    
-    ArgumentList : ArgumentList , ... AssignmentExpression
-    
-    1. Let precedingArgs be the result of evaluating ArgumentList.
-    2. Let spreadRef be the result of evaluating AssignmentExpression.
-    3. Let iterator be GetIterator(GetValue(spreadRef) ).
-    4. ReturnIfAbrupt(iterator).
-
     SuperCall : super Arguments
     
     1. Let newTarget be GetNewTarget().
@@ -22,6 +13,15 @@ info: >
     4. ReturnIfAbrupt(func).
     5. Let argList be ArgumentListEvaluation of Arguments.
     [...]
+
+    12.3.6.1 Runtime Semantics: ArgumentListEvaluation
+    
+    ArgumentList : ArgumentList , ... AssignmentExpression
+    
+    1. Let precedingArgs be the result of evaluating ArgumentList.
+    2. Let spreadRef be the result of evaluating AssignmentExpression.
+    3. Let iterator be GetIterator(GetValue(spreadRef) ).
+    4. ReturnIfAbrupt(iterator).
 ---*/
 
 

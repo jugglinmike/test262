@@ -5,16 +5,6 @@
 description: Spread operator applied to the only argument when evaluation throws (`new` operator)
 es6id: 12.3.3.1
 info: >
-    12.3.6.1 Runtime Semantics: ArgumentListEvaluation
-    
-    ArgumentList : ... AssignmentExpression
-    
-    1. Let list be an empty List.
-    2. Let spreadRef be the result of evaluating AssignmentExpression.
-    3. Let spreadObj be GetValue(spreadRef).
-    4. Let iterator be GetIterator(spreadObj).
-    5. ReturnIfAbrupt(iterator).
-
     MemberExpression : new MemberExpression Arguments
     
     1. Return EvaluateNew(MemberExpression, Arguments).
@@ -25,6 +15,16 @@ info: >
     7. Else,
        a. Let argList be ArgumentListEvaluation of arguments.
        [...]
+
+    12.3.6.1 Runtime Semantics: ArgumentListEvaluation
+    
+    ArgumentList : ... AssignmentExpression
+    
+    1. Let list be an empty List.
+    2. Let spreadRef be the result of evaluating AssignmentExpression.
+    3. Let spreadObj be GetValue(spreadRef).
+    4. Let iterator be GetIterator(spreadObj).
+    5. ReturnIfAbrupt(iterator).
 ---*/
 
 

@@ -5,16 +5,6 @@
 description: Spread operator applied to the only argument when evaluation throws (CallExpression)
 es6id: 12.3.4.1
 info: >
-    12.3.6.1 Runtime Semantics: ArgumentListEvaluation
-    
-    ArgumentList : ... AssignmentExpression
-    
-    1. Let list be an empty List.
-    2. Let spreadRef be the result of evaluating AssignmentExpression.
-    3. Let spreadObj be GetValue(spreadRef).
-    4. Let iterator be GetIterator(spreadObj).
-    5. ReturnIfAbrupt(iterator).
-
     CallExpression : MemberExpression Arguments
     
     [...]
@@ -26,6 +16,16 @@ info: >
     [...]
     6. Let result be Call(func, thisValue, argList).
     [...]
+
+    12.3.6.1 Runtime Semantics: ArgumentListEvaluation
+    
+    ArgumentList : ... AssignmentExpression
+    
+    1. Let list be an empty List.
+    2. Let spreadRef be the result of evaluating AssignmentExpression.
+    3. Let spreadObj be GetValue(spreadRef).
+    4. Let iterator be GetIterator(spreadObj).
+    5. ReturnIfAbrupt(iterator).
 ---*/
 
 

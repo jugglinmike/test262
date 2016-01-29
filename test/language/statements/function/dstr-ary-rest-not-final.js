@@ -6,12 +6,6 @@ description: Rest element followed by an invalid element (function declaration)
 es6id: 14.1.19
 negative: SyntaxError
 info: >
-    13.3.3 Destructuring Binding Patterns
-    ArrayBindingPattern[Yield] :
-        [ Elisionopt BindingRestElement[?Yield]opt ]
-        [ BindingElementList[?Yield] ]
-        [ BindingElementList[?Yield] , Elisionopt BindingRestElement[?Yield]opt ]
-
     FunctionDeclaration :
         function BindingIdentifier ( FormalParameters ) { FunctionBody }
     
@@ -42,6 +36,12 @@ info: >
         b. Let formalStatus be IteratorBindingInitialization for formals with
            iteratorRecord and env as arguments.
     [...]
+
+    13.3.3 Destructuring Binding Patterns
+    ArrayBindingPattern[Yield] :
+        [ Elisionopt BindingRestElement[?Yield]opt ]
+        [ BindingElementList[?Yield] ]
+        [ BindingElementList[?Yield] , Elisionopt BindingRestElement[?Yield]opt ]
 ---*/
 
 

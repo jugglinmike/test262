@@ -5,6 +5,14 @@
 description: SingleNameBinding does not re-assign name to named functions (`var` statement)
 es6id: 13.3.2.4
 info: >
+    VariableDeclaration : BindingPattern Initializer
+    
+    1. Let rhs be the result of evaluating Initializer.
+    2. Let rval be GetValue(rhs).
+    3. ReturnIfAbrupt(rval).
+    4. Return the result of performing BindingInitialization for
+       BindingPattern passing rval and undefined as arguments.
+
     13.3.3.6 Runtime Semantics: IteratorBindingInitialization
     
     SingleNameBinding : BindingIdentifier Initializeropt
@@ -18,14 +26,6 @@ info: >
           [...]
     7. If environment is undefined, return PutValue(lhs, v).
     8. Return InitializeReferencedBinding(lhs, v).
-
-    VariableDeclaration : BindingPattern Initializer
-    
-    1. Let rhs be the result of evaluating Initializer.
-    2. Let rval be GetValue(rhs).
-    3. ReturnIfAbrupt(rval).
-    4. Return the result of performing BindingInitialization for
-       BindingPattern passing rval and undefined as arguments.
 ---*/
 
 

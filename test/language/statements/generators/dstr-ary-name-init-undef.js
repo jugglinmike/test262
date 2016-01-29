@@ -5,18 +5,6 @@
 description: Destructuring initializer with an undefined value (generator function declaration)
 es6id: 14.4.12
 info: >
-    13.3.3.6 Runtime Semantics: IteratorBindingInitialization
-    
-    SingleNameBinding : BindingIdentifier Initializeropt
-    
-    [...]
-    6. If Initializer is present and v is undefined, then
-       a. Let defaultValue be the result of evaluating Initializer.
-       b. Let v be GetValue(defaultValue).
-       [...]
-    7. If environment is undefined, return PutValue(lhs, v).
-    8. Return InitializeReferencedBinding(lhs, v).
-
     GeneratorDeclaration : function * ( FormalParameters ) { GeneratorBody }
     
         [...]
@@ -46,6 +34,18 @@ info: >
         b. Let formalStatus be IteratorBindingInitialization for formals with
            iteratorRecord and env as arguments.
     [...]
+
+    13.3.3.6 Runtime Semantics: IteratorBindingInitialization
+    
+    SingleNameBinding : BindingIdentifier Initializeropt
+    
+    [...]
+    6. If Initializer is present and v is undefined, then
+       a. Let defaultValue be the result of evaluating Initializer.
+       b. Let v be GetValue(defaultValue).
+       [...]
+    7. If environment is undefined, return PutValue(lhs, v).
+    8. Return InitializeReferencedBinding(lhs, v).
 ---*/
 
 

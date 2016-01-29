@@ -5,6 +5,18 @@
 description: Spread operator following other arguments when no iteration occurs (CallExpression)
 es6id: 12.3.4.1
 info: >
+    CallExpression : MemberExpression Arguments
+    
+    [...]
+    9. Return EvaluateDirectCall(func, thisValue, Arguments, tailCall).
+    
+    12.3.4.3 Runtime Semantics: EvaluateDirectCall
+    
+    1. Let argList be ArgumentListEvaluation(arguments).
+    [...]
+    6. Let result be Call(func, thisValue, argList).
+    [...]
+
     12.3.6.1 Runtime Semantics: ArgumentListEvaluation
     
     ArgumentList : ArgumentList , ... AssignmentExpression
@@ -17,18 +29,6 @@ info: >
        a. Let next be IteratorStep(iterator).
        b. ReturnIfAbrupt(next).
        c. If next is false, return precedingArgs.
-
-    CallExpression : MemberExpression Arguments
-    
-    [...]
-    9. Return EvaluateDirectCall(func, thisValue, Arguments, tailCall).
-    
-    12.3.4.3 Runtime Semantics: EvaluateDirectCall
-    
-    1. Let argList be ArgumentListEvaluation(arguments).
-    [...]
-    6. Let result be Call(func, thisValue, argList).
-    [...]
 ---*/
 
 

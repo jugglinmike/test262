@@ -6,12 +6,6 @@ description: Rest element followed by an invalid element (arrow function express
 es6id: 14.2.16
 negative: SyntaxError
 info: >
-    13.3.3 Destructuring Binding Patterns
-    ArrayBindingPattern[Yield] :
-        [ Elisionopt BindingRestElement[?Yield]opt ]
-        [ BindingElementList[?Yield] ]
-        [ BindingElementList[?Yield] , Elisionopt BindingRestElement[?Yield]opt ]
-
     ArrowFunction : ArrowParameters => ConciseBody
     
     [...]
@@ -40,6 +34,12 @@ info: >
         b. Let formalStatus be IteratorBindingInitialization for formals with
            iteratorRecord and env as arguments.
     [...]
+
+    13.3.3 Destructuring Binding Patterns
+    ArrayBindingPattern[Yield] :
+        [ Elisionopt BindingRestElement[?Yield]opt ]
+        [ BindingElementList[?Yield] ]
+        [ BindingElementList[?Yield] , Elisionopt BindingRestElement[?Yield]opt ]
 ---*/
 
 

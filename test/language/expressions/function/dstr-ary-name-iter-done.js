@@ -5,17 +5,6 @@
 description: SingleNameBinding when value iteration was completed previously (function expression)
 es6id: 14.1.20
 info: >
-    13.3.3.6 Runtime Semantics: IteratorBindingInitialization
-    
-    SingleNameBinding : BindingIdentifier Initializeropt
-    
-    [...]
-    4. If iteratorRecord.[[done]] is false, then
-       [...]
-    5. If iteratorRecord.[[done]] is true, let v be undefined.
-    [...]
-    8. Return InitializeReferencedBinding(lhs, v).
-
     FunctionExpression : function ( FormalParameters ) { FunctionBody }
     
         [...]
@@ -45,6 +34,17 @@ info: >
         b. Let formalStatus be IteratorBindingInitialization for formals with
            iteratorRecord and env as arguments.
     [...]
+
+    13.3.3.6 Runtime Semantics: IteratorBindingInitialization
+    
+    SingleNameBinding : BindingIdentifier Initializeropt
+    
+    [...]
+    4. If iteratorRecord.[[done]] is false, then
+       [...]
+    5. If iteratorRecord.[[done]] is true, let v be undefined.
+    [...]
+    8. Return InitializeReferencedBinding(lhs, v).
 ---*/
 
 

@@ -5,6 +5,15 @@
 description: Spread operator applied to the only argument when evaluation throws (SuperCall)
 es6id: 12.3.5.1
 info: >
+    SuperCall : super Arguments
+    
+    1. Let newTarget be GetNewTarget().
+    2. If newTarget is undefined, throw a ReferenceError exception.
+    3. Let func be GetSuperConstructor().
+    4. ReturnIfAbrupt(func).
+    5. Let argList be ArgumentListEvaluation of Arguments.
+    [...]
+
     12.3.6.1 Runtime Semantics: ArgumentListEvaluation
     
     ArgumentList : ... AssignmentExpression
@@ -14,15 +23,6 @@ info: >
     3. Let spreadObj be GetValue(spreadRef).
     4. Let iterator be GetIterator(spreadObj).
     5. ReturnIfAbrupt(iterator).
-
-    SuperCall : super Arguments
-    
-    1. Let newTarget be GetNewTarget().
-    2. If newTarget is undefined, throw a ReferenceError exception.
-    3. Let func be GetSuperConstructor().
-    4. ReturnIfAbrupt(func).
-    5. Let argList be ArgumentListEvaluation of Arguments.
-    [...]
 ---*/
 
 

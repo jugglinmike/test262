@@ -5,14 +5,6 @@
 description: Destructuring initializer with a "hole" (static class expression generator method)
 es6id: 14.5.15
 info: >
-    13.3.3.6 Runtime Semantics: IteratorBindingInitialization
-    SingleNameBinding : BindingIdentifier Initializeropt
-    [...] 6. If Initializer is present and v is undefined, then
-       a. Let defaultValue be the result of evaluating Initializer.
-       b. Let v be GetValue(defaultValue).
-       [...]
-    7. If environment is undefined, return PutValue(lhs, v). 8. Return InitializeReferencedBinding(lhs, v).
-
     ClassDeclaration : class BindingIdentifier ClassTail
     
     1. Let className be StringValue of BindingIdentifier.
@@ -63,6 +55,14 @@ info: >
         b. Let formalStatus be IteratorBindingInitialization for formals with
            iteratorRecord and env as arguments.
     [...]
+
+    13.3.3.6 Runtime Semantics: IteratorBindingInitialization
+    SingleNameBinding : BindingIdentifier Initializeropt
+    [...] 6. If Initializer is present and v is undefined, then
+       a. Let defaultValue be the result of evaluating Initializer.
+       b. Let v be GetValue(defaultValue).
+       [...]
+    7. If environment is undefined, return PutValue(lhs, v). 8. Return InitializeReferencedBinding(lhs, v).
 ---*/
 
 

@@ -6,12 +6,6 @@ description: Rest element followed by an invalid element (class expression metho
 es6id: 14.5.16
 negative: SyntaxError
 info: >
-    13.3.3 Destructuring Binding Patterns
-    ArrayBindingPattern[Yield] :
-        [ Elisionopt BindingRestElement[?Yield]opt ]
-        [ BindingElementList[?Yield] ]
-        [ BindingElementList[?Yield] , Elisionopt BindingRestElement[?Yield]opt ]
-
     ClassExpression : class BindingIdentifieropt ClassTail
     
     1. If BindingIdentifieropt is not present, let className be undefined.
@@ -64,6 +58,12 @@ info: >
         b. Let formalStatus be IteratorBindingInitialization for formals with
            iteratorRecord and env as arguments.
     [...]
+
+    13.3.3 Destructuring Binding Patterns
+    ArrayBindingPattern[Yield] :
+        [ Elisionopt BindingRestElement[?Yield]opt ]
+        [ BindingElementList[?Yield] ]
+        [ BindingElementList[?Yield] , Elisionopt BindingRestElement[?Yield]opt ]
 ---*/
 
 

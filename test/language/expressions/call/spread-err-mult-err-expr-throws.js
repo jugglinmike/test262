@@ -5,15 +5,6 @@
 description: Spread operator following other arguments when evaluation throws (CallExpression)
 es6id: 12.3.4.1
 info: >
-    12.3.6.1 Runtime Semantics: ArgumentListEvaluation
-    
-    ArgumentList : ArgumentList , ... AssignmentExpression
-    
-    1. Let precedingArgs be the result of evaluating ArgumentList.
-    2. Let spreadRef be the result of evaluating AssignmentExpression.
-    3. Let iterator be GetIterator(GetValue(spreadRef) ).
-    4. ReturnIfAbrupt(iterator).
-
     CallExpression : MemberExpression Arguments
     
     [...]
@@ -25,6 +16,15 @@ info: >
     [...]
     6. Let result be Call(func, thisValue, argList).
     [...]
+
+    12.3.6.1 Runtime Semantics: ArgumentListEvaluation
+    
+    ArgumentList : ArgumentList , ... AssignmentExpression
+    
+    1. Let precedingArgs be the result of evaluating ArgumentList.
+    2. Let spreadRef be the result of evaluating AssignmentExpression.
+    3. Let iterator be GetIterator(GetValue(spreadRef) ).
+    4. ReturnIfAbrupt(iterator).
 ---*/
 
 

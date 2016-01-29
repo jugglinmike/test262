@@ -268,52 +268,54 @@
       { d: 'member', f: 'dot-id', expected: false, pattern: ['var o = { get attr() { return f(n-1); } };', 'o.attr'] },
       // SuperProperty
       { d: 'super', f: 'brkt', expected: false, source: [
-        '(function() {',
-        '  "use strict";',
-        '  var finished = false;',
-        '  class Parent {}',
-        '  class Child extends Parent {',
-        '    method(n) {',
-        '      Object.defineProperty(Parent.prototype, "prop", {',
-        '        configurable: true,',
-        '        get: function() {',
-        '          if (n === 0) {',
-        '            finished = true;',
-        '            return;',
-        '          }',
-        '          return this.method(n - 1);',
+        'var exception;',
+        'class Parent {}',
+        'class Child extends Parent {',
+        '  method(n) {',
+        '    Object.defineProperty(Parent.prototype, "prop", {',
+        '      configurable: true,',
+        '      get: function() {',
+        '        if (n === 0) {',
+        '          finished = true;',
+        '          return;',
         '        }',
-        '      });',
-        '      return super.prop;',
-        '    }',
+        '        return this.method(n - 1);',
+        '      }',
+        '    });',
+        '    return super.prop;',
         '  }',
+        '}',
+        'try {',
         '  new Child().method($MAX_ITERATIONS);',
-        '  return finished;',
-        '}());'
+        '} catch (e) {',
+        '  exception = e;',
+        '}',
+        'assert(exception);'
       ].join('\n') },
       { d: 'super', f: 'dot', expected: false, source: [
-        '(function() {',
-        '  "use strict";',
-        '  var finished = false;',
-        '  class Parent {}',
-        '  class Child extends Parent {',
-        '    method(n) {',
-        '      Object.defineProperty(Parent.prototype, "prop", {',
-        '        configurable: true,',
-        '        get: function() {',
-        '          if (n === 0) {',
-        '            finished = true;',
-        '            return;',
-        '          }',
-        '          return this.method(n - 1);',
+        'var exception;',
+        'class Parent {}',
+        'class Child extends Parent {',
+        '  method(n) {',
+        '    Object.defineProperty(Parent.prototype, "prop", {',
+        '      configurable: true,',
+        '      get: function() {',
+        '        if (n === 0) {',
+        '          finished = true;',
+        '          return;',
         '        }',
-        '      });',
-        '      return super["prop"];',
-        '    }',
+        '        return this.method(n - 1);',
+        '      }',
+        '    });',
+        '    return super["prop"];',
         '  }',
+        '}',
+        'try {',
         '  new Child().method($MAX_ITERATIONS);',
-        '  return finished;',
-        '}());'
+        '} catch (e) {',
+        '  exception = e;',
+        '}',
+        'assert(exception);'
       ].join('\n') },
 
       // MetaProperty
@@ -342,10 +344,10 @@
       // TODO: what?
       //' this',
       // IdentifierReference
-      { d: 'with', expected: false, source: [
-        '(function() {',
-        '  var o = {};',
-        '  var finished = false;',
+      { d: 'with', expected: false, noStrict: true, source: [
+        'var o = {};',
+        'var exception;',
+        'try {',
         '  with (o) {',
         '    (function() {',
         '      "use strict";',
@@ -366,8 +368,10 @@
         '      f(100000);',
         '    }());',
         '  }',
-        '  return finished;',
-        '}());'
+        '} catch (e) {',
+        '  exception = e',
+        '}',
+        'assert(exception);',
       ].join('\n') },
       // Literal
       // TODO: What?
@@ -467,7 +471,7 @@
         ];
         baseCase = [];
         postCall = [
-          '} catch(e) {',
+          '} catch (e) {',
           '  exception = e;',
           '}',
           'assert(exception);'
@@ -482,7 +486,6 @@
           .concat(preCall)
           .concat([
             '(function f(n) {',
-            '  "use strict";',
             '  if (n === 0) {'
           ])
           .concat(baseCase)
@@ -501,22 +504,29 @@
     var description = testCase.type + ' is '  + (testCase.expected ? '' : 'not ') +
       'a candidate for tail-call optimization.';
     testCase.source = [
-      '// Copyright (C) 2016 the V8 project authors. All rights reserved.',
-      '// This code is governed by the BSD license found in the LICENSE file.',
-      '/*---',
-      'description: ' + description,
-      'id: static-semantics-hasproductionintailposition',
-      '---*/',
-      '',
-      ''
-    ].join('\n') + testCase.source;
+        '// Copyright (C) 2016 the V8 project authors. All rights reserved.',
+        '// This code is governed by the BSD license found in the LICENSE file.',
+        '/*---',
+        'description: ' + description,
+        'id: static-semantics-hasproductionintailposition',
+        'flags: [' + (testCase.noStrict ? 'noStrict' : 'onlyStrict') + ']',
+        '---*/',
+        '',
+        ''
+      ].join('\n') + testCase.source;
   }
 
   function execute(testCase) {
-    var exception, result;
+    var toEval, exception, result;
+
+    toEval = '(function() {\n';
+    if (!testCase.noStrict) {
+      toEval += '  "use strict";\n';
+    }
+    toEval += testCase.source + '\n}());';
 
     try {
-      result = eval(testCase.source);
+      result = eval(toEval);
     } catch (e) {
       exception = e;
     }
@@ -527,7 +537,7 @@
       result = 'success';
     }
 
-    if ((result === 'success' && testCase.expected) || (result === 'overflow' && !testCase.expected)) {
+    if (result === 'success') {
       p('PASS: ' + testCase.fileName);
     } else {
       p('FAIL: ' + testCase.fileName);

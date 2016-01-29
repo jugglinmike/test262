@@ -454,24 +454,47 @@
       if (testCase.source) {
         return;
       }
+      var preCall, baseCase, postCall, srcLines;
 
-      testCase.source = [
-          '(function() {',
-          '  var finished = false;',
-          testCase.pre ? '  ' + testCase.pre : null,
-          '  (function f(n) {',
-          '    "use strict";',
-          '    if (n === 0) {',
-          '      finished = true;',
-          '      return f;',
-          '    }',
-          '    ' + testCase.body,
-          '  }(' + maxIterations + '));',
-          '  return finished;',
-          '}());'
-        ]
-        .filter(function(line) { return !!line; })
-        .join('\n');
+      if (testCase.expected) {
+        preCall = ['var callCount = 0;'];
+        baseCase = ['  callCount += 1'];
+        postCall = ['assert.sameValue(callCount, 1)'];
+      } else {
+        preCall = [
+          'var exception;',
+          'try {'
+        ];
+        baseCase = [];
+        postCall = [
+          '} catch(e) {',
+          '  exception = e;',
+          '}',
+          'assert(exception);'
+        ];
+      }
+
+      if (testCase.pre) {
+        preCall = preCall.concat(testCase.pre);
+      }
+
+      srcLines = []
+          .concat(preCall)
+          .concat([
+            '(function f(n) {',
+            '  "use strict";',
+            '  if (n === 0) {'
+          ])
+          .concat(baseCase)
+          .concat([
+            '    return f;',
+            '  }',
+            '  ' + testCase.body,
+            '}(' + maxIterations + '));'
+          ])
+          .concat(postCall);
+
+        testCase.source = srcLines.join('\n');
     }
   };
   function addFrontmatter(testCase) {
@@ -501,7 +524,7 @@
     if (exception) {
       result = exception instanceof InternalError ? 'overflow' : 'error';
     } else {
-      result = result ? 'success' : 'error';
+      result = 'success';
     }
 
     if ((result === 'success' && testCase.expected) || (result === 'overflow' && !testCase.expected)) {
@@ -523,6 +546,19 @@
 
   testCases.forEach(testGenerators.fromBody);
   testCases.forEach(addFrontmatter);
+
+  eval([
+    'assert = function(val) {',
+    '  if (!val) {',
+    '    throw new Error("Expected " + val + " to be truthy.");',
+    '  }',
+    '};',
+    'assert.sameValue = function(a, b) {',
+    '  if (a !== b) {',
+    '    throw new Error("Expected " + a + " to equal " + b + ".");',
+    '  }',
+    '};'
+  ].join('\n'));
 
   testCases.forEach(execute);
 }());

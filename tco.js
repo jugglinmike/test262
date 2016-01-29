@@ -7,7 +7,10 @@
  */
 (function() {
   var p = typeof print === 'undefined' ? console.log.bind(console) : print;
-  if (typeof InternalError === 'undefined') { InternalError = Error; }
+  // SpiderMonkey and es6-draft both throw an `InternalError` in response to
+  // stack overflows, but V8 throws a RangeError.
+  var OverflowError = typeof InternalError !== 'undefined' ?
+    InternalError : RangeError;
   var stmts = [
     // BlockStatement
     { d: 'block', f: 'stmt', expected: true, pattern: '{ S }' },
@@ -532,7 +535,7 @@
     }
 
     if (exception) {
-      result = exception instanceof InternalError ? 'overflow' : 'error';
+      result = exception instanceof OverflowError ? 'overflow' : 'error';
     } else {
       result = 'success';
     }

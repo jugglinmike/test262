@@ -176,10 +176,10 @@
     { d: 'less-than', f: 'left',  expected: false, pattern: 'f(n-1) < 0' },
     { d: 'greater-than', f: 'right', expected: false, pattern: '0 > f(n-1)' },
     { d: 'greater-than', f: 'left', expected: false, pattern: 'f(n-1) > 0' },
-    { d: 'less-than-or-equal-to', f: 'right', expected: false, pattern: '0 <= f(n-1)' },
-    { d: 'less-than-or-equal-to', f: 'left', expected: false, pattern: 'f(n-1) <= 0' },
-    { d: 'greater-than-or-equal-to', f: 'right', expected: false, pattern: '0 >= f(n-1)' },
-    { d: 'greater-than-or-equal-to', f: 'left', expected: false, pattern: 'f(n-1) >= 0' },
+    { d: 'less-than-or-equal', f: 'right', expected: false, pattern: '0 <= f(n-1)' },
+    { d: 'less-than-or-equal', f: 'left', expected: false, pattern: 'f(n-1) <= 0' },
+    { d: 'greater-than-or-equal', f: 'right', expected: false, pattern: '0 >= f(n-1)' },
+    { d: 'greater-than-or-equal', f: 'left', expected: false, pattern: 'f(n-1) >= 0' },
     { d: 'instanceof', f: 'right', expected: false, pattern: 'f instanceof f(n-1)' },
     { d: 'instanceof', f: 'left', expected: false, pattern: 'f(n-1) instanceof f' },
     { d: 'in', f: 'right', expected: false, pattern: 'f in f(n-1)' },
@@ -362,7 +362,7 @@
       // TODO: what?
       //' this',
       // IdentifierReference
-      { d: 'with', expected: false, noStrict: true, source: [
+      { d: '../identifiers', expected: false, noStrict: true, source: [
         'var o = {};',
         'var exception;',
         'try {',

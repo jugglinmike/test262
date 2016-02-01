@@ -1,8 +1,6 @@
-// Copyright (C) 2016 the V8 project authors. All rights reserved.
-// This code is governed by the BSD license found in the LICENSE file.
 /*---
 template: default
-desc: 'Rest element followed by an invalid element'
+desc: Rest element (array binding pattern) followed by an invalid element
 negative: SyntaxError
 info: >
     13.3.3 Destructuring Binding Patterns
@@ -14,6 +12,6 @@ info: >
 ---*/
 
 //- elems
-[...x, y]
+[...[x], y]
 //- vals
 [1, 2, 3]

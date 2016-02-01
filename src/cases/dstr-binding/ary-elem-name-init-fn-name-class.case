@@ -1,7 +1,5 @@
-// Copyright (C) 2016 the V8 project authors. All rights reserved.
-// This code is governed by the BSD license found in the LICENSE file.
 /*---
-desc: SingleNameBinding does not re-assign name to named functions
+desc: SingleNameBinding does assign name to "anonymous" classes
 template: default
 info: |
     13.3.3.6 Runtime Semantics: IteratorBindingInitialization
@@ -20,8 +18,9 @@ info: |
 ---*/
 
 //- elems
-[x = function y() {}]
+[cls = class {}, xCls = class X {}]
 //- vals
 []
 //- body
-assert.sameValue(x.name, 'y');
+assert.sameValue(cls.name, 'cls');
+assert.notSameValue(xCls.name, 'xCls');

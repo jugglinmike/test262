@@ -547,6 +547,7 @@
         'description: ' + description,
         'id: static-semantics-hasproductionintailposition',
         'flags: [' + (testCase.noStrict ? 'noStrict' : 'onlyStrict') + ']',
+        'features: [tail-call-optimization]',
         'includes: [tco-helper.js]',
         '---*/',
         '',

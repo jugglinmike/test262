@@ -1,5 +1,5 @@
 /*---
-desc: SingleNameBinding assigns inferred name to anonymous functions
+desc: SingleNameBinding does assign name to arrow functions
 template: default
 info: |
     13.3.3.6 Runtime Semantics: IteratorBindingInitialization
@@ -12,17 +12,14 @@ info: |
        b. Let v be GetValue(defaultValue).
        c. ReturnIfAbrupt(v).
        d. If IsAnonymousFunctionDefinition(Initializer) is true, then
-          i. Let hasNameProperty be HasOwnProperty(v, "name").
-          ii. ReturnIfAbrupt(hasNameProperty).
-          iii. If hasNameProperty is false, perform SetFunctionName(v,
-               bindingId).
+          [...]
     7. If environment is undefined, return PutValue(lhs, v).
     8. Return InitializeReferencedBinding(lhs, v).
 ---*/
 
 //- elems
-[x = function() {}]
+[arrow = () => {}]
 //- vals
 []
 //- body
-assert.sameValue(x.name, 'x');
+assert.sameValue(arrow.name, 'arrow');

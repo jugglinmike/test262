@@ -11,6 +11,21 @@
   // stack overflows, but V8 throws a RangeError.
   var OverflowError = typeof InternalError !== 'undefined' ?
     InternalError : RangeError;
+  // Definition of global values that would normally be supplied by the test
+  // harness
+  var env = [
+    'var $MAX_ITERATIONS = 100000;',
+    'assert = function(val) {',
+    '  if (!val) {',
+    '    throw new Error("Expected " + val + " to be truthy.");',
+    '  }',
+    '};',
+    'assert.sameValue = function(a, b) {',
+    '  if (a !== b) {',
+    '    throw new Error("Expected " + a + " to equal " + b + ".");',
+    '  }',
+    '};'
+  ].join('\n')
   var stmts = [
     // BlockStatement
     { d: 'block', f: 'stmt', expected: true, pattern: '{ S }' },
@@ -560,6 +575,22 @@
     //p(testCase.source + '\n\n');
   }
 
+  function write(testCase) {
+    if (typeof require === 'undefined') {
+      throw new Error('Unable to write to file in this enviromnet.');
+    }
+    var fs = require('fs');
+    var path = require('path');
+    var dirName = require('path').dirname(testCase.fileName);
+
+    try {
+      fs.mkdirSync(dirName);
+      p('Created directory: ' + dirName);
+    } catch (err) {}
+    p('Writing ' + testCase.fileName);
+    fs.writeFileSync(testCase.fileName, testCase.source);
+  }
+
   exprs.map(testGenerators.fromExpression);
   stmts.map(testGenerators.fromStatement);
 
@@ -568,19 +599,11 @@
   testCases.forEach(testGenerators.fromBody);
   testCases.forEach(addFrontmatter);
 
-  eval([
-    'var $MAX_ITERATIONS = 100000;',
-    'assert = function(val) {',
-    '  if (!val) {',
-    '    throw new Error("Expected " + val + " to be truthy.");',
-    '  }',
-    '};',
-    'assert.sameValue = function(a, b) {',
-    '  if (a !== b) {',
-    '    throw new Error("Expected " + a + " to equal " + b + ".");',
-    '  }',
-    '};'
-  ].join('\n'));
 
-  testCases.forEach(execute);
+  if (typeof process !== 'undefined' && process.argv[2] === 'write') {
+    testCases.forEach(write);
+  } else {
+    eval(env);
+    testCases.forEach(execute);
+  }
 }());

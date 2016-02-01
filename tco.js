@@ -449,9 +449,22 @@
   var testGenerators = {
     fromStatement: function(testCase) {
       testCase.fileName = buildName('statements', testCase);
-      testCase.type = 'statement';
       var pattern = Array.isArray(testCase.pattern) ?
         testCase.pattern.join('\n') : testCase.pattern;
+      var match = pattern.match(/S|E/g);
+
+      testCase.type = (pattern.indexOf('S') > -1 ?
+        'statement' : 'expression') + ' within statement';
+
+      if (!match) {
+        throw new Error('No subsitution string found in pattern: ' +
+          testCase.pattern);
+      }
+
+      if (match.length > 1) {
+        throw new Error('Too many substitution patterns found in pattern: ' +
+          testCase.pattern);
+      }
 
       testCase.body = pattern
         .replace(/S/, 'return f(n - 1);')

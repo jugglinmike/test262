@@ -1,4 +1,4 @@
-import re
+import os, re
 
 from util.find_comments import find_comments
 from util.parse_yaml import parse_yaml
@@ -12,6 +12,10 @@ class Case:
 
         with open(filename) as handle:
             self.attribs = self._parse(handle.read())
+
+    @property
+    def name(self):
+        return re.sub(r'\.\w+$', '', os.path.basename(self.filename))
 
     def _parse(self, source):
         case = dict(meta=None, regions=dict())

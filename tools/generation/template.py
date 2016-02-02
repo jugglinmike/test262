@@ -6,6 +6,7 @@ from util.parse_yaml import parse_yaml
 
 indentPattern = re.compile(r'^(\s*)')
 interpolatePattern = re.compile(r'\{\s*(\S+)\s*\}')
+nameInterpolationPattern = re.compile(r'\{\{\s*(\S+)\s*\}\}')
 
 def _indent(text, prefix = '    '):
     '''Prefix a block of text (as defined by the "line break" control
@@ -29,6 +30,10 @@ class Template:
         self.regions = []
 
         self._parse()
+
+    @property
+    def name(self):
+        return re.sub(r'\.\w+$', '', os.path.basename(self.filename))
 
     def _parse(self):
         for comment in find_comments(self.source):
@@ -104,11 +109,24 @@ class Template:
 
         return '\n'.join(lines)
 
+    def _filename_replacer(self, case, match):
+        val = match.group(1)
+        if val == 'templatename':
+            return self.name
+        if val == 'casename':
+            return case.name
+        return match.group()
+
+    def _filename(self, case):
+        return nameInterpolationPattern.sub(
+            lambda match: self._filename_replacer(case, match),
+            self.attribs['meta']['path']) + '.js'
+
     def expand(self, case, encoding):
         frontmatter = self._frontmatter(case.filename, case.attribs)
         body = self.expand_regions(self.source, case.attribs)
 
         return dict(
-            name = self.attribs['meta']['path'] + os.path.basename(case.filename[:-7]) + '.js',
+            name = self._filename(case),
             source = codecs.encode(frontmatter + '\n' + body, encoding)
         )

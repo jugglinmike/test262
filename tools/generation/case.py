@@ -6,10 +6,11 @@ from util.parse_yaml import parse_yaml
 regionStartPattern = re.compile(r'-\s+(\S+)')
 
 class Case:
-    def __init__(self, file_name):
+    def __init__(self, filename):
+        self.filename = filename
         self.attribs = dict(meta=None, regions=dict())
 
-        with open(file_name) as handle:
+        with open(filename) as handle:
             self.attribs = self._parse(handle.read())
 
     def _parse(self, source):

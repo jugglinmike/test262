@@ -12,12 +12,18 @@ class Expander:
 
     def _load_templates(self, template_class):
         directory = os.path.join(self.case_dir, template_class)
-        file_names = map(
-            lambda x: os.path.join(directory, x),
-            filter(self.is_template_file, os.listdir(directory))
-        )
+        templates = []
+        for subdirectory, _, filenames in os.walk(directory):
+            subdirectory = os.path.relpath(subdirectory, directory)
+            if subdirectory == '.':
+                subdirectory = ''
 
-        self.templates[template_class] = [Template(x) for x in file_names]
+            for filename in filenames:
+                if self.is_template_file(filename):
+                    templates.append(
+                        Template(directory, os.path.join(subdirectory, filename)))
+
+        self.templates[template_class] = templates
 
     def _get_templates(self, template_class):
         if not template_class in self.templates:

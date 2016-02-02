@@ -20,10 +20,11 @@ def _indent(text, prefix = '    '):
     return prefix + ('\n' + prefix).join(lines)
 
 class Template:
-    def __init__(self, filename):
+    def __init__(self, directory, filename):
+        self.directory = directory
         self.filename = filename
 
-        with open(filename) as template_file:
+        with open(self.fullpath) as template_file:
             self.source = template_file.read()
 
         self.attribs = dict()
@@ -33,7 +34,11 @@ class Template:
 
     @property
     def name(self):
-        return re.sub(r'\.\w+$', '', os.path.basename(self.filename))
+        return re.sub(r'\.\w+$', '', self.filename)
+
+    @property
+    def fullpath(self):
+        return os.path.join(self.directory, self.filename)
 
     def _parse(self):
         for comment in find_comments(self.source):
@@ -77,7 +82,7 @@ class Template:
         lines += [
             '// This file was procedurally generated from the following sources:',
             '// - ' + case_filename,
-            '// - ' + self.filename,
+            '// - ' + self.fullpath,
             '/*---',
             'description: ' + description,
             'es6id: ' + self.attribs['meta']['es6id']
@@ -117,16 +122,26 @@ class Template:
             return case.name
         return match.group()
 
-    def _filename(self, case):
+    def _render_test_name(self, case):
+        path = None
+
+        if 'path' in self.attribs['meta']:
+            path = self.attribs['meta']['path']
+
+        if 'path' in case.attribs['meta']:
+            if path:
+                raise Exception('Test "path" over-specified.')
+            path = case.attribs['meta']['path']
+
         return nameInterpolationPattern.sub(
             lambda match: self._filename_replacer(case, match),
-            self.attribs['meta']['path']) + '.js'
+            path) + '.js'
 
     def expand(self, case, encoding):
         frontmatter = self._frontmatter(case.filename, case.attribs)
         body = self.expand_regions(self.source, case.attribs)
 
         return dict(
-            name = self._filename(case),
+            name = self._render_test_name(case),
             source = codecs.encode(frontmatter + '\n' + body, encoding)
         )

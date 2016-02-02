@@ -1,0 +1,10 @@
+/*---
+path: built-ins/Int32Array/{{ templatename }}
+desc: Int8Array
+template: default
+---*/
+
+//- ta
+Int32Array
+//- bpe
+4

@@ -1,0 +1,21 @@
+/*---
+name: CallExpression
+es6id: 12.3.4.1
+info: |
+    CallExpression : MemberExpression Arguments
+
+    [...]
+    9. Return EvaluateDirectCall(func, thisValue, Arguments, tailCall).
+
+    12.3.4.3 Runtime Semantics: EvaluateDirectCall
+
+    1. Let argList be ArgumentListEvaluation(arguments).
+    [...]
+    6. Let result be Call(func, thisValue, argList).
+    [...]
+---*/
+
+var buffer = new ArrayBuffer(8);
+assert.throws(RangeError, function() {
+  new /*{ta}*/(buffer, 0, /*{bpe}*/ + 1);
+});

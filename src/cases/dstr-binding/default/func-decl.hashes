@@ -1,5 +1,5 @@
 /*---
-path: language/statements/function/dstr-
+path: language/statements/function/dstr-{{ casename }}
 name: function declaration
 es6id: 14.1.19
 info: |

@@ -1,5 +1,5 @@
 /*---
-path: language/statements/generators/dstr-
+path: language/statements/generators/dstr-{{ casename }}
 name: generator function declaration
 es6id: 14.4.12
 info: |

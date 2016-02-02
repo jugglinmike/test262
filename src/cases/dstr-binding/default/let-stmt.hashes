@@ -1,5 +1,5 @@
 /*---
-path: language/statements/let/dstr-
+path: language/statements/let/dstr-{{ casename }}
 name: >
     `let` statement
 es6id: 13.3.1.4

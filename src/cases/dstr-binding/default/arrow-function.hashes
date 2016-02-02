@@ -1,5 +1,5 @@
 /*---
-path: language/expressions/arrow-function/dstr-
+path: language/expressions/arrow-function/dstr-{{ casename }}
 name: arrow function expression
 es6id: 14.2.16
 info: |

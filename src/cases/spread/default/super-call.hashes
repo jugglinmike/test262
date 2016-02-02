@@ -1,5 +1,5 @@
 /*---
-path: language/expressions/super/spread-
+path: language/expressions/super/spread-{{ casename }}
 name: SuperCall
 es6id: 12.3.5.1
 info: |

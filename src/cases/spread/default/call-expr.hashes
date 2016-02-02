@@ -1,5 +1,5 @@
 /*---
-path: language/expressions/call/spread-
+path: language/expressions/call/spread-{{ casename }}
 name: CallExpression
 es6id: 12.3.4.1
 info: |

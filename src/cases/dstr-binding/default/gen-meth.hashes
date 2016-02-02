@@ -1,5 +1,5 @@
 /*---
-path: language/expressions/object/dstr-gen-meth-
+path: language/expressions/object/dstr-gen-meth-{{ casename }}
 name: generator method
 es6id: 14.4.13
 info: |

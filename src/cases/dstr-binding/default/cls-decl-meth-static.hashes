@@ -1,5 +1,5 @@
 /*---
-path: language/statements/class/dstr-meth-static-
+path: language/statements/class/dstr-meth-static-{{ casename }}
 name: static class expression method
 es6id: 14.5.15
 info: |

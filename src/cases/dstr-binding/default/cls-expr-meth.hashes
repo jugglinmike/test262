@@ -1,5 +1,5 @@
 /*---
-path: language/expressions/class/dstr-meth-
+path: language/expressions/class/dstr-meth-{{ casename }}
 name: class expression method
 es6id: 14.5.16
 info: |

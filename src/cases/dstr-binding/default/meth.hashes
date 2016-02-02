@@ -1,5 +1,5 @@
 /*---
-path: language/expressions/object/dstr-meth-
+path: language/expressions/object/dstr-meth-{{ casename }}
 name: method
 es6id: 14.3.8
 info: |

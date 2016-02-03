@@ -1,6 +1,5 @@
-// This file was procedurally generated from the following sources:
-// - src/cases/dstr-binding/ary-name-init-exhausted.hashes
-// - src/cases/dstr-binding/default/var-stmt.hashes
+// Copyright (C) Copyright 2016 the V8 project authors. All rights reserved.
+// This code is governed by the BSD license found in the LICENSE file.
 /*---
 description: Abrupt completion during identifier resolution (`var` statement)
 es6id: 13.3.2.4

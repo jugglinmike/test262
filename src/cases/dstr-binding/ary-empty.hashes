@@ -7,7 +7,7 @@ info: |
     ArrayBindingPattern : [ ]
 
     1. Return NormalCompletion(empty).
-features: [generator]
+features: [generators]
 ---*/
 
 //- setup

@@ -1,6 +1,6 @@
 /*---
 template: default
-desc: Rest element (identifier) followed by an invalid element
+desc: Rest element (array binding pattern) followed by an invalid element
 negative: SyntaxError
 info: >
     13.3.3 Destructuring Binding Patterns
@@ -12,6 +12,6 @@ info: >
 ---*/
 
 //- elems
-[...x, y]
+[...[x], y]
 //- vals
 [1, 2, 3]

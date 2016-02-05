@@ -39,6 +39,12 @@ def target(*deps):
         return wrapped
     return other
 
+# Install Python dependencies using the PIP package manager.
+@target()
+def deps():
+    import pip
+    pip.main(['install', '-r', 'tools/generation/requirements.txt'])
+
 @target('build_static', 'build_cases')
 def build():
     pass
@@ -47,7 +53,7 @@ def build():
 def build_static():
     shutil.copytree(STATIC_DIR, OUT_DIR)
 
-@target()
+@target('deps')
 def build_cases():
     shell(sys.executable, 'tools/generation/compile.py',
           '--no-clobber', STATIC_DIR,

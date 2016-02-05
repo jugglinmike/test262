@@ -6,7 +6,7 @@ info: |
 
     BindingElement : BindingPattern Initializeropt
 
-    1. If iteratorRecord.[[done]] is false, then 
+    1. If iteratorRecord.[[done]] is false, then
        [...]
        e. Else
           i. Let v be IteratorValue(next).

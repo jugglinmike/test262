@@ -1,5 +1,5 @@
 /*---
-desc: SingleNameBinding does assign name to "anonymous" functions
+desc: SingleNameBinding does assign name to "anonymous" functions "through" cover grammar
 template: default
 info: |
     13.3.3.6 Runtime Semantics: IteratorBindingInitialization

@@ -1,5 +1,5 @@
 /*---
-desc: SingleNameBinding does assign name to "anonymous" classes
+desc: SingleNameBinding assigns `name` to "anonymous" classes
 template: default
 info: |
     13.3.3.6 Runtime Semantics: IteratorBindingInitialization

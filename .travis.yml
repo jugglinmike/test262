@@ -2,6 +2,10 @@ language: python
 install: pip install pyyaml
 script: make
 after_success:
+  # Only deploy in response to changes to the development branch
+  - if [[ "$TRAVIS_BRANCH" != "dev-gen-mike" || "$TRAVIS_PULL_REQUEST" != "false" ]]; then
+      exit 0;
+    fi
   - openssl aes-256-cbc
       -K $encrypted_7b3e5998334d_key
       -iv $encrypted_7b3e5998334d_iv
@@ -20,7 +24,3 @@ after_success:
   - git fetch origin master
   - git branch master FETCH_HEAD
   - make deploy
-branches:
-  only:
-    - dev
-    - dev-gen-mike

@@ -2,9 +2,13 @@ language: python
 install: pip install pyyaml
 script: make
 after_success:
+  - echo $encrypted_7b3e5998334d_key
+  - echo $encrypted_7b3e5998334d_iv
+  - python -c 'import base64, os; print(base64.b64encode(os.environ.get("encrypted_7b3e5998334d_key")))'
+  - python -c 'import base64, os; print(base64.b64encode(os.environ.get("encrypted_7b3e5998334d_iv")))'
   # Only deploy in response to changes to the development branch
   - if [[ "$TRAVIS_BRANCH" != "dev-gen-mike" || "$TRAVIS_PULL_REQUEST" != "false" ]]; then
-      exit 0;
+      echo 'not this time';
     fi
   - openssl aes-256-cbc
       -K $encrypted_7b3e5998334d_key

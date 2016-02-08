@@ -1,0 +1,25 @@
+/*---
+desc: SingleNameBinding assigns `name` to "anonymous" classes
+template: default
+info: |
+    13.3.3.7 Runtime Semantics: KeyedBindingInitialization
+
+    SingleNameBinding : BindingIdentifier Initializeropt
+
+    [...]
+    6. If Initializer is present and v is undefined, then
+       [...]
+       d. If IsAnonymousFunctionDefinition(Initializer) is true, then
+          i. Let hasNameProperty be HasOwnProperty(v, "name").
+          ii. ReturnIfAbrupt(hasNameProperty).
+          iii. If hasNameProperty is false, perform SetFunctionName(v,
+               bindingId).
+---*/
+
+//- elems
+{ cls = class {}, xCls = class X {} }
+//- vals
+{}
+//- body
+assert.sameValue(cls.name, 'cls');
+assert.notSameValue(xCls.name, 'xCls');

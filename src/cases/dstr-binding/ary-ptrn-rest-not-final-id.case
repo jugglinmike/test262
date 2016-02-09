@@ -1,6 +1,6 @@
 /*---
 template: default
-desc: Rest element (identifier) followed by an invalid element
+desc: Rest element (identifier) may not be followed by any element
 negative: SyntaxError
 info: >
     13.3.3 Destructuring Binding Patterns

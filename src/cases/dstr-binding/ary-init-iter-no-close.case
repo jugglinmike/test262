@@ -1,3 +1,5 @@
+// Copyright (C) 2016 the V8 project authors. All rights reserved.
+// This code is governed by the BSD license found in the LICENSE file.
 /*---
 desc: Iterator is not closed when exhausted by pattern evaluation
 template: default

@@ -14,11 +14,11 @@ info: |
 //- elems
 { w: { x, y, z } = { x: 4, y: 5, z: 6 } }
 //- vals
-{ w: { x: 7, y: 8, z: 9 } }
+{ w: { x: undefined, z: 7 } }
 //- body
-assert.sameValue(x, 7);
-assert.sameValue(y, 8);
-assert.sameValue(z, 9);
+assert.sameValue(x, undefined);
+assert.sameValue(y, undefined);
+assert.sameValue(z, 7);
 
 assert.throws(ReferenceError, function() {
   w;

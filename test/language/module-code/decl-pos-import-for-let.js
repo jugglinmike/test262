@@ -7,6 +7,5 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-for (let x = 0; ;) {
+for (let x = 0; false;)
   import v from './non-existent.js';
-}

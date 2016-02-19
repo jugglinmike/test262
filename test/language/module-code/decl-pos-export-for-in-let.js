@@ -7,6 +7,5 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-for (let y in []) {
+for (let y in [])
   export default null;
-}

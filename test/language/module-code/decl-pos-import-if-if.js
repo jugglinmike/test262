@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-if (true) { import v from './non-existent.js'; }
+if (false) import v from './non-existent.js';

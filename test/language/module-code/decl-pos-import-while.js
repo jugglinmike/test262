@@ -7,6 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-while (true) {
-  import v from './non-existent.js';
-}
+while (false) import v from './non-existent.js';

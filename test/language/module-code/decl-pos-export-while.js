@@ -7,6 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-while (true) {
-  export default null;
-}
+while (false) export default null;

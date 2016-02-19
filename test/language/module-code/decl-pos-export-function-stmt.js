@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-function x() { export default null; }
+function f() { export default null; }

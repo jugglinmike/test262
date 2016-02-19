@@ -7,6 +7,5 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-for (const y in []) {
+for (const y in [])
   import v from './non-existent.js';
-}

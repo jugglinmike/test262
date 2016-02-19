@@ -7,6 +7,5 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-for (x = 0; x < 1; ++x) {
+for (x = 0; false;)
   export default null;
-}

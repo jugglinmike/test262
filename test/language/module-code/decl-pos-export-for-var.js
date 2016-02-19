@@ -7,6 +7,6 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-for (var x = 0; ;) {
+for (var x = 0; false;) {
   export default null;
 }

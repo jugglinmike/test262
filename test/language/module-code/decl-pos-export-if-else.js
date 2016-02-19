@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-if (false) { } else { export default null; }
+if (true) { } else export default null;

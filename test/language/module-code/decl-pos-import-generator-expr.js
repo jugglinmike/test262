@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-(function* g() { import v from './non-existent.js'; });
+(function*() { import v from './non-existent.js'; });

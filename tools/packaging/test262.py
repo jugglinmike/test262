@@ -513,6 +513,8 @@ class TestSuite(object):
               if not self.strict_only:
                 non_strict_case = TestCase(self, name, full_path, False)
 
+                # Tests for module code should be run exactly one time
+                # (*without* the addition of a global "use strict" directive).
                 if non_strict_case.IsModule():
                     cases.append(non_strict_case)
                     continue

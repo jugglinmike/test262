@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-function* g() { import v from './decl-pos-import-generator-stmt.js'; }
+class C { static *method() { import v from './decl-pos-import-class-decl-method-gen-static.js'; } }

@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-(class { method() { import v from './non-existent.js'; } });
+(class { method() { import v from './decl-pos-import-class-expr-meth.js'; } });

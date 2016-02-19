@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-{ void 0; import v from './non-existent.js'; }
+{ void 0; import v from './decl-pos-import-block-stmt-list.js'; }

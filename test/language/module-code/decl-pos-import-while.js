@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-while (false) import v from './non-existent.js';
+while (false) import v from './decl-pos-import-while.js';

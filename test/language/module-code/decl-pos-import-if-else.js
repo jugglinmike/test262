@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-if (true) { } else import v from './non-existent.js';
+if (true) { } else import v from './decl-pos-import-if-else.js';

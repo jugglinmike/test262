@@ -8,4 +8,4 @@ flags: [module]
 ---*/
 
 for (let y of [])
-  import v from './non-existent.js';
+  import v from './decl-pos-import-for-of-let.js';

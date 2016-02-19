@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-function* g() { import v from './non-existent.js'; }
+function* g() { import v from './decl-pos-import-generator-stmt.js'; }

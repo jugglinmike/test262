@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-test262: import v from './non-existent.js';
+test262: import v from './decl-pos-import-labeled.js';

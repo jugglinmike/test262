@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-({ set m(x) { import v from './non-existent.js'; } });
+({ set m(x) { import v from './decl-pos-import-object-setter.js'; } });

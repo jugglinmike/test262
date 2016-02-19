@@ -8,4 +8,4 @@ flags: [module]
 ---*/
 
 for (const y of [])
-  import v from './non-existent.js';
+  import v from './decl-pos-import-for-of-const.js';

@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-switch(0) { default: import v from './non-existent.js'; }
+switch(0) { default: import v from './decl-pos-import-switch-dftl.js'; }

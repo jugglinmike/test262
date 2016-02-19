@@ -20,5 +20,5 @@ info: |
 ---*/
 
 assert.throws(SyntaxError, function() {
-  eval('import v from "./non-existent.js";');
+  eval('import v from "./import.js";');
 });

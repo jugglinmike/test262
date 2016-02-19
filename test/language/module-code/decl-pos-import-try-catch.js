@@ -8,5 +8,5 @@ flags: [module]
 ---*/
 
 try { } catch (err) {
-  import v from './non-existent.js';
+  import v from './decl-pos-import-try-catch.js';
 }

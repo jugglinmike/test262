@@ -14,4 +14,4 @@ info: |
          StatementList
 ---*/
 
-import v from './non-existent.js';
+import v from './import.js';

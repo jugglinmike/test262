@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-({ get m() { import v from './non-existent.js'; } });
+({ get m() { import v from './decl-pos-import-object-getter.js'; } });

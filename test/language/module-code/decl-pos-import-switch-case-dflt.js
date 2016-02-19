@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-switch(0) { case 0: import v from './decl-pos-import-switch-case-dflt.js'; default: }
+switch(0) { case 1: import v from './decl-pos-import-switch-case-dflt.js'; default: }

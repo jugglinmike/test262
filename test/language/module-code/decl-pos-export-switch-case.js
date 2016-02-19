@@ -7,4 +7,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-switch(0) { case 0: export default null; }
+switch(0) { case 1: export default null; }

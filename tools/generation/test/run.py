@@ -16,18 +16,20 @@ class TestGeneration(unittest.TestCase):
         stdout, stderr = sp.communicate()
         return dict(stdout=stdout, stderr=stderr, returncode=sp.returncode)
 
-    def compareTrees(self, targetName):
-        expectedFiles = []
-        actualFiles = []
+    def getFiles(self, path):
+        names = []
+        for root, _, fileNames in os.walk(path):
+            for fileName in filter(lambda x: x[0] != '.', fileNames):
+                names.append(os.path.join(root, fileName))
+        names.sort()
+        return names
 
+    def compareTrees(self, targetName):
         expectedPath = os.path.join(EXPECTED_DIR, targetName)
         actualPath = os.path.join(OUT_DIR, targetName)
 
-        for root, _, files in os.walk(expectedPath):
-            expectedFiles += map(lambda x: os.path.join(root, x), files)
-
-        for root, _, files in os.walk(actualPath):
-            actualFiles += map(lambda x: os.path.join(root, x), files)
+        expectedFiles = self.getFiles(expectedPath)
+        actualFiles = self.getFiles(actualPath)
 
         self.assertListEqual(
             map(lambda x: os.path.relpath(x, expectedPath), expectedFiles),

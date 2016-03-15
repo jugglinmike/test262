@@ -18,5 +18,8 @@ import './instn-once.js';
 
 var global = fnGlobalObject();
 
-assert.sameValue(global.test262, undefined);
+assert.sameValue(global.test262, undefined, 'global property initially unset');
+
 global.test262 = 262;
+
+assert.sameValue(global.test262, 262, 'global property was defined');

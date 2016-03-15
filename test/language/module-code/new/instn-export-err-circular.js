@@ -23,4 +23,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-export { x } from './instn-export-circular_.js';
+export { x } from './instn-export-err-circular_.js';

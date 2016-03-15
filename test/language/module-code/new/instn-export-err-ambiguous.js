@@ -34,4 +34,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-export { x } from './instn-export-ambiguous_.js';
+export { x } from './instn-export-err-ambiguous_.js';

@@ -17,4 +17,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-export { x } from './instn-export-not-found_.js';
+export { x } from './instn-export-err-not-found_.js';

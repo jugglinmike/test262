@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import argparse
 import os, sys
 
 from lib.expander import Expander
 from lib.test import Test
+
+def print_error(*values):
+    print('ERROR:', *values, file=sys.stderr)
 
 def find_cases(location):
     # When a file is specified, return the file name and its containing
@@ -40,14 +44,13 @@ def create(args):
                     test.load(args.out)
 
                     if args.no_clobber:
-                        print(
-                            'ERROR: Refusing to overwrite file: ' +
-                            test.file_name)
+                        print_error(
+                            'Refusing to overwrite file: ' + test.file_name)
                         exit(1)
 
                     if not test.is_generated():
-                        print(
-                            'ERROR: Refusing to overwrite non-generated file: ' +
+                        print_error(
+                            'Refusing to overwrite non-generated file: ' +
                             test.file_name)
                         exit(1)
                 except IOError:

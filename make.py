@@ -6,7 +6,6 @@ OUT_DIR = os.environ.get('OUT_DIR') or 'test'
 SRC_DIR = os.environ.get('SRC_DIR') or 'src'
 PUBLISH_DIR = os.environ.get('PLUBLISH_DIR') or 'test'
 UPSTREAM = os.environ.get('UPSTREAM') or 'git@github.com:tc39/test262.git'
-MAINTAINER = os.environ.get('MAINTAINER') or 'goyakin@microsoft.com'
 
 def shell(*args):
     sp = subprocess.Popen(list(args), stdout=subprocess.PIPE)
@@ -41,10 +40,6 @@ def build():
     pass
 
 @target()
-def build_static():
-    shutil.copytree(STATIC_DIR, OUT_DIR)
-
-@target()
 def build_cases():
     shell(sys.executable, 'tools/generation/generator.py',
           '--out', OUT_DIR,
@@ -52,8 +47,7 @@ def build_cases():
 
 @target()
 def clean():
-    shutil.rmtree(OUT_DIR, ignore_errors=True)
-    shutil.rmtree(OUT_DIR + '.tmp', ignore_errors=True)
+    shell(sys.executable, 'tools/generation/generator.py', 'clean', OUT_DIR)
 
 @target('clean', 'build')
 def deploy():

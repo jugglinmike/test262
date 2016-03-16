@@ -12,7 +12,9 @@ class TestGeneration(unittest.TestCase):
 
     def fixture(self, name):
         relpath = os.path.relpath(os.path.join(testDir, 'fixtures', name))
-        sp = subprocess.Popen([ex, '-o', OUT_DIR, relpath], stdout=subprocess.PIPE)
+        sp = subprocess.Popen(
+            [ex, 'create', '-o', OUT_DIR, relpath],
+            stdout=subprocess.PIPE)
         stdout, stderr = sp.communicate()
         return dict(stdout=stdout, stderr=stderr, returncode=sp.returncode)
 

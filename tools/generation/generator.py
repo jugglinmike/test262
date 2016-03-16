@@ -1,28 +1,10 @@
 #!/usr/bin/env python
-from __future__ import print_function
 
 import argparse
 import os, sys
 
 from lib.expander import Expander
 from lib.test import Test
-
-def print_test(test):
-    print('/**')
-    print(' * ----------------------------------------------------------------')
-    print(' * ' + test['name'])
-    print(' * ----------------------------------------------------------------')
-    print(' */')
-    print(test['source'])
-    print('\n')
-
-def write_test(prefix, test):
-    location = os.path.join(prefix, test['name'])
-    path = os.path.dirname(location)
-    if not os.path.exists(path):
-        os.makedirs(path)
-    with open(location, 'w') as handle:
-        handle.write(test['source'])
 
 def find_cases(location):
     # When a file is specified, return the file name and its containing
@@ -39,9 +21,10 @@ def find_cases(location):
             lambda x: os.path.join(args.cases, x), os.listdir(args.cases))
 
 def clean(args):
-    for (subdir,_,fileNames) in os.walk(args.directory):
+    for (subdir, _, fileNames) in os.walk(args.directory):
         for fileName in map(lambda x: os.path.join(subdir, x), fileNames):
             test = Test(fileName)
+            test.load()
             if test.is_generated():
                 print('Deleting file "' + fileName + '"...')
                 os.remove(fileName)
@@ -53,15 +36,25 @@ def create(args):
         exp = Expander(caseDir)
         for test in exp.expand('utf-8', caseFile):
             if args.no_clobber:
-                other_file = os.path.join(args.no_clobber, test['name'])
+                other_file = os.path.join(args.no_clobber, test.file_name)
                 if os.path.isfile(other_file):
                     print('ERROR: Refusing to overwrite ' + other_file)
                     exit(1)
 
             if args.out:
-                write_test(args.out, test)
+                try:
+                    test.load(args.out)
+
+                    if not test.is_generated():
+                        print(
+                            'ERROR: Refusing to overwrite non-generated file: ' +
+                            test.file_name)
+                        exit(1)
+                except IOError:
+                    pass
+                test.write(args.out)
             else:
-                print_test(test)
+                print(test.to_string())
 
 parser = argparse.ArgumentParser(description='Test262 test generator tool')
 subparsers = parser.add_subparsers()

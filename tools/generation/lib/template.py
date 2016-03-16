@@ -3,6 +3,7 @@ import codecs, yaml
 
 from util.find_comments import find_comments
 from util.parse_yaml import parse_yaml
+from test import Test
 
 indentPattern = re.compile(r'^(\s*)')
 interpolatePattern = re.compile(r'\{\s*(\S+)\s*\}')
@@ -152,7 +153,5 @@ class Template:
         frontmatter = self._frontmatter(case_filename, case_values)
         body = self.expand_regions(self.source, case_values)
 
-        return dict(
-            name = self.attribs['meta']['path'] + case_name + '.js',
-            source = codecs.encode(frontmatter + '\n' + body, encoding)
-        )
+        return Test(self.attribs['meta']['path'] + case_name + '.js',
+            source=codecs.encode(frontmatter + '\n' + body, encoding))

@@ -1,17 +1,27 @@
-import re
+import os, re
 
 from util.find_comments import find_comments
 from util.parse_yaml import parse_yaml
 
 class Test:
-    def __init__(self, file_name):
+    """Representation of a generated test. Specifies a file location which may
+    or may not exist."""
+    def __init__(self, file_name, source=None):
+        self.file_name = file_name
+        self.source = source
         self.attribs = dict(meta=None)
 
-        with open(file_name) as handle:
-            self._parse(handle.read())
+        if self.source:
+            self._parse()
 
-    def _parse(self, source):
-        for comment in find_comments(source):
+    def load(self, prefix = None):
+        location = os.path.join(prefix or '', self.file_name)
+        with open(location) as handle:
+            self.source = handle.read()
+        self._parse()
+
+    def _parse(self):
+        for comment in find_comments(self.source):
             meta = parse_yaml(comment['source'])
             if meta:
                 self.attribs['meta'] = meta
@@ -26,3 +36,21 @@ class Test:
             return False
 
         return 'generated' in flags
+
+    def to_string(self):
+        return '\n'.join([
+            '/**',
+            ' * ----------------------------------------------------------------',
+            ' * ' + self.file_name,
+            ' * ----------------------------------------------------------------',
+            ' */',
+            self.source,
+            '\n'])
+
+    def write(self, prefix):
+        location = os.path.join(prefix, self.file_name)
+        path = os.path.dirname(location)
+        if not os.path.exists(path):
+            os.makedirs(path)
+        with open(location, 'w') as handle:
+            handle.write(self.source)

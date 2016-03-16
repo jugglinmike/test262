@@ -4,7 +4,7 @@
 /*---
 description: foobar (First template name)
 es6id: 1.2.3
-flags: [a, b, c, d]
+flags: [generated, a, b, c, d]
 includes: [foo.js]
 info: >
     template info

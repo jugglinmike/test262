@@ -4,7 +4,7 @@
 /*---
 description: foobar (Second template name)
 esid: sec-a-generic-id
-flags: [a, b]
+flags: [generated, a, b]
 includes: [foo.js, bar.js]
 info: >
     template info

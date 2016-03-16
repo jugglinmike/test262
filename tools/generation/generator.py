@@ -35,15 +35,15 @@ def create(args):
     for caseDir in caseDirs:
         exp = Expander(caseDir)
         for test in exp.expand('utf-8', caseFile):
-            if args.no_clobber:
-                other_file = os.path.join(args.no_clobber, test.file_name)
-                if os.path.isfile(other_file):
-                    print('ERROR: Refusing to overwrite ' + other_file)
-                    exit(1)
-
             if args.out:
                 try:
                     test.load(args.out)
+
+                    if args.no_clobber:
+                        print(
+                            'ERROR: Refusing to overwrite file: ' +
+                            test.file_name)
+                        exit(1)
 
                     if not test.is_generated():
                         print(
@@ -59,20 +59,21 @@ def create(args):
 parser = argparse.ArgumentParser(description='Test262 test generator tool')
 subparsers = parser.add_subparsers()
 
-create_parser = subparsers.add_parser('create', help='''Generate test material''')
+create_parser = subparsers.add_parser('create',
+    help='''Generate test material''')
 create_parser.add_argument('-o', '--out', help='''The directory to write the
     compiled tests. If unspecified, tests will be written to standard out.''')
-create_parser.add_argument('-n', '--no-clobber', help='''Do not produce test if a
-    corresponding file exists within this directory.''')
-create_parser.add_argument('cases', help='''Test cases to generate. May be a file or a
-    directory.''')
+create_parser.add_argument('-n', '--no-clobber', action='store_true',
+    help='''Do not produce test if a corresponding file exists within this
+        directory.''')
+create_parser.add_argument('cases',
+    help='''Test cases to generate. May be a file or a directory.''')
 create_parser.set_defaults(func=create)
 
-clean_parser = subparsers.add_parser(
-    'clean',
+clean_parser = subparsers.add_parser('clean',
     help='''Remove previously-generated files''')
-clean_parser.add_argument('directory', help='''Remove any generated tests from
-    this directory''')
+clean_parser.add_argument('directory',
+    help='''Remove any generated tests from this directory''')
 clean_parser.set_defaults(func=clean)
 
 args = parser.parse_args()

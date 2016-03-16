@@ -4,7 +4,7 @@ from __future__ import print_function
 import argparse
 import os, sys
 
-from expander import Expander
+from lib.expander import Expander
 
 def print_test(test):
     print('/**')

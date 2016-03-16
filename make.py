@@ -2,14 +2,11 @@
 
 import os, shutil, subprocess, sys
 
-OUT_DIR = os.environ.get('OUT_DIR') or 'out'
+OUT_DIR = os.environ.get('OUT_DIR') or 'test'
 SRC_DIR = os.environ.get('SRC_DIR') or 'src'
 PUBLISH_DIR = os.environ.get('PLUBLISH_DIR') or 'test'
 UPSTREAM = os.environ.get('UPSTREAM') or 'git@github.com:tc39/test262.git'
 MAINTAINER = os.environ.get('MAINTAINER') or 'goyakin@microsoft.com'
-
-CASE_DIR = os.path.join(SRC_DIR, 'cases')
-STATIC_DIR = os.path.join(SRC_DIR, 'static')
 
 def shell(*args):
     sp = subprocess.Popen(list(args), stdout=subprocess.PIPE)
@@ -50,9 +47,8 @@ def build_static():
 @target()
 def build_cases():
     shell(sys.executable, 'tools/generation/generator.py',
-          '--no-clobber', STATIC_DIR,
           '--out', OUT_DIR,
-          CASE_DIR)
+          SRC_DIR)
 
 @target()
 def clean():
@@ -69,3 +65,13 @@ def deploy():
     shell('git', 'commit', '--message', '"Re-build from source"')
     shell('git', 'push', UPSTREAM, 'master')
     shell('git', 'checkout', '-')
+
+if len(sys.argv) == 1:
+    targets['build']()
+
+for target in sys.argv[1:]:
+    if not target in targets:
+        sys.stderr.write('No target named: "' + target + '".\n' +
+            'Available targets: ' + ', '.join(list(targets)) + '\n')
+        sys.exit(1)
+    targets[target]()

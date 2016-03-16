@@ -8,7 +8,7 @@ from test import Test
 indentPattern = re.compile(r'^(\s*)')
 interpolatePattern = re.compile(r'\{\s*(\S+)\s*\}')
 
-def _indent(text, prefix = '    '):
+def indent(text, prefix = '    '):
     '''Prefix a block of text (as defined by the "line break" control
     character) with some character sequence.'''
 
@@ -76,7 +76,7 @@ class Template:
             whitespace = indentPattern.match(lines[region['lineno']]).group(1)
             value = context['regions'].get(region['name'], '')
             source = source[:region['firstchar']] + \
-                _indent(value, whitespace).lstrip() + \
+                indent(value, whitespace).lstrip() + \
                 source[region['lastchar']:]
 
         setup = context['regions'].get('setup')
@@ -135,11 +135,11 @@ class Template:
         info = []
 
         if 'info' in self.attribs['meta']:
-            info.append(_indent(self.attribs['meta']['info']))
+            info.append(indent(self.attribs['meta']['info']))
         if 'info' in case_values['meta']:
             if len(info):
                 info.append('')
-            info.append(_indent(case_values['meta']['info']))
+            info.append(indent(case_values['meta']['info']))
 
         if len(info):
             lines.append('info: >')

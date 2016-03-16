@@ -26,7 +26,12 @@ flags: [module]
 
 import * as self1 from './instn-import-star-equality.js';
 import * as self2 from './instn-import-star-equality.js';
-import * as other from './instn-import-star-equality-empty_.js';
+import * as other1 from './instn-import-star-equality-empty_.js';
+import * as self3 from './instn-import-star-equality.js';
+import * as other2 from './instn-import-star-equality-empty_.js';
 
 assert.sameValue(self1, self2);
-assert.notSameValue(self1, other);
+assert.sameValue(self1, self3);
+assert.sameValue(other1, other2);
+
+assert.notSameValue(self1, other1);

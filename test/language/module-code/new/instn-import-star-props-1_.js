@@ -1,6 +1,24 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 
-export var direct = null;
-export * from './instn-import-star-props-2_.js';
-export var both = null;
+var notExportedVar1;
+let notExportedLet1;
+const notExportedConst1 = null;
+function notExportedFunc1() {}
+function* notExportedGen1() {}
+class notExportedClass1 {}
+
+var localBindingId;
+
+export var localVarDecl;
+export let localLetDecl;
+export const localConstDecl = null;
+export function localFuncDecl() {};
+export function* localGenDecl() {};
+export class localClassDecl {};
+export { localBindingId };
+export { localBindingId as localIdName };
+export { indirectIdName } from './instn-import-star-props-indirect_.js';
+export { indirectIdName as indirectIdName2 } from './instn-import-star-props-indirect_.js';
+
+export * from './instn-import-star-props-star_.js';

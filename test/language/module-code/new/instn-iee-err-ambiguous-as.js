@@ -1,7 +1,7 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-description: Ambiguous imported bindings produce a SyntaxError
+description: IndirectExportEntries validation - ambiguous imported bindings
 esid: sec-moduledeclarationinstantiation
 info: |
     [...]
@@ -34,4 +34,4 @@ negative: SyntaxError
 flags: [module]
 ---*/
 
-export { x } from './instn-export-err-ambiguous_.js';
+export { x as y } from './instn-iee-err-ambiguous_.js';

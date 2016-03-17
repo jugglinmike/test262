@@ -1,7 +1,7 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-description: Undefined imported bindings produce a SyntaxError
+description: IndirectExportEntries validation - undefined imported bindings
 esid: sec-moduledeclarationinstantiation
 info: |
     [...]
@@ -13,8 +13,13 @@ info: |
 
     15.2.1.16.3 ResolveExport
 
+    [...]
+    9. Let starResolution be null.
+    10. For each ExportEntry Record e in module.[[StarExportEntries]], do
+        [...]
+    11. Return starResolution. 
 negative: SyntaxError
 flags: [module]
 ---*/
 
-export { x } from './instn-export-err-not-found_.js';
+export { x } from './instn-iee-err-not-found-empty_.js';

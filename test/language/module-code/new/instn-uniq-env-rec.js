@@ -32,3 +32,22 @@ assert.sameValue(typeof fifth, 'function', 'function declaration');
 assert.sameValue(fifth(), 'fifth');
 assert.sameValue(typeof sixth, 'function', 'generator function declaration');
 assert.sameValue(sixth().next().value, 'sixth');
+
+assert.throws(ReferenceError, function() {
+  seventh;
+});
+assert.throws(ReferenceError, function() {
+  eighth;
+});
+assert.throws(ReferenceError, function() {
+  ninth;
+});
+assert.throws(ReferenceError, function() {
+  tenth;
+});
+assert.throws(ReferenceError, function() {
+  eleventh;
+});
+assert.throws(ReferenceError, function() {
+  twelfth;
+});

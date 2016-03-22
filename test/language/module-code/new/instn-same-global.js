@@ -12,7 +12,7 @@ includes: [fnGlobalObject.js]
 flags: [module]
 ---*/
 
-import './inst-same-global-set_.js';
+import './instn-same-global-set_.js';
 
 var global = fnGlobalObject();
 

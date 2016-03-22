@@ -9,17 +9,25 @@ info: |
        NormalCompletion(empty).
     6. Let env be NewModuleEnvironment(realm.[[GlobalEnv]]).
     7. Set module.[[Environment]] to env.
+    8. For each String required that is an element of
+       module.[[RequestedModules]] do,
+       a. NOTE: Before instantiating a module, all of the modules it requested
+          must be available. An implementation may perform this test at any
+          time prior to this point.
+       b. Let requiredModule be ? HostResolveImportedModule(module, required).
+       c. Perform ? requiredModule.ModuleDeclarationInstantiation().
     [...]
-includes: [fnGlobalObject.js]
 flags: [module]
 ---*/
 
+import {} from './instn-once.js';
 import './instn-once.js';
+import * as ns1 from './instn-once.js';
+import dflt1 from './instn-once.js';
+export {} from './instn-once.js';
+import dflt2, {} from './instn-once.js';
+export * from './instn-once.js';
+import dflt3, * as ns from './instn-once.js';
+export default null;
 
-var global = fnGlobalObject();
-
-assert.sameValue(global.test262, undefined, 'global property initially unset');
-
-global.test262 = 262;
-
-assert.sameValue(global.test262, 262, 'global property was defined');
+let x;

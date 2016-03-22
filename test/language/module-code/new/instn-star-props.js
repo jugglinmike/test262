@@ -27,10 +27,6 @@ info: |
 flags: [module]
 ---*/
 
-var assert = print;
-assert.sameValue = print;
-export default function() {};
-
 import * as ns from './instn-star-props-1_.js';
 
 // Export entries defined by a directly-imported module

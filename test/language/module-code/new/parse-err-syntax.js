@@ -4,6 +4,14 @@
 description: Early SyntaxError resulting from module parsing
 esid: sec-parsemodule
 negative: SyntaxError
+info: |
+    [...]
+    2. Parse sourceText using Module as the goal symbol and analyze the parse
+       result for any Early Error conditions. If the parse was successful and
+       no early errors were found, let body be the resulting parse tree.
+       Otherwise, let body be a List of one or more SyntaxError or
+       ReferenceError objects representing the parsing errors and/or early
+       errors.
 flags: [module]
 ---*/
 

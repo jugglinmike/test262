@@ -26,12 +26,18 @@ flags: [module]
 
 import * as self1 from './instn-star-equality.js';
 import * as self2 from './instn-star-equality.js';
-import * as other1 from './instn-star-equality-empty_.js';
+import * as other1 from './instn-star-equality-other_.js';
 import * as self3 from './instn-star-equality.js';
-import * as other2 from './instn-star-equality-empty_.js';
+import * as other2 from './instn-star-equality-other_.js';
+import { testNs } from './instn-star-equality-other_.js';
 
-assert.sameValue(self1, self2);
-assert.sameValue(self1, self3);
-assert.sameValue(other1, other2);
+assert.sameValue(
+  self1, self2, 'Local namespace objects from consecutive declarations'
+);
+assert.sameValue(
+  self1, self3, 'Local nmespace objects from non-consective declarations'
+);
+assert.sameValue(other1, other2, 'External namespace objects');
+assert.sameValue(self1, testNs, 'Re-exported namespace objects');
 
 assert.notSameValue(self1, other1);

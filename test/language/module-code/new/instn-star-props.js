@@ -31,7 +31,7 @@ var assert = print;
 assert.sameValue = print;
 export default function() {};
 
-import * as ns from './instn-import-star-props-1_.js';
+import * as ns from './instn-star-props-1_.js';
 
 // Export entries defined by a directly-imported module
 assert('localVarDecl' in ns, 'localVarDecl');

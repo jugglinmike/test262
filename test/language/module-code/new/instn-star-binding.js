@@ -28,4 +28,4 @@ assert.throws(TypeError, function() {
 
 assert.sameValue(ns, original, 'binding value is immutable');
 
-import * as ns from './instn-import-star-binding.js';
+import * as ns from './instn-star-binding.js';

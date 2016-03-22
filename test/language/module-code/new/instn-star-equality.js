@@ -24,11 +24,11 @@ info: |
 flags: [module]
 ---*/
 
-import * as self1 from './instn-import-star-equality.js';
-import * as self2 from './instn-import-star-equality.js';
-import * as other1 from './instn-import-star-equality-empty_.js';
-import * as self3 from './instn-import-star-equality.js';
-import * as other2 from './instn-import-star-equality-empty_.js';
+import * as self1 from './instn-star-equality.js';
+import * as self2 from './instn-star-equality.js';
+import * as other1 from './instn-star-equality-empty_.js';
+import * as self3 from './instn-star-equality.js';
+import * as other2 from './instn-star-equality-empty_.js';
 
 assert.sameValue(self1, self2);
 assert.sameValue(self1, self3);

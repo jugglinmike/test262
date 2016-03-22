@@ -33,21 +33,38 @@ assert.sameValue(fifth(), 'fifth');
 assert.sameValue(typeof sixth, 'function', 'generator function declaration');
 assert.sameValue(sixth().next().value, 'sixth');
 
+// Two separate mechansims are required to ensure that no binding has been
+// created for a given identifier. A "bare" reference should produce a
+// ReferenceError for non-existent bindings and uninitialized bindings. A
+// reference through the `typeof` operator should succeed for non-existent
+// bindings and initialized bindings.  Only non-existent bindings satisfy both
+// tests.
+typeof seventh;
 assert.throws(ReferenceError, function() {
   seventh;
 });
+
+typeof eight;
 assert.throws(ReferenceError, function() {
   eighth;
 });
+
+typeof ninth;
 assert.throws(ReferenceError, function() {
   ninth;
 });
+
+typeof tenth;
 assert.throws(ReferenceError, function() {
   tenth;
 });
+
+typeof eleventh;
 assert.throws(ReferenceError, function() {
   eleventh;
 });
+
+typeof twelfth;
 assert.throws(ReferenceError, function() {
   twelfth;
 });

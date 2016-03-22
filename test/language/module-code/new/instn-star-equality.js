@@ -35,7 +35,7 @@ assert.sameValue(
   self1, self2, 'Local namespace objects from consecutive declarations'
 );
 assert.sameValue(
-  self1, self3, 'Local nmespace objects from non-consective declarations'
+  self1, self3, 'Local namespace objects from non-consective declarations'
 );
 assert.sameValue(other1, other2, 'External namespace objects');
 assert.sameValue(self1, testNs, 'Re-exported namespace objects');

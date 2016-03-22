@@ -30,7 +30,11 @@ info: |
 flags: [module]
 ---*/
 
-import * as ns from './instn-star-circular-a_.js';
+import * as a from './instn-star-circular-a_.js';
+import * as b from './instn-star-circular-b_.js';
 
-assert('fromA' in ns, 'entry for binding from "a"');
-assert('fromB' in ns, 'entry for binding from "b"');
+assert('fromA' in a, 'entry for binding from "a" in namespace of module A');
+assert('fromB' in a, 'entry for binding from "b" in namespace of module A');
+
+assert('fromA' in b, 'entry for binding from "a" in namespace of module B');
+assert('fromB' in b, 'entry for binding from "b" in namespace of module B');

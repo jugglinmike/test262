@@ -12,6 +12,8 @@ info: |
        a. Let requiredModule be ? HostResolveImportedModule(module, required).
        b. Perform ? requiredModule.ModuleEvaluation().
     [...]
+    16. Let result be the result of evaluating module.[[ECMAScriptCode]].
+    [...]
 includes: [fnGlobalObject.js]
 flags: [module]
 ---*/

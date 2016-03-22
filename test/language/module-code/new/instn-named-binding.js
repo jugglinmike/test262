@@ -18,6 +18,13 @@ info: |
            iii. Call envRec.CreateImportBinding(in.[[LocalName]],
                 resolution.[[Module]], resolution.[[BindingName]]).
     [...]
+
+    8.1.1.5.5 CreateImportBinding
+
+    [...]
+    5. Create an immutable indirect binding in envRec for N that references M
+       and N2 as its target binding and record that the binding is initialized.
+    6. Return NormalCompletion(empty).
 flags: [module]
 ---*/
 

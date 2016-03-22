@@ -2,8 +2,7 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 description:
-    Circular "star" imports do not trigger infinite recursion during name
-    enumeration.
+    Default exports are not included in the module namespace object
 esid: sec-moduledeclarationinstantiation
 info: |
     [...]
@@ -23,18 +22,23 @@ info: |
 
     15.2.1.16.2 GetExportedNames
 
-    1. Let module be this Source Text Module Record.
-    2. If exportStarSet contains module, then
-       a. Assert: We've reached the starting point of an import * circularity.
-       b. Return a new empty List.
+    7. For each ExportEntry Record e in module.[[StarExportEntries]], do
+       [...]
+       c. For each element n of starNames, do
+          i. If SameValue(n, "default") is false, then
+          [...]
 flags: [module]
 ---*/
 
-import * as a from './instn-star-circular-a_.js';
-import * as b from './instn-star-circular-b_.js';
+import * as named from './instn-star-props-skip-dflt-named_.js';
+import * as production from './instn-star-props-skip-dflt-prod_.js';
 
-assert('fromA' in a, 'entry for binding from "a" in namespace of module A');
-assert('fromB' in a, 'entry for binding from "b" in namespace of module A');
+assert('namedOther' in named);
+assert.sameValue(
+  'default' in named, false, 'default specified via identifier'
+);
 
-assert('fromA' in b, 'entry for binding from "a" in namespace of module B');
-assert('fromB' in b, 'entry for binding from "b" in namespace of module B');
+assert('productionOther' in production);
+assert.sameValue(
+  'default' in production, false, 'default specified via dedicated production'
+);

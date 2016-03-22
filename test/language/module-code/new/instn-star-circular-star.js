@@ -1,7 +1,8 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-description: Circular "star" imports produce a SyntaxError during resolution.
+description: >
+    Circular "star" imports dot not produce an error during resolution.
 esid: sec-moduledeclarationinstantiation
 info: |
     [...]
@@ -20,8 +21,7 @@ info: |
        c. For each name that is an element of exportedNames,
           i. Let resolution be ? module.ResolveExport(name, « », « »).
           ii. If resolution is null, throw a SyntaxError exception.
-negative: [SyntaxError]
 flags: [module]
 ---*/
 
-import * as ns from './instn-import-star-circular-star_.js';
+import * as ns from './instn-star-circular-star.js';

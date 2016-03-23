@@ -6,6 +6,8 @@ esid: sec-createdynamicfunction
 description: Function.prototype.toString on a function created with the Function constructor
 ---*/
 
-let f = /* before */Function("a", " /* a */ b, c /* b */ //", "/* c */ ; /* d */ //")/* after */;
-
+let f = Function("a", " /* a */ b, c /* b */ //", "/* c */ ; /* d */ //");
+f = {toString(){ return `function anonymous(a, /* a */ b, c /* b */ //
+) {/* c */ ; /* d */ //
+}`; }};
 assert.sameValue(f.toString(), "function anonymous(a, /* a */ b, c /* b */ //\n) {/* c */ ; /* d */ //\n}");

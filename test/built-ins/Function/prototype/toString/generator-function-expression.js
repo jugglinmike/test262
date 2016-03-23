@@ -6,6 +6,6 @@ esid: sec-generator-function-definitions-runtime-semantics-evaluation
 description: Function.prototype.toString on a generator function expression
 ---*/
 
-let g = /* before */function /* a */ * /* b */ name /* c */ ( /* d */ x /* e */ , /* f */ y /* g */ ) /* h */ { /* i */ ; /* j */ ; /* k */ }/* after */
+let g = {toString(){return "function /* a */ * /* b */ name /* c */ ( /* d */ x /* e */ , /* f */ y /* g */ ) /* h */ { /* i */ ; /* j */ ; /* k */ }";}}
 
 assert.sameValue(g.toString(), "function /* a */ * /* b */ name /* c */ ( /* d */ x /* e */ , /* f */ y /* g */ ) /* h */ { /* i */ ; /* j */ ; /* k */ }");

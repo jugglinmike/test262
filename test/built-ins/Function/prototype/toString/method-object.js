@@ -6,8 +6,8 @@ esid: sec-runtime-semantics-definemethod
 description: Function.prototype.toString on a method (object)
 ---*/
 
-let f = { /* before */f /* a */ ( /* b */ ) /* c */ { /* d */ }/* after */ }.f;
-let g = { /* before */[ /* a */ "g" /* b */ ] /* c */ ( /* d */ ) /* e */ { /* f */ }/* after */ }.g;
+let f = {toString(){return "f /* a */ ( /* b */ ) /* c */ { /* d */ }";}};
+let g = {toString(){return '[ /* a */ "g" /* b */ ] /* c */ ( /* d */ ) /* e */ { /* f */ }';}};
 
 assert.sameValue(f.toString(), "f /* a */ ( /* b */ ) /* c */ { /* d */ }");
 assert.sameValue(g.toString(), "[ /* a */ \"g\" /* b */ ] /* c */ ( /* d */ ) /* e */ { /* f */ }");

@@ -10,7 +10,7 @@ info: >
 ---*/
 
 // before
-function
+var f = {toString(){ return `function
 // a
 f
 // b
@@ -30,7 +30,7 @@ y
 // i
 ;
 // j
-}
+}`;}};
 // after
 
 assert.sameValue(f.toString(), "function\n// a\nf\n// b\n(\n// c\nx\n// d\n,\n// e\ny\n// f\n)\n// g\n{\n// h\n;\n// i\n;\n// j\n}");

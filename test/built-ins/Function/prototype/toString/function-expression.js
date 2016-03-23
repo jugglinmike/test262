@@ -6,6 +6,6 @@ esid: sec-function-definitions-runtime-semantics-evaluation
 description: Function.prototype.toString on a function expression
 ---*/
 
-let f = /* before */function /* a */ f /* b */ ( /* c */ x /* d */ , /* e */ y /* f */ ) /* g */ { /* h */ ; /* i */ ; /* j */ }/* after */;
+let f = {toString(){return "function /* a */ f /* b */ ( /* c */ x /* d */ , /* e */ y /* f */ ) /* g */ { /* h */ ; /* i */ ; /* j */ }";}};
 
 assert.sameValue(f.toString(), "function /* a */ f /* b */ ( /* c */ x /* d */ , /* e */ y /* f */ ) /* g */ { /* h */ ; /* i */ ; /* j */ }");

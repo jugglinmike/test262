@@ -2,7 +2,7 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 description: >
-    Mutable bindings are are created in the lexical environment record prior to
+    Mutable bindings are created in the lexical environment record prior to
     execution for class declarations
 esid: sec-moduledeclarationinstantiation
 info: |

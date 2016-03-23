@@ -2,8 +2,8 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 description: >
-    Mutable bindings are are initialized in the lexical environment record
-    prior to execution for function declarations
+    Mutable bindings are initialized in the lexical environment record prior to
+    execution for function declarations
 esid: sec-moduledeclarationinstantiation
 info: |
     [...]

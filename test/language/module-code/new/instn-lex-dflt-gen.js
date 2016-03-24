@@ -2,8 +2,8 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 description: >
-    A mutable bindings is initialized in the lexical environment record prior
-    to execution for "anonymous" generator function declarations
+    A mutable bindings is created and initialized in the lexical environment
+    record prior to execution for "anonymous" generator function declarations
 esid: sec-moduledeclarationinstantiation
 info: |
     [...]

@@ -6,7 +6,7 @@ export function fnBinding() { return 2; }
 export function* genBinding() { return 3; }
 export let letBinding = 4;
 export const constBinding = 5;
-export class classBinding { valueOf() { return 6; } };
+export class classBinding { valueOf() { return 6; } }
 
 Function('return this;')().test262update = function() {
   varBinding = 7;

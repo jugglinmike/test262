@@ -13,9 +13,9 @@ var starBindingId;
 export var starVarDecl;
 export let starLetDecl;
 export const starConstDecl = null;
-export function starFuncDecl() {};
-export function* starGenDecl() {};
-export class starClassDecl {};
+export function starFuncDecl() {}
+export function* starGenDecl() {}
+export class starClassDecl {}
 export { starBindingId };
 export { starBindingId as starIdName };
 export { starIndirectIdName } from './instn-star-props-nrml-indirect_.js';

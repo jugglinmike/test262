@@ -13,9 +13,9 @@ var localBindingId;
 export var localVarDecl;
 export let localLetDecl;
 export const localConstDecl = null;
-export function localFuncDecl() {};
-export function* localGenDecl() {};
-export class localClassDecl {};
+export function localFuncDecl() {}
+export function* localGenDecl() {}
+export class localClassDecl {}
 export { localBindingId };
 export { localBindingId as localIdName };
 export { indirectIdName } from './instn-star-props-nrml-indirect_.js';

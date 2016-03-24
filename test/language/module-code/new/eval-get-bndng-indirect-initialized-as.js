@@ -20,19 +20,31 @@ flags: [module]
 
 import {
     varName as varBinding2,
+    varName as varBinding3,
     fnName as fnBinding2,
+    fnName as fnBinding3,
     genName as genBinding2,
+    genName as genBinding3,
     letName as letBinding2,
+    letName as letBinding3,
     constName as constBinding2,
-    className as classBinding2
+    constName as constBinding3,
+    className as classBinding2,
+    className as classBinding3
   } from './eval-get-bndng-indirect-initialized-as_.js';
 
 assert.sameValue(varBinding2, 1);
+assert.sameValue(varBinding3, 1);
 assert.sameValue(fnBinding2(), 2);
+assert.sameValue(fnBinding3(), 2);
 assert.sameValue(genBinding2().next().value, 3);
+assert.sameValue(genBinding3().next().value, 3);
 assert.sameValue(letBinding2, 4);
+assert.sameValue(letBinding3, 4);
 assert.sameValue(constBinding2, 5);
+assert.sameValue(constBinding3, 5);
 assert.sameValue(new classBinding2().valueOf(), 6);
+assert.sameValue(new classBinding3().valueOf(), 6);
 
 // This function is exposed on the global scope (instead of as an exported
 // binding) in order to avoid possible false positives from assuming correct
@@ -40,7 +52,12 @@ assert.sameValue(new classBinding2().valueOf(), 6);
 fnGlobalObject().test262update();
 
 assert.sameValue(varBinding2, 7);
+assert.sameValue(varBinding3, 7);
 assert.sameValue(fnBinding2, 8);
+assert.sameValue(fnBinding3, 8);
 assert.sameValue(genBinding2, 9);
+assert.sameValue(genBinding3, 9);
 assert.sameValue(letBinding2, 10);
+assert.sameValue(letBinding3, 10);
 assert.sameValue(classBinding2, 11);
+assert.sameValue(classBinding3, 11);

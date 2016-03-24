@@ -31,6 +31,13 @@ assert.sameValue(y, 1, 'binding value is immutable');
 
 import { x as y } from './instn-named-binding-as_.js';
 
+// Taken together, the following two assertions demonstrate that there is no
+// entry in the environment record for ImportName:
 assert.throws(ReferenceError, function() {
   x;
-}, 'no environment record entry is created for ImportName');
+}, 'a binding is not created and initialized for ImportName');
+assert.sameValue(
+  typeof x,
+  'undefined',
+  'a binding is not created and left uninitialized for ImportName'
+);

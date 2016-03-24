@@ -33,7 +33,7 @@ assert.sameValue(fifth(), 'fifth');
 assert.sameValue(typeof sixth, 'function', 'generator function declaration');
 assert.sameValue(sixth().next().value, 'sixth');
 
-// Two separate mechansims are required to ensure that no binding has been
+// Two separate mechanisms are required to ensure that no binding has been
 // created for a given identifier. A "bare" reference should produce a
 // ReferenceError for non-existent bindings and uninitialized bindings. A
 // reference through the `typeof` operator should succeed for non-existent

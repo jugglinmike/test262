@@ -21,7 +21,7 @@ flags: [module]
 
 var global = fnGlobalObject();
 
-assert.sameValue(test262, undefined);
+assert.sameValue(test262, undefined, 'value is initialized to `undefined`');
 assert.sameValue(
   Object.getOwnPropertyDescriptor(global, 'test262'), undefined
 );

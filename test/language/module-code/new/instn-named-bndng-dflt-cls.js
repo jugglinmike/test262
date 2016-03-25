@@ -2,8 +2,8 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 description: >
-    A mutable bindings is created (but not initialized) in the lexical
-    environment record prior to execution for "anonymous" class declarations
+    Imported binding reflects state of exported default binding ("anonymous"
+    class declaration)
 esid: sec-moduledeclarationinstantiation
 info: |
     [...]
@@ -35,5 +35,5 @@ assert.throws(ReferenceError, function() {
   typeof C;
 }, 'Binding is created but not initialized.');
 
-export default class { valueOf() { return 45; } };
-import C from './instn-lex-dflt-cls.js';
+export default class {};
+import C from './instn-named-bndng-dflt-cls.js';

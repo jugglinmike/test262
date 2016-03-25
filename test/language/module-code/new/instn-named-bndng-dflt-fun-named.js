@@ -2,8 +2,8 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 description: >
-    A mutable bindings is created and initialized in the lexical environment
-    record prior to execution for "anonymous" function declarations
+    Imported binding reflects state of exported default binding ("named"
+    function declaration)
 esid: sec-moduledeclarationinstantiation
 info: |
     [...]
@@ -20,6 +20,18 @@ info: |
                 2. Call envRec.InitializeBinding(dn, fo).
     [...]
 
+    14.1.20 Runtime Semantics: InstantiateFunctionObject
+
+    FunctionDeclaration : function ( FormalParameters ) { FunctionBody }
+
+    1. If the function code for FunctionDeclaration is strict mode code, let
+       strict be true. Otherwise let strict be false.
+    2. Let F be FunctionCreate(Normal, FormalParameters, FunctionBody, scope,
+       strict).
+    3. Perform MakeConstructor(F).
+    4. Perform SetFunctionName(F, "default").
+    5. Return F. 
+
     14.1 Function Definitions
 
     Syntax
@@ -31,7 +43,8 @@ info: |
 flags: [module]
 ---*/
 
-assert.sameValue(fn(), 23, 'function value is hoisted');
+assert.sameValue(f(), 23, 'function value is hoisted');
+assert.sameValue(f.name, 'fName', 'correct name is assigned');
 
-import fn from './instn-lex-dflt-fun.js';
-export default function() { return 23; };
+import f from './instn-named-bndng-dflt-fun-named.js';
+export default function fName() { return 23; };

@@ -1,7 +1,9 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-description: References to indirect initialized bindings resolve successfully
+description: >
+    Modifications to named bindings that occur after dependency has been
+    evaluated are reflected in local binding
 esid: sec-moduleevaluation
 info: |
     8.1.1.5.1 GetBindingValue (N, S)
@@ -18,7 +20,15 @@ includes: [fnGlobalObject.js]
 flags: [module]
 ---*/
 
-import val from './eval-get-bndng-indirect-dflt_.js';
+import { x as y, x as z } from './eval-gtbndng-indirect-update-as_.js';
 
-assert.sameValue(val(), 1);
-assert.sameValue(val, 2);
+assert.sameValue(y, 1);
+assert.sameValue(z, 1);
+
+// This function is exposed on the global scope (instead of as an exported
+// binding) in order to avoid possible false positives from assuming correct
+// behavior of the semantics under test.
+fnGlobalObject().test262update();
+
+assert.sameValue(y, 2);
+assert.sameValue(z, 2);

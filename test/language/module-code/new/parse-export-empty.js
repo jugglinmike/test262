@@ -23,4 +23,16 @@ info: |
 flags: [module]
 ---*/
 
+export{};
 export {};
+export {}
+export { };
+export
+{
+
+};
+export//-
+{//-
+//-
+};
+export/**/{/**/};

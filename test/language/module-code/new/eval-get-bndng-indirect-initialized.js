@@ -14,6 +14,8 @@ info: |
        c. If targetEnv is undefined, throw a ReferenceError exception.
        d. Let targetER be targetEnv's EnvironmentRecord.
        e. Return ? targetER.GetBindingValue(N2, S).
+    [...]
+    5. Return the value currently bound to N in envRec.
 includes: [fnGlobalObject.js]
 flags: [module]
 ---*/

@@ -12,7 +12,7 @@ info: |
 
     15.2.3.11 Runtime Semantics: Evaluation
 
-    ExportDeclaration : export default AssignmentExpression; 
+    ExportDeclaration : export default AssignmentExpression;
 
     [...]
     1. Let rhs be the result of evaluating AssignmentExpression.

@@ -19,7 +19,7 @@ info: |
 
     ImportDeclaration : import ImportClause FromClause;
 
-        1. Return ModuleRequests of FromClause. 
+        1. Return ModuleRequests of FromClause.
 
     15.2.3 Exports
 

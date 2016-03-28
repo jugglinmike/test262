@@ -20,7 +20,7 @@ info: |
     8.3.4 ResolveThisBinding ( )
 
     1. Let envRec be GetThisEnvironment( ).
-    2. Return ? envRec.GetThisBinding(). 
+    2. Return ? envRec.GetThisBinding().
 
     8.3.3 GetThisEnvironment ( )
 
@@ -30,7 +30,7 @@ info: |
        b. Let exists be envRec.HasThisBinding().
        c. If exists is true, return envRec.
        d. Let outer be the value of lex's outer environment reference.
-       e. Let lex be outer. 
+       e. Let lex be outer.
 
     8.1.1.5.3 HasThisBinding ()
 
@@ -38,7 +38,7 @@ info: |
 
     8.1.1.5.4 GetThisBinding ()
 
-    1. Return undefined. 
+    1. Return undefined.
 flags: [module]
 ---*/
 

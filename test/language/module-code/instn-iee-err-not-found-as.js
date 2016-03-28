@@ -17,7 +17,7 @@ info: |
     9. Let starResolution be null.
     10. For each ExportEntry Record e in module.[[StarExportEntries]], do
         [...]
-    11. Return starResolution. 
+    11. Return starResolution.
 negative: SyntaxError
 flags: [module]
 ---*/

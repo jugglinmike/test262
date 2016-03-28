@@ -18,7 +18,7 @@ info: |
     1. Let status be the result of BindingClassDeclarationEvaluation of this
        ClassDeclaration.
     2. ReturnIfAbrupt(status).
-    3. Return NormalCompletion(empty). 
+    3. Return NormalCompletion(empty).
 
     14.5.15 Runtime Semantics: BindingClassDeclarationEvaluation
 

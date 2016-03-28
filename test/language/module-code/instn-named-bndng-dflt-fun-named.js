@@ -30,7 +30,7 @@ info: |
        strict).
     3. Perform MakeConstructor(F).
     4. Perform SetFunctionName(F, "default").
-    5. Return F. 
+    5. Return F.
 
     14.1 Function Definitions
 

@@ -16,7 +16,7 @@ info: |
     LexicalBinding : BindingIdentifier Initializer
 
     [...]
-    6. Return InitializeReferencedBinding(lhs, value). 
+    6. Return InitializeReferencedBinding(lhs, value).
 flags: [module]
 ---*/
 

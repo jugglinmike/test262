@@ -22,6 +22,7 @@ info: |
 
     15.2.1.16.2 GetExportedNames
 
+    [...]
     7. For each ExportEntry Record e in module.[[StarExportEntries]], do
        [...]
        c. For each element n of starNames, do
@@ -30,8 +31,8 @@ info: |
 flags: [module]
 ---*/
 
-import * as named from './instn-star-props-skip-dflt-named_.js';
-import * as production from './instn-star-props-skip-dflt-prod_.js';
+import * as named from './instn-star-props-dflt-skip-star-named_.js';
+import * as production from './instn-star-props-dflt-skip-star-prod_.js';
 
 assert('namedOther' in named);
 assert.sameValue(

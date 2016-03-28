@@ -13,7 +13,7 @@ info: |
 
     Syntax
 
-    ExportDeclaration:
+    ExportDeclaration :
 
     export default [lookahead ∉ { function, class }] AssignmentExpression[In];
 flags: [module]

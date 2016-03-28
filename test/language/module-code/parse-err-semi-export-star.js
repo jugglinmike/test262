@@ -4,6 +4,7 @@
 description: >
     "export *" declarations require a trailing semicolon or LineTerminator
 esid: sec-exports
+info: |
     ExportDeclaration:
       export * FromClause;
       export ExportClause FromClause;

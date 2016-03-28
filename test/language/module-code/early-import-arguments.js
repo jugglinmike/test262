@@ -4,14 +4,14 @@
 description: ImportedBinding is a BindingIdentifier and cannot be "arguments"
 esid: sec-imports
 info: |
-    ImportSpecifier:
+    ImportSpecifier :
       ImportedBinding
       IdentifierName as ImportedBinding
 
-    ImportedBinding:
+    ImportedBinding :
       BindingIdentifier
 
-    12.1.1 Static Semantics: Early Errors#
+    12.1.1 Static Semantics : Early Errors
 
     BindingIdentifier : Identifier
 

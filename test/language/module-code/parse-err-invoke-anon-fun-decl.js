@@ -4,6 +4,7 @@
 description: >
     Anonymous function declaration must not be interpreted as an expression
 esid: sec-exports
+info: |
     ExportDeclaration:
       export * FromClause;
       export ExportClause FromClause;

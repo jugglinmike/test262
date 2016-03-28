@@ -4,6 +4,7 @@
 description: >
     Expression not permitted in AssignmentExpression position
 esid: sec-exports
+info: |
     ExportDeclaration:
       export * FromClause;
       export ExportClause FromClause;

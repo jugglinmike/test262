@@ -17,7 +17,5 @@ export { a as b , } from './instn-iee-trlng-comma_.js';
 
 import { a, b } from './instn-iee-trlng-comma.js';
 
-var assert = { sameValue: print };
-
 assert.sameValue(a, 333, 'comma following named export');
 assert.sameValue(b, 333, 'comma following re-named export');

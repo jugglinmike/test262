@@ -2,7 +2,7 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 esid: sec-runtime-semantics-catchclauseevaluation
-description: Creation of new lexical environment for `catch` block
+description: Retainment of existing variable environment for `catch` block
 info: |
     [...]
     8. Let B be the result of evaluating Block.
@@ -11,11 +11,14 @@ features: [let]
 ---*/
 
 var probe;
-let x = 'outside';
+var x = 1;
+
 try {
-  throw [];
-} catch ([_ = probe = function() { return x; }]) {
-  let x = 'inside';
+  throw null;
+} catch (_) {
+  var x = 2;
+  probe = function() { return x; };
 }
 
-assert.sameValue(probe(), 'outside');
+assert.sameValue(x, 2);
+assert.sameValue(probe(), 2);

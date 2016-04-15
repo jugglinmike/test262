@@ -3,7 +3,8 @@
 /*---
 esid: sec-function-definitions-runtime-semantics-iteratorbindinginitialization
 description: >
-    Disposal of variable environment for the BindingRest formal parameter
+    Creation of new variable environment for the BindingRestElement formal
+    parameter
 info: |
     [...]
     2. Let currentContext be the running execution context.

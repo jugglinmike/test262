@@ -17,14 +17,26 @@ features: [let]
 flags: [noStrict]
 ---*/
 
+var probeX, probeY;
+
 switch (null) {
   default:
-    let x;
+    let x = 'xInside';
+    probeX = function() { return x; };
 }
-eval('var x;');
+
+assert.sameValue(probeX(), 'xInside');
+assert.throws(ReferenceError, function() {
+  x;
+});
 
 switch (null) {
   case null:
-    let y;
+    let y = 'yInside';
+    probeY = function() { return y; };
 }
-eval('var y;');
+
+assert.sameValue(probeY(), 'yInside');
+assert.throws(ReferenceError, function() {
+  y;
+});

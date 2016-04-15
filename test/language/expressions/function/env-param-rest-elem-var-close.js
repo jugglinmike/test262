@@ -3,7 +3,7 @@
 /*---
 esid: sec-function-definitions-runtime-semantics-iteratorbindinginitialization
 description: >
-    Disposal of variable environment for the BindingRest formal parameter
+    Disposal of variable environment for the BindingRestElement formal parameter
 info: |
     [...]
     2. Let currentContext be the running execution context.
@@ -15,7 +15,8 @@ info: |
     7. Set the VariableEnvironment of currentContext to paramVarEnv.
     8. Set the LexicalEnvironment of currentContext to paramVarEnv.
     9. Let result be the result of performing IteratorBindingInitialization for
-      BindingRestElement using iteratorRecord and environment as the arguments.
+       BindingRestElement using iteratorRecord and environment as the
+       arguments.
     10. Set the VariableEnvironment of currentContext to originalEnv.
     11. Set the LexicalEnvironment of currentContext to originalEnv.
     [...]

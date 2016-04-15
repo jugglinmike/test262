@@ -24,6 +24,7 @@ switch (eval('var x = 1;'), probeX = function() { return x; }) {
 }
 
 assert.sameValue(probeX(), 2);
+assert.sameValue(x, 2);
 
 var probeY;
 
@@ -32,3 +33,4 @@ switch (eval('var y = 1;'), probeY = function() { return y; }) {
 }
 
 assert.sameValue(probeY(), 2);
+assert.sameValue(y, 2);

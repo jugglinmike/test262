@@ -17,12 +17,22 @@ features: [let]
 flags: [noStrict]
 ---*/
 
-switch (eval('var x;')) {
+var probe1, probe2, probe3, probe4;
+
+switch (probe1 = function() { x; }) {
   default:
-    let x;
+    probe2 = function() { return x; };
+    let x = 'xInside';
 }
 
-switch (eval('var y;')) {
+assert.throws(ReferenceError, probe1);
+assert.sameValue(probe2(), 'xInside');
+
+switch (probe3 = function() { y; }, undefined) {
   case undefined:
-    let y;
+    probe4 = function() { return y; };
+    let y = 'yInside';
 }
+
+assert.throws(ReferenceError, probe3);
+assert.sameValue(probe4(), 'yInside');

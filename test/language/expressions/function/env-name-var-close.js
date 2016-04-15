@@ -16,14 +16,13 @@ info: |
 ---*/
 
 var f = 'outside';
-var probe1 = function() { return f; };
-var probe2;
+var probe;
 
 var func = function f() {
-  probe2 = function() { return f; };
+  probe = function() { return f; };
 };
 
 func();
 
-assert.sameValue(probe1(), 'outside');
-assert.sameValue(probe2(), func);
+assert.sameValue(probe(), func);
+assert.sameValue(f, 'outside');

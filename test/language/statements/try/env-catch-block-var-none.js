@@ -7,18 +7,19 @@ info: |
     [...]
     8. Let B be the result of evaluating Block.
     [...]
-features: [let]
 ---*/
 
-var probe;
 var x = 1;
+var probeBefore = function() { return x; };
+var probeInside;
 
 try {
   throw null;
 } catch (_) {
   var x = 2;
-  probe = function() { return x; };
+  probeInside = function() { return x; };
 }
 
-assert.sameValue(x, 2);
-assert.sameValue(probe(), 2);
+assert.sameValue(probeBefore(), 2, 'reference preceeding statement');
+assert.sameValue(probeInside(), 2, 'reference within statement');
+assert.sameValue(x, 2, 'reference following statement');

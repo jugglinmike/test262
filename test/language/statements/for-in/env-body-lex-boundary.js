@@ -28,11 +28,23 @@ features: [let]
 var x = 'outside';
 var probeFirst, probeSecond;
 
-for (let x in { first: 0, second: 0 })
+for (let x in { a: 0, b: 0 })
   if (!probeFirst)
     probeFirst = function() { return x; };
   else
     probeSecond = function() { return x; };
 
-assert.sameValue(probeFirst(), 'first');
-assert.sameValue(probeSecond(), 'second');
+
+// 13.7.5.15 EnumerateObjectProperties
+//
+// > [...] The mechanics and order of enumerating the properties is not
+// > specified [...]
+assert.notSameValue(probeFirst(), probeSecond());
+assert(
+  probeFirst() === 'a' || probeFirst() === 'b',
+  'First binding is either "a" or "b"'
+);
+assert(
+  probeSecond() === 'a' || probeSecond() === 'b',
+  'Second binding is either "a" or "b"'
+);

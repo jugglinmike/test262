@@ -41,8 +41,8 @@ for (
   var x = 2, ___ = probeBody = function() { return x; };
 
 
-assert.sameValue(probeBefore(), 2);
-assert.sameValue(probeExpr(), 2);
-assert.sameValue(probeDecl(), 2);
-assert.sameValue(probeBody(), 2);
-assert.sameValue(x, 2);
+assert.sameValue(probeBefore(), 2, 'reference preceeding statement');
+assert.sameValue(probeExpr(), 2, 'reference from AssignmentExpression');
+assert.sameValue(probeDecl(), 2, 'reference from ForDelaration');
+assert.sameValue(probeBody(), 2, 'reference from statement body');
+assert.sameValue(x, 2, 'reference following statement');

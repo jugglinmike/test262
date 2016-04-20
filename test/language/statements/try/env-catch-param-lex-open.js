@@ -5,13 +5,16 @@ esid: sec-runtime-semantics-catchclauseevaluation
 description: Creation of new lexical environment for `catch` parameter
 ---*/
 
-var probe;
+var probeBefore = function() { return x; };
+var probeTry, probeParam;
+var x = 'outside';
 
 try {
-  var x = 'outside';
+  probeTry = function() { return x; };
 
   throw ['inside'];
-} catch ([x, _ = probe = function() { return x; }]) {}
+} catch ([x, _ = probeParam = function() { return x; }]) {}
 
-assert.sameValue(x, 'outside');
-assert.sameValue(probe(), 'inside');
+assert.sameValue(probeBefore(), 'outside');
+assert.sameValue(probeTry(), 'outside');
+assert.sameValue(probeParam(), 'inside');

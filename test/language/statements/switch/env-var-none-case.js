@@ -2,7 +2,7 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 esid: sec-switch-statement-runtime-semantics-evaluation
-description: Creation of new lexical environment
+description: Retainment of existing variable environment (`case` clause)
 info: |
     1. Let exprRef be the result of evaluating Expression.
     2. Let switchValue be ? GetValue(exprRef).
@@ -13,26 +13,20 @@ info: |
     7. Let R be the result of performing CaseBlockEvaluation of CaseBlock with
       argument switchValue.
     [...]
-features: [let]
 flags: [noStrict]
 ---*/
 
-var probe1, probe2, probe3, probe4;
+var probeExpr, probeSelector, probeStmt;
+var probeBefore = function() { return x; };
 
-switch (probe1 = function() { x; }) {
-  default:
-    probe2 = function() { return x; };
-    let x = 'xInside';
+switch (eval('var x = 1;'), probeExpr = function() { return x; }, null) {
+  case eval('var x = 2;'), probeSelector = function() { return x; }, null:
+    probeStmt = function() { return x; };
+    var x = 3;
 }
 
-assert.throws(ReferenceError, probe1);
-assert.sameValue(probe2(), 'xInside');
-
-switch (probe3 = function() { y; }, undefined) {
-  case undefined:
-    probe4 = function() { return y; };
-    let y = 'yInside';
-}
-
-assert.throws(ReferenceError, probe3);
-assert.sameValue(probe4(), 'yInside');
+assert.sameValue(probeBefore(), 3, 'reference preceeding statement');
+assert.sameValue(probeExpr(), 3, 'reference from first Expression');
+assert.sameValue(probeSelector(), 3, 'reference from "selector" Expression');
+assert.sameValue(probeStmt(), 3, 'reference from Statement position');
+assert.sameValue(x, 3, 'reference following statement');

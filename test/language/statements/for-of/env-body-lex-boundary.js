@@ -25,7 +25,7 @@ info: |
 features: [let]
 ---*/
 
-var x = 'outside';
+let x = 'outside';
 var probeFirst, probeSecond;
 
 for (let x of ['first', 'second'])

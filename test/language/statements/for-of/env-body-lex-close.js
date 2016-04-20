@@ -25,7 +25,7 @@ info: |
 features: [let]
 ---*/
 
-var x = 'outside';
+let x = 'outside';
 var probeDecl, probeBody;
 
 for (

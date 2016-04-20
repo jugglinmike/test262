@@ -2,7 +2,7 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 esid: sec-switch-statement-runtime-semantics-evaluation
-description: Retainment of existing variable environment
+description: Retainment of existing variable environment (`default` clause)
 info: |
     1. Let exprRef be the result of evaluating Expression.
     2. Let switchValue be ? GetValue(exprRef).
@@ -16,21 +16,16 @@ info: |
 flags: [noStrict]
 ---*/
 
-var probeX;
+var probeExpr, probeStmt;
+var probeBefore = function() { return x; };
 
-switch (eval('var x = 1;'), probeX = function() { return x; }) {
+switch (eval('var x = 1;'), probeExpr = function() { return x; }) {
   default:
+    probeStmt = function() { return x; };
     var x = 2;
 }
 
-assert.sameValue(probeX(), 2);
-assert.sameValue(x, 2);
-
-var probeY;
-
-switch (eval('var y = 1;'), probeY = function() { return y; }) {
-  case eval('var y = 2;'):
-}
-
-assert.sameValue(probeY(), 2);
-assert.sameValue(y, 2);
+assert.sameValue(probeBefore(), 2, 'reference preceeding statment');
+assert.sameValue(probeExpr(), 2, 'reference from Expression position');
+assert.sameValue(probeStmt(), 2, 'reference from Statement position');
+assert.sameValue(x, 2, 'reference following statement');

@@ -2,7 +2,7 @@
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
 esid: sec-switch-statement-runtime-semantics-evaluation
-description: Disposal of lexical environment
+description: Disposal of lexical environment (from `case` clause)
 info: |
     1. Let exprRef be the result of evaluating Expression.
     2. Let switchValue be ? GetValue(exprRef).
@@ -14,29 +14,16 @@ info: |
       argument switchValue.
     [...]
 features: [let]
-flags: [noStrict]
 ---*/
 
-var probeX, probeY;
-
-switch (null) {
-  default:
-    let x = 'xInside';
-    probeX = function() { return x; };
-}
-
-assert.sameValue(probeX(), 'xInside');
-assert.throws(ReferenceError, function() {
-  x;
-});
+let x = 'outside';
+var probe;
 
 switch (null) {
   case null:
-    let y = 'yInside';
-    probeY = function() { return y; };
+    let x = 'inside';
+    probe = function() { return x; };
 }
 
-assert.sameValue(probeY(), 'yInside');
-assert.throws(ReferenceError, function() {
-  y;
-});
+assert.sameValue(probe(), 'inside');
+assert.sameValue(x, 'outside');

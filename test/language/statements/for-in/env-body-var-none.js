@@ -4,11 +4,11 @@
 esid: sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation
 description: No variable environment is created for the statement body
 info: |
-    IterationStatement : for ( ForDeclaration of AssignmentExpression ) Statement 
+    IterationStatement : for ( ForDeclaration of AssignmentExpression ) Statement
 
     [...]
     2. Return ? ForIn/OfBodyEvaluation(ForDeclaration, Statement, keyResult,
-       lexicalBinding, labelSet). 
+       lexicalBinding, labelSet).
 
     13.7.5.13 Runtime Semantics: ForIn/OfBodyEvaluation
 

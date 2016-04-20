@@ -6,7 +6,7 @@ description: >
     Creation of new lexical environment to serve as a temporal dead zone for
     the statement's AssignmentExpresson
 info: |
-    IterationStatement : for ( ForDeclaration of AssignmentExpression ) Statement 
+    IterationStatement : for ( ForDeclaration of AssignmentExpression ) Statement
 
     1. Let keyResult be the result of performing ?
        ForIn/OfHeadEvaluation(BoundNames of ForDeclaration,

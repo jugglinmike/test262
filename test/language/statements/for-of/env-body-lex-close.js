@@ -6,11 +6,11 @@ description: >
     Disposal of lexical environment for the initial evaluation of the statement
     body
 info: |
-    IterationStatement : for ( ForDeclaration of AssignmentExpression ) Statement 
+    IterationStatement : for ( ForDeclaration of AssignmentExpression ) Statement
 
     [...]
     2. Return ? ForIn/OfBodyEvaluation(ForDeclaration, Statement, keyResult,
-       lexicalBinding, labelSet). 
+       lexicalBinding, labelSet).
 
     13.7.5.13 Runtime Semantics: ForIn/OfBodyEvaluation
 
@@ -21,7 +21,7 @@ info: |
        j. Set the running execution context's LexicalEnvironment to oldEnv.
        k. If LoopContinues(result, labelSet) is false, return ?
           IteratorClose(iterator, UpdateEmpty(result, V)).
-       l. If result.[[Value]] is not empty, let V be result.[[Value]]. 
+       l. If result.[[Value]] is not empty, let V be result.[[Value]].
 features: [let]
 ---*/
 

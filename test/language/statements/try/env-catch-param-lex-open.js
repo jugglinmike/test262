@@ -9,7 +9,7 @@ var probe;
 
 try {
   var x = 'outside';
-  
+
   throw ['inside'];
 } catch ([x, _ = probe = function() { return x; }]) {}
 

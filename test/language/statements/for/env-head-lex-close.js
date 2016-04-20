@@ -18,7 +18,7 @@ info: |
     7. Set the running execution context's LexicalEnvironment to loopEnv.
     [...]
     12. Set the running execution context's LexicalEnvironment to oldEnv.
-    13. Return Completion(bodyResult). 
+    13. Return Completion(bodyResult).
 features: [let]
 ---*/
 

@@ -5,7 +5,7 @@ esid: sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation
 description: >
     No variable environment is created for the statement "head"
 info: |
-    IterationStatement : for ( ForDeclaration of AssignmentExpression ) Statement 
+    IterationStatement : for ( ForDeclaration of AssignmentExpression ) Statement
 
     1. Let keyResult be the result of performing ?
        ForIn/OfHeadEvaluation(BoundNames of ForDeclaration,

@@ -3,8 +3,8 @@
 /*---
 esid: sec-for-in-and-for-of-statements-runtime-semantics-labelledevaluation
 description: >
-    Creation of new lexical environment to serve as a temporal dead zone for
-    the statement's AssignmentExpresson
+    Disposal of lexical environment to serve as a temporal dead zone for the
+    statement's AssignmentExpresson
 info: |
     IterationStatement : for ( ForDeclaration of AssignmentExpression ) Statement 
 
@@ -24,15 +24,21 @@ info: |
           i. Perform ! TDZEnvRec.CreateMutableBinding(name, false).
        e. Set the running execution context's LexicalEnvironment to TDZ.
     3. Let exprRef be the result of evaluating expr.
+    4. Set the running execution context's LexicalEnvironment to oldEnv.
     [...]
 features: [let]
 ---*/
 
 var x = 'outside';
-var probeBefore = function() { return x; };
-var probeExpr;
+var probeDecl, probeExpr, probeBody;
 
-for (let x of (probeExpr = function() { x; }, [])) ;
+for (
+    let [x, _ = probeDecl = function() { return x; }]
+    of
+    (probeExpr = function() { x; }, [['inside']])
+  )
+  probeBody = function() { return x; };
 
-assert.sameValue(probeBefore(), 'outside');
 assert.throws(ReferenceError, probeExpr);
+assert.sameValue(probeDecl(), 'inside');
+assert.sameValue(probeBody(), 'inside');

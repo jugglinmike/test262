@@ -15,19 +15,19 @@ flags: [noStrict]
 ---*/
 
 var name = 'outside';
-var probe1 = function() { return name; };
-var probe2;
+var probeBefore = function() { return name; };
+var probeParam;
 
 var func = function name(
     // The initializer is intentionally omitted from the following
     // VariableStatement in order to demonstrate that a new binding is created
     // (and not simply re-used from the FunctionExpression's
     // BindingIdentifier).
-    _ = (eval('var name;'), probe2 = function() { return name; })
+    _ = (eval('var name;'), probeParam = function() { return name; })
   ) {
 };
 
 func();
 
-assert.sameValue(probe1(), 'outside');
-assert.sameValue(probe2(), undefined);
+assert.sameValue(probeBefore(), 'outside');
+assert.sameValue(probeParam(), undefined);

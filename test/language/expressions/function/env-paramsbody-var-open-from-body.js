@@ -14,18 +14,18 @@ info: |
 ---*/
 
 var name = 'outside';
-var probe1 = function() { return name; };
-var probe2;
+var probeBefore = function() { return name; };
+var probeBody;
 
 var func = function name() {
   // The initializer is intentionally omitted from the following
   // VariableStatement in order to demonstrate that a new binding is created
   // (and not simply re-used from the FunctionExpression's BindingIdentifier).
   var name;
-  probe2 = function() { return name; };
+  probeBody = function() { return name; };
 };
 
 func();
 
-assert.sameValue(probe1(), 'outside');
-assert.sameValue(probe2(), undefined);
+assert.sameValue(probeBefore(), 'outside');
+assert.sameValue(probeBody(), undefined);

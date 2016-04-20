@@ -15,15 +15,14 @@ info: |
     [...]
 ---*/
 
-var f = 'outside';
-var probe1 = function() { return f; };
-var probe2;
+var probe;
 
-var func = function* f() {
-  probe2 = function() { return f; };
+var func = function* g() {
+  probe = function() { return g; };
 };
+var g = 'outside';
 
 func().next();
 
-assert.sameValue(probe1(), 'outside');
-assert.sameValue(probe2(), func);
+assert.sameValue(g, 'outside');
+assert.sameValue(probe(), func);

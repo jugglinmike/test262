@@ -13,7 +13,7 @@ info: |
 features: [let]
 ---*/
 
-var x = 'outside';
+let x = 'outside';
 var probeBefore = function() { return x; };
 var probeInside;
 

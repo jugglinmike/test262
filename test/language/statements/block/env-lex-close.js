@@ -10,7 +10,7 @@ info: |
     4. Set the running execution context's LexicalEnvironment to blockEnv.
     5. Let blockValue be the result of evaluating StatementList.
     6. Set the running execution context's LexicalEnvironment to oldEnv.
-    7. Return blockValue. 
+    7. Return blockValue.
 features: [let]
 ---*/
 
@@ -21,7 +21,7 @@ var probe;
   probe = function() { return x; };
 }
 
-var x = 'outside';
+let x = 'outside';
 
 assert.sameValue(x, 'outside');
 assert.sameValue(probe(), 'inside');

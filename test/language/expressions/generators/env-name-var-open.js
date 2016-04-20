@@ -17,15 +17,15 @@ info: |
     [...]
 ---*/
 
-var f = 'outside';
-var probe1 = function() { return f; };
-var probe2;
+var g = 'outside';
+var probeBefore = function() { return g; };
+var probeParam;
 
-var func = function* f(_ = probe2 = function() { return f; }) {
+var func = function* g(_ = probeParam = function() { return g; }) {
   return 'inside';
 };
 
 func().next();
 
-assert.sameValue(probe1(), 'outside');
-assert.sameValue(probe2(), func);
+assert.sameValue(probeBefore(), 'outside');
+assert.sameValue(probeParam(), func);

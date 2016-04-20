@@ -19,9 +19,9 @@ var probe1 = function() { return name; };
 var probe2;
 
 var func = function name() {
-  // The initializer is intentionally omitted from the following
-  // VariableStatement in order to demonstrate that a new binding is created
-  // (and not simply re-used from the FunctionExpression's BindingIdentifier).
+  assert.throws(ReferenceError, function() {
+    name;
+  });
   let name;
   probe2 = function() { return name; };
 };

@@ -21,12 +21,12 @@ info: |
 ---*/
 
 var x = 'outside';
-var probe1, probe2;
+var probeParams, probeBody;
 
-(function(_ = probe1 = function() { return x; }) {
+(function(_ = probeParams = function() { return x; }) {
   var x = 'inside';
-  probe2 = function() { return x; };
+  probeBody = function() { return x; };
 }());
 
-assert.sameValue(probe1(), 'outside');
-assert.sameValue(probe2(), 'inside');
+assert.sameValue(probeParams(), 'outside');
+assert.sameValue(probeBody(), 'inside');

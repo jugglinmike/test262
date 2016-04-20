@@ -18,14 +18,14 @@ info: |
 ---*/
 
 var f = 'outside';
-var probe1 = function() { return f; };
-var probe2;
+var probeBefore = function() { return f; };
+var probeParams;
 
-var func = function f(_ = probe2 = function() { return f; }) {
+var func = function f(_ = probeParams = function() { return f; }) {
   return 'inside';
 };
 
 func();
 
-assert.sameValue(probe1(), 'outside');
-assert.sameValue(probe2(), func);
+assert.sameValue(probeBefore(), 'outside');
+assert.sameValue(probeParams(), func);

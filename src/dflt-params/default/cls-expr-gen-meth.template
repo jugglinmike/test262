@@ -1,7 +1,7 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-path: language/expressions/class/dstr-gen-meth-
+path: language/expressions/class/params-dflt-gen-meth-
 name: class expression method
 esid: sec-class-definitions-runtime-semantics-evaluation
 es6id: 14.5.16
@@ -63,11 +63,12 @@ info: |
 
 var callCount = 0;
 var C = class {
-  *method(/*{ elems }*/) {
+  *method(/*{ params }*/) {
     /*{ body }*/
     callCount = callCount + 1;
   }
 };
 
-new C().method(/*{ vals }*/).next();
+C.prototype.method(/*{ args }*/).next();
+
 assert.sameValue(callCount, 1, 'method invoked exactly once');

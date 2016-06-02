@@ -66,6 +66,7 @@ var C = class {
   }
 };
 
-C.prototype.method(/*{ args }*/);
-
-assert.sameValue(callCount, 1, 'method invoked exactly once');
+assert.throws(/*{ error }*/, function() {
+  C.prototype.method(/*{ args }*/);
+});
+assert.sameValue(callCount, 0, 'method body not evaluated');

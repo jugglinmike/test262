@@ -1,18 +1,20 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-path: language/expressions/function/params-dflt-
-name: function expression
-esid: sec-function-definitions-runtime-semantics-evaluation
-es6id: 14.1.20
+path: language/expressions/object/params-dflt-meth-
+name: method
+esid: sec-runtime-semantics-definemethod
+es6id: 14.3.8
 features: [default-parameters]
 info: |
-    FunctionExpression : function ( FormalParameters ) { FunctionBody }
+    MethodDefinition : PropertyName ( StrictFormalParameters ) { FunctionBody }
 
-        [...]
-        3. Let closure be FunctionCreate(Normal, FormalParameters, FunctionBody,
-           scope, strict).
-        [...]
+    [...]
+    6. Let closure be FunctionCreate(kind, StrictFormalParameters,
+       FunctionBody, scope, strict). If functionPrototype was passed as a
+       parameter then pass its value as the functionPrototype optional argument
+       of FunctionCreate.
+    [...]
 
     9.2.1 [[Call]] ( thisArgument, argumentsList)
 
@@ -38,13 +40,8 @@ info: |
     [...]
 ---*/
 
-var callCount = 0;
-var f;
-f = function(/*{ params }*/) {
-  /*{ body }*/
-  callCount = callCount + 1;
+0, {
+  method(/*{ params }*/) {
+    /*{ body }*/
+  }
 };
-
-f(/*{ args }*/);
-
-assert.sameValue(callCount, 1, 'function invoked exactly once');

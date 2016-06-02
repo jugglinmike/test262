@@ -1,7 +1,7 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-path: language/expressions/object/dstr-gen-meth-
+path: language/expressions/object/params-dflt-gen-meth-
 name: generator method
 esid: sec-generator-function-definitions-runtime-semantics-propertydefinitionevaluation
 es6id: 14.4.13
@@ -45,11 +45,12 @@ info: |
 
 var callCount = 0;
 var obj = {
-  *method(/*{ elems }*/) {
+  *method(/*{ params }*/) {
     /*{ body }*/
     callCount = callCount + 1;
   }
 };
 
-obj.method(/*{ vals }*/).next();
+obj.method(/*{ args }*/).next();
+
 assert.sameValue(callCount, 1, 'generator method invoked exactly once');

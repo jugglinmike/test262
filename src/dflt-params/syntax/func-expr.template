@@ -38,13 +38,6 @@ info: |
     [...]
 ---*/
 
-var callCount = 0;
-var f;
-f = function(/*{ params }*/) {
+0, function(/*{ params }*/) {
   /*{ body }*/
-  callCount = callCount + 1;
 };
-
-f(/*{ args }*/);
-
-assert.sameValue(callCount, 1, 'function invoked exactly once');

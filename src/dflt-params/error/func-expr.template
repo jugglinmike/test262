@@ -45,6 +45,7 @@ f = function(/*{ params }*/) {
   callCount = callCount + 1;
 };
 
-f(/*{ args }*/);
-
-assert.sameValue(callCount, 1, 'function invoked exactly once');
+assert.throws(/*{ error }*/, function() {
+  f(/*{ args }*/);
+});
+assert.sameValue(callCount, 0, 'function body not evaluated');

@@ -1,7 +1,7 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-path: language/expressions/generators/dstr-
+path: language/expressions/generators/params-dflt-
 name: generator function expression
 esid: sec-generator-function-definitions-runtime-semantics-evaluation
 es6id: 14.4.14
@@ -40,10 +40,11 @@ info: |
 
 var callCount = 0;
 var f;
-f = function*(/*{ elems }*/) {
+f = function*(/*{ params }*/) {
   /*{ body }*/
   callCount = callCount + 1;
 };
 
-f(/*{ vals }*/).next();
+f(/*{ args }*/).next();
+
 assert.sameValue(callCount, 1, 'generator function invoked exactly once');

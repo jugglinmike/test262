@@ -1,8 +1,8 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-path: language/expressions/class/params-dflt-meth-
-name: class expression method
+path: language/expressions/class/params-dflt-meth-static-
+name: static class expression method
 esid: sec-class-definitions-runtime-semantics-evaluation
 es6id: 14.5.16
 features: [default-parameters]
@@ -19,10 +19,10 @@ info: |
 
     21. For each ClassElement m in order from methods
         a. If IsStatic of m is false, then
-           i. Let status be the result of performing
-              PropertyDefinitionEvaluation for m with arguments proto and
-              false.
-        [...]
+        b. Else,
+           Let status be the result of performing PropertyDefinitionEvaluation for
+           m with arguments F and false.
+    [...]
 
     14.3.8 Runtime Semantics: DefineMethod
 
@@ -60,12 +60,13 @@ info: |
 
 var callCount = 0;
 var C = class {
-  method(/*{ params }*/) {
+  static method(/*{ params }*/) {
     /*{ body }*/
     callCount = callCount + 1;
   }
 };
 
-C.prototype.method(/*{ args }*/);
-
-assert.sameValue(callCount, 1, 'method invoked exactly once');
+assert.throws(/*{ error }*/, function() {
+  C.method(/*{ args }*/);
+});
+assert.sameValue(callCount, 0, 'method body not evaluated');

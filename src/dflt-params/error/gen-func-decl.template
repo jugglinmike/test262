@@ -1,17 +1,17 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-path: language/expressions/function/params-dflt-
-name: function expression
-esid: sec-function-definitions-runtime-semantics-evaluation
-es6id: 14.1.20
+path: language/statements/generators/params-dflt-
+name: generator function declaration
+esid: sec-generator-function-definitions-runtime-semantics-instantiatefunctionobject
+es6id: 14.4.12
 features: [default-parameters]
 info: |
-    FunctionExpression : function ( FormalParameters ) { FunctionBody }
+    GeneratorDeclaration : function * ( FormalParameters ) { GeneratorBody }
 
         [...]
-        3. Let closure be FunctionCreate(Normal, FormalParameters, FunctionBody,
-           scope, strict).
+        2. Let F be GeneratorFunctionCreate(Normal, FormalParameters,
+           GeneratorBody, scope, strict).
         [...]
 
     9.2.1 [[Call]] ( thisArgument, argumentsList)
@@ -39,12 +39,13 @@ info: |
 ---*/
 
 var callCount = 0;
-var f;
-f = function(/*{ params }*/) {
+function* f(/*{ params }*/) {
   /*{ body }*/
   callCount = callCount + 1;
-};
+}
 
-f(/*{ args }*/);
+assert.throws(/*{ error }*/, function() {
+  f(/*{ args }*/);
+});
 
-assert.sameValue(callCount, 1, 'function invoked exactly once');
+assert.sameValue(callCount, 0, 'generator function body not evaluated');

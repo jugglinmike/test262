@@ -1,31 +1,12 @@
 // Copyright (C) 2016 the V8 project authors. All rights reserved.
 // This code is governed by the BSD license found in the LICENSE file.
 /*---
-path: language/expressions/class/params-dflt-gen-meth-static-
-name: static class expression generator method
-esid: sec-class-definitions-runtime-semantics-evaluation
-es6id: 14.5.16
+path: language/expressions/object/params-dflt-gen-meth-
+name: generator method
+esid: sec-generator-function-definitions-runtime-semantics-propertydefinitionevaluation
+es6id: 14.4.13
 features: [default-parameters]
 info: |
-    ClassExpression : class BindingIdentifieropt ClassTail
-
-    1. If BindingIdentifieropt is not present, let className be undefined.
-    2. Else, let className be StringValue of BindingIdentifier.
-    3. Let value be the result of ClassDefinitionEvaluation of ClassTail
-       with argument className.
-    [...]
-
-    14.5.14 Runtime Semantics: ClassDefinitionEvaluation
-
-    21. For each ClassElement m in order from methods
-        a. If IsStatic of m is false, then
-        b. Else,
-           Let status be the result of performing PropertyDefinitionEvaluation
-           for m with arguments F and false.
-    [...]
-
-    14.4.13 Runtime Semantics: PropertyDefinitionEvaluation
-
     GeneratorMethod :
         * PropertyName ( StrictFormalParameters ) { GeneratorBody }
 
@@ -36,6 +17,7 @@ info: |
     4. Let scope be the running execution context's LexicalEnvironment.
     5. Let closure be GeneratorFunctionCreate(Method,
        StrictFormalParameters, GeneratorBody, scope, strict).
+    [...]
 
     9.2.1 [[Call]] ( thisArgument, argumentsList)
 
@@ -61,14 +43,8 @@ info: |
     [...]
 ---*/
 
-var callCount = 0;
-var C = class {
-  static *method(/*{ params }*/) {
+0, {
+  *method(/*{ params }*/) {
     /*{ body }*/
-    callCount = callCount + 1;
   }
 };
-
-C.method(/*{ args }*/).next();
-
-assert.sameValue(callCount, 1, 'method invoked exactly once');

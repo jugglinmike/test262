@@ -65,7 +65,8 @@ class C {
     /*{ body }*/
     callCount = callCount + 1;
   }
-};
+}
 
 C.method(/*{ args }*/).next();
+
 assert.sameValue(callCount, 1, 'method invoked exactly once');

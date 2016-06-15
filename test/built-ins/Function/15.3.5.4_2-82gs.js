@@ -11,11 +11,21 @@ flags: [noStrict]
 features: [caller]
 ---*/
 
-function f() { return gNonStrict();};
-var o = {};
-(function () {"use strict"; f.apply(o); })();
-
-
 function gNonStrict() {
     return gNonStrict.caller;
 }
+var caller = function() {
+  "use strict";
+  value = gNonStrict.apply({});
+};
+var value;
+
+// In the event that the implementation chooses not to define an "own" property
+// on the function object, the reference to "caller" will resolve to the
+// ThrowTypeError function installed as a "set" accessor method on the
+// FunctionPrototype object.
+try {
+  caller();
+} catch (err) {}
+
+assert.notSameValue(value, caller);

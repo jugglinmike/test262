@@ -1,6 +1,6 @@
 class Check(object):
-    id = None
+    ID = None
     description = None
 
-    def run(name, meta, source):
+    def run(self, name, meta, source):
         return True

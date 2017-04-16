@@ -16,7 +16,7 @@ parser.add_argument('--whitelist',
         type=argparse.FileType('r'),
         help='file containing expected linting errors')
 parser.add_argument('files',
-        nargs='*',
+        nargs='+',
         help='files to lint')
 
 checks = [CheckFrontmatter(), CheckLicense()]
@@ -44,6 +44,10 @@ if __name__ == '__main__':
         whitelist = lib.whitelist.parse(args.whitelist)
     else:
         whitelist = dict()
+
+    file_count = len(args.files)
+    print 'Linting %s file%s.' % (file_count, 's' if file_count != 1 else '')
+
     all_errors = lint(args.files)
     unexpected_errors = dict(all_errors)
 

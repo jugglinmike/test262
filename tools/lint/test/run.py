@@ -33,9 +33,34 @@ class TestGeneration(unittest.TestCase):
         result = self.lint(['non-existent-file.js'])
         self.assertNotEqual(result["returncode"], 0)
 
-    def test_normal(self):
-        fspath = self.fixture('foobar', 'some text')
-        result = self.lint([fspath])
+def create_file_test(name, fspath):
+    def test(self):
+        with open(fspath, 'r') as f:
+            contents = f.read()
+        expected, input = contents.split('^ expected errors | v input\n')
+        expected = expected.split()
+        tmp_file = self.fixture(name, input)
+        result = self.lint([tmp_file])
+        if len(expected) == 0:
+            self.assertEqual(result['returncode'], 0)
+            self.assertEqual(result['stderr'], '')
+        else:
+            self.assertNotEqual(result['returncode'], 0)
+            for err in expected:
+                self.assertIn(err, result['stderr'])
+
+    return test
+
+
+dirname = os.path.join(os.path.abspath(testDir), 'fixtures')
+for file_name in os.listdir(dirname):
+    full_path = os.path.join(dirname, file_name)
+    if not os.path.isfile(full_path) or file_name.startswith('.'):
+        continue
+
+    t = create_file_test(file_name, full_path)
+    t.__name__ = 'test_' + file_name
+    setattr(TestGeneration, t.__name__, t)
 
 if __name__ == '__main__':
     unittest.main()

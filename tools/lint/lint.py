@@ -3,62 +3,63 @@
 # This code is governed by the BSD license found in the LICENSE file.
 
 import argparse
-import inspect
-import re
 import sys
-import yaml
 
 from lib.checks.frontmatter import CheckFrontmatter
 from lib.eprint import eprint
+import lib.frontmatter
+import lib.whitelist
 
 parser = argparse.ArgumentParser(description='Test262 linting tool')
+parser.add_argument('--whitelist', type=argparse.FileType('r'))
 parser.add_argument('files',
         nargs='*',
         help='files to lint')
 
 checks = [CheckFrontmatter()]
 
-def parse_frontmatter(src):
-    match = re.search(r'/\*---(.*)---\*/', src, re.DOTALL)
-    if not match:
-        return None
+def lint(file_names):
+    errors = dict()
 
-    try:
-        return yaml.load(match.group(1))
-    except (yaml.scanner.ScannerError, yaml.parser.ParserError):
-        return None
-
-if __name__ == '__main__':
-    args = parser.parse_args()
-    errors = []
-    failed_checks = set([])
-
-    for file_name in args.files:
+    for file_name in file_names:
         with open(file_name, 'r') as f:
             content = f.read()
-        meta = parse_frontmatter(content)
+        meta = lib.frontmatter.parse(content)
         for check in checks:
             error = check.run(file_name, meta, content)
 
             if error is not None:
-                failed_checks.add(check)
-                errors.append((file_name, check, error))
+                if file_name not in errors:
+                    errors[file_name] = dict()
+                errors[file_name][check.ID] = error
 
-    error_count = len(errors)
+    return errors
+
+if __name__ == '__main__':
+    args = parser.parse_args()
+    if args.whitelist:
+        whitelist = lib.whitelist.parse(args.whitelist)
+    else:
+        whitelist = dict()
+    all_errors = lint(args.files)
+    unexpected_errors = dict(all_errors)
+
+    for file_name, failures in all_errors.iteritems():
+        if file_name not in whitelist:
+            continue
+        if set(failures.keys()) == whitelist[file_name]:
+            del unexpected_errors[file_name]
+
+    error_count = len(unexpected_errors)
     s = 's' if error_count != 1 else ''
 
-    print '%s error%s found.' % (error_count, s)
+    print 'Linting complete. %s error%s found.' % (error_count, s)
 
     if error_count == 0:
         sys.exit(0)
 
-    for error in errors:
-        eprint('%s: %s - %s' % (error[0], error[1].ID, error[2]))
-
-    eprint('')
-    eprint('## Check Descriptions')
-
-    for failed_check in failed_checks:
-        eprint('%s - %s' % (failed_check.ID, failed_check.__doc__))
+    for file_name, failures in unexpected_errors.iteritems():
+        for ID, message in failures.iteritems():
+            eprint('%s: %s - %s' % (file_name, ID, message))
 
     sys.exit(1)

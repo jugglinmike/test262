@@ -48,6 +48,22 @@ class TestGeneration(unittest.TestCase):
 
         self.assertEqual(result['returncode'], 0)
 
+    def test_whitelist_comment(self):
+        test_content = ('// Copyright (C) 2017 Mike Pennisi. All rights reserved.' +
+            '// This code is governed by the BSD license found in the LICENSE file.')
+        test_file = self.fixture('input.js', test_content)
+        whitelist_content = ('# One comment\n' +
+            '# Another comment\n' +
+            test_file + ' FRONTMATTER')
+        whitelist_file = self.fixture('lint.whitelist', whitelist_content)
+
+        result = self.lint([test_file])
+
+        self.assertNotEqual(result['returncode'], 0)
+
+        result = self.lint(['--whitelist', whitelist_file, test_file])
+
+        self.assertEqual(result['returncode'], 0)
 
 def create_file_test(name, fspath):
     def test(self):

@@ -2,6 +2,9 @@ def parse(handle):
     whitelist = dict()
 
     for line in handle:
+        if line.startswith('#'):
+            continue
+
         parts = line.split()
         file_name = parts[0]
         check_names = set(parts[1:])

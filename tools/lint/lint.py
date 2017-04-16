@@ -6,6 +6,7 @@ import argparse
 import sys
 
 from lib.checks.frontmatter import CheckFrontmatter
+from lib.checks.license import CheckLicense
 from lib.eprint import eprint
 import lib.frontmatter
 import lib.whitelist
@@ -16,7 +17,7 @@ parser.add_argument('files',
         nargs='*',
         help='files to lint')
 
-checks = [CheckFrontmatter()]
+checks = [CheckFrontmatter(), CheckLicense()]
 
 def lint(file_names):
     errors = dict()

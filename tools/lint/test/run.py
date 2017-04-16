@@ -34,7 +34,7 @@ class TestGeneration(unittest.TestCase):
         self.assertNotEqual(result["returncode"], 0)
 
     def test_whitelist_single(self):
-        test_content = ('// Copyright (C) 2017 Mike Pennisi. All rights reserved.' +
+        test_content = ('// Copyright (C) 2017 Mike Pennisi. All rights reserved.\n' +
             '// This code is governed by the BSD license found in the LICENSE file.')
         test_file = self.fixture('input.js', test_content)
         whitelist_content = test_file + ' FRONTMATTER'
@@ -49,7 +49,7 @@ class TestGeneration(unittest.TestCase):
         self.assertEqual(result['returncode'], 0)
 
     def test_whitelist_comment(self):
-        test_content = ('// Copyright (C) 2017 Mike Pennisi. All rights reserved.' +
+        test_content = ('// Copyright (C) 2017 Mike Pennisi. All rights reserved.\n' +
             '// This code is governed by the BSD license found in the LICENSE file.')
         test_file = self.fixture('input.js', test_content)
         whitelist_content = ('# One comment\n' +

@@ -1,8 +1,10 @@
 language: python
 install: pip install pyyaml
 script:
-  - echo The test generation tool should be working.
-  - ./tools/generation/test/run.py
-  - sh ./tools/scripts/ci.sh
+  - $SCRIPT
 after_success:
-  - sh ./tools/scripts/deploy.sh
+  - ./tools/scripts/deploy.sh
+env:
+  - SCRIPT=./tools/scripts/ci_build.sh
+  - SCRIPT=./tools/generation/test/run.py
+  - SCRIPT=./tools/scripts/ci_lint.sh

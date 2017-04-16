@@ -2,6 +2,10 @@ import re
 import yaml
 
 def parse(src):
+    '''Parse the YAML-formatted metadata found in a given string of source
+    code. Tolerate missing or invalid metadata; those conditions are handled by
+    a dedicated "Check" instance.'''
+
     match = re.search(r'/\*---(.*)---\*/', src, re.DOTALL)
     if not match:
         return None

@@ -8,7 +8,7 @@ testDir = os.path.dirname(os.path.relpath(__file__))
 OUT_DIR = os.path.join(testDir, 'out')
 ex = os.path.join(testDir, '..', 'lint.py')
 
-class TestGeneration(unittest.TestCase):
+class TestLinter(unittest.TestCase):
     maxDiff = None
 
     def fixture(self, name, content):
@@ -66,6 +66,9 @@ class TestGeneration(unittest.TestCase):
         self.assertEqual(result['returncode'], 0)
 
 def create_file_test(name, fspath):
+    '''Dynamically generate a function that may be used as a test method with
+    the Python `unittest` module.'''
+
     def test(self):
         with open(fspath, 'r') as f:
             contents = f.read()
@@ -83,7 +86,6 @@ def create_file_test(name, fspath):
 
     return test
 
-
 dirname = os.path.join(os.path.abspath(testDir), 'fixtures')
 for file_name in os.listdir(dirname):
     full_path = os.path.join(dirname, file_name)
@@ -92,7 +94,7 @@ for file_name in os.listdir(dirname):
 
     t = create_file_test(file_name, full_path)
     t.__name__ = 'test_' + file_name
-    setattr(TestGeneration, t.__name__, t)
+    setattr(TestLinter, t.__name__, t)
 
 if __name__ == '__main__':
     unittest.main()

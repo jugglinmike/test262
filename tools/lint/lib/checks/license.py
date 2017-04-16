@@ -5,7 +5,7 @@ from ..check import Check
 _MIN_YEAR = 2009
 _MAX_YEAR = 2030
 
-license_pattern = re.compile(
+_LICENSE_PATTERN = re.compile(
     r'\/\/ Copyright( \([cC]\))? (\w+) .+\. {1,2}All rights reserved\.[\r\n]{1,2}' +
     r'(' +
         r'\/\/ (' +
@@ -28,7 +28,7 @@ class CheckLicense(Check):
         if meta and 'flags' in meta and 'generated' in meta['flags']:
             return
 
-        match = license_pattern.search(source)
+        match = _LICENSE_PATTERN.search(source)
 
         if not match:
             return 'No license information found.'

@@ -1,11 +1,11 @@
 from ..check import Check
 
-_required_fields = set(['description'])
-_optional_fields = set([
+_REQUIRED_FIELDS = set(['description'])
+_OPTIONAL_FIELDS = set([
     'author', 'es5id', 'es6id', 'esid', 'features', 'flags', 'includes',
     'info', 'negative', 'timeout'
 ])
-_valid_fields = _required_fields | _optional_fields
+_VALID_FIELDS = _REQUIRED_FIELDS | _OPTIONAL_FIELDS
 
 class CheckFrontmatter(Check):
     '''Ensure tests have the expected YAML-formatted metadata.'''
@@ -22,11 +22,11 @@ class CheckFrontmatter(Check):
 
         fields = set(meta.keys())
 
-        missing = _required_fields - fields
+        missing = _REQUIRED_FIELDS - fields
         if len(missing) > 0:
             return 'Required fields missing: %s' % ', '.join(list(missing))
 
-        unrecognized = fields - _valid_fields
+        unrecognized = fields - _VALID_FIELDS
         if len(unrecognized) > 0:
             return 'Unrecognized fields: %s' % ', '.join(list(unrecognized))
 

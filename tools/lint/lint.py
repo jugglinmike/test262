@@ -12,7 +12,9 @@ import lib.frontmatter
 import lib.whitelist
 
 parser = argparse.ArgumentParser(description='Test262 linting tool')
-parser.add_argument('--whitelist', type=argparse.FileType('r'))
+parser.add_argument('--whitelist',
+        type=argparse.FileType('r'),
+        help='file containing expected linting errors')
 parser.add_argument('files',
         nargs='*',
         help='files to lint')

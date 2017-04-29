@@ -8,6 +8,7 @@ import sys
 from lib.collect_files import collect_files
 from lib.checks.frontmatter import CheckFrontmatter
 from lib.checks.license import CheckLicense
+from lib.checks.negative import CheckNegative
 from lib.eprint import eprint
 import lib.frontmatter
 import lib.whitelist
@@ -20,7 +21,7 @@ parser.add_argument('path',
         nargs='+',
         help='file name or directory of files to lint')
 
-checks = [CheckFrontmatter(), CheckLicense()]
+checks = [CheckFrontmatter(), CheckLicense(), CheckNegative()]
 
 def lint(file_names):
     errors = dict()

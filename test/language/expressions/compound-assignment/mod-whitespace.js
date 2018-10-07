@@ -13,45 +13,45 @@ description: Checking by using eval, check operator is x %= y
 var x;
 
 x = -1;
-assert.sameValue(x	%=	-1, 0, 'U+0009 (expression)');
-assert.sameValue(x, 0, 'U+0009 (side effect)');
+assert.sameValue(x	%=	-1, -0, 'U+0009 (expression)');
+assert.sameValue(x, -0, 'U+0009 (side effect)');
 
 x = -1;
-assert.sameValue(x%=-1, 0, 'U+000B (expression)');
-assert.sameValue(x, 0, 'U+000B (side effect)');
+assert.sameValue(x%=-1, -0, 'U+000B (expression)');
+assert.sameValue(x, -0, 'U+000B (side effect)');
 
 x = -1;
-assert.sameValue(x%=-1, 0, 'U+000C (expression)');
-assert.sameValue(x, 0, 'U+000C (side effect)');
+assert.sameValue(x%=-1, -0, 'U+000C (expression)');
+assert.sameValue(x, -0, 'U+000C (side effect)');
 
 x = -1;
-assert.sameValue(x %= -1, 0, 'U+0020 (expression)');
-assert.sameValue(x, 0, 'U+0020 (side effect)');
+assert.sameValue(x %= -1, -0, 'U+0020 (expression)');
+assert.sameValue(x, -0, 'U+0020 (side effect)');
 
 x = -1;
-assert.sameValue(x %= -1, 0, 'U+00A0 (expression)');
-assert.sameValue(x, 0, 'U+00A0 (side effect)');
+assert.sameValue(x %= -1, -0, 'U+00A0 (expression)');
+assert.sameValue(x, -0, 'U+00A0 (side effect)');
 
 x = -1;
 assert.sameValue(x
 %=
--1, 0, 'U+000A (expression)');
-assert.sameValue(x, 0, 'U+000A (side effect)');
+-1, -0, 'U+000A (expression)');
+assert.sameValue(x, -0, 'U+000A (side effect)');
 
 x = -1;
-assert.sameValue(x%=-1, 0, 'U+000D (expression)');
-assert.sameValue(x, 0, 'U+000D (side effect)');
+assert.sameValue(x%=-1, -0, 'U+000D (expression)');
+assert.sameValue(x, -0, 'U+000D (side effect)');
 
 x = -1;
-assert.sameValue(x %= -1, 0, 'U+2028 (expression)');
-assert.sameValue(x, 0, 'U+2028 (side effect)');
+assert.sameValue(x %= -1, -0, 'U+2028 (expression)');
+assert.sameValue(x, -0, 'U+2028 (side effect)');
 
 x = -1;
-assert.sameValue(x %= -1, 0, 'U+2029 (expression)');
-assert.sameValue(x, 0, 'U+2029 (side effect)');
+assert.sameValue(x %= -1, -0, 'U+2029 (expression)');
+assert.sameValue(x, -0, 'U+2029 (side effect)');
 
 x = -1;
 assert.sameValue(x	  
   %=	  
-  -1, 0, 'U+0009U+000BU+000CU+0020U+00A0U+000AU+000DU+2028U+2029 (expression)');
-assert.sameValue(x, 0, 'U+0009U+000BU+000CU+0020U+00A0U+000AU+000DU+2028U+2029 (side effect)');
+  -1, -0, 'U+0009U+000BU+000CU+0020U+00A0U+000AU+000DU+2028U+2029 (expression)');
+assert.sameValue(x, -0, 'U+0009U+000BU+000CU+0020U+00A0U+000AU+000DU+2028U+2029 (side effect)');

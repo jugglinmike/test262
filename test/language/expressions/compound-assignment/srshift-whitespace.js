@@ -13,31 +13,45 @@ description: Checking by using eval, check operator is x >>= y
 var x;
 
 x = 1;
-assert.sameValue(x\u0009>>=\u00091, 0);
+assert.sameValue(x	>>=	1, 0, 'U+0009 (expression)');
+assert.sameValue(x, 0, 'U+0009 (side effect)');
 
 x = 1;
-assert.sameValue(x\u000B>>=\u000B1, 0);
+assert.sameValue(x>>=1, 0, 'U+000B (expression)');
+assert.sameValue(x, 0, 'U+000B (side effect)');
 
 x = 1;
-assert.sameValue(x\u000C>>=\u000C1, 0);
+assert.sameValue(x>>=1, 0, 'U+000C (expression)');
+assert.sameValue(x, 0, 'U+000C (side effect)');
 
 x = 1;
-assert.sameValue(x\u0020>>=\u00201, 0);
+assert.sameValue(x >>= 1, 0, 'U+0020 (expression)');
+assert.sameValue(x, 0, 'U+0020 (side effect)');
 
 x = 1;
-assert.sameValue(x\u00A0>>=\u00A01, 0);
+assert.sameValue(x >>= 1, 0, 'U+00A0 (expression)');
+assert.sameValue(x, 0, 'U+00A0 (side effect)');
 
 x = 1;
-assert.sameValue(x\u000A>>=\u000A1, 0);
+assert.sameValue(x
+>>=
+1, 0, 'U+000A (expression)');
+assert.sameValue(x, 0, 'U+000A (side effect)');
 
 x = 1;
-assert.sameValue(x\u000D>>=\u000D1, 0);
+assert.sameValue(x>>=1, 0, 'U+000D (expression)');
+assert.sameValue(x, 0, 'U+000D (side effect)');
 
 x = 1;
-assert.sameValue(x\u2028>>=\u20281, 0);
+assert.sameValue(x >>= 1, 0, 'U+2028 (expression)');
+assert.sameValue(x, 0, 'U+2028 (side effect)');
 
 x = 1;
-assert.sameValue(x\u2029>>=\u20291, 0);
+assert.sameValue(x >>= 1, 0, 'U+2029 (expression)');
+assert.sameValue(x, 0, 'U+2029 (side effect)');
 
 x = 1;
-assert.sameValue(x\u0009\u000B\u000C\u0020\u00A0\u000A\u000D\u2028\u2029>>=\u0009\u000B\u000C\u0020\u00A0\u000A\u000D\u2028\u20291, 0);
+assert.sameValue(x	  
+  >>=	  
+  1, 0, 'U+0009U+000BU+000CU+0020U+00A0U+000AU+000DU+2028U+2029 (expression)');
+assert.sameValue(x, 0, 'U+0009U+000BU+000CU+0020U+00A0U+000AU+000DU+2028U+2029 (side effect)');

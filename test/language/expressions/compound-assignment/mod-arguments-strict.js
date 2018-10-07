@@ -3,11 +3,15 @@
 
 /*---
 es5id: 11.13.2-6-14-s
+esid: sec-assignment-operators
 description: >
     Strict Mode - SyntaxError is thrown if the identifier arguments
     appear as the LeftHandSideExpression of a Compound Assignment
     operator(%=)
 flags: [onlyStrict]
+negative:
+  phase: parse
+  type: SyntaxError
 ---*/
 
 function testcase() {

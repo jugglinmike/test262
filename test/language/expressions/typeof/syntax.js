@@ -7,71 +7,74 @@ info: |
     allowed
 es5id: 11.4.3_A1
 es6id: 12.5.6.1
-description: Checking by using eval
 ---*/
 
+var x = 0;
+
 assert.sameValue(
-  eval("var x = 0; typeof\u0009x"),
+  typeof	x,
   "number",
-  '#1: var x = 0; typeof\\u0009x; x === "number".'
+  '#1: typeof\\u0009x; x === "number".'
 );
 
 assert.sameValue(
-  eval("var x = 0; typeof\u000Bx"),
+  typeofx,
   "number",
-  '#2: var x = 0; typeof\\u000Bx; x === "number".'
+  '#2: typeof\\u000Bx; x === "number".'
 );
 
 assert.sameValue(
-  eval("var x = 0; typeof\u000Cx"),
+  typeofx,
   "number",
-  '#3: var x = 0; typeof\\u000Cx; x === "number".'
+  '#3: typeof\\u000Cx; x === "number".'
 );
 
 assert.sameValue(
-  eval("var x = 0; typeof\u0020x"),
+  typeof x,
   "number",
-  '#4: var x = 0; typeof\\u0020x; x === "number".'
+  '#4: typeof\\u0020x; x === "number".'
 );
 
 assert.sameValue(
-  eval("var x = 0; typeof\u00A0x"),
+  typeof x,
   "number",
-  '#5: var x = 0; typeof\\u00A0x; x === "number".'
+  '#5: typeof\\u00A0x; x === "number".'
 );
 
 assert.sameValue(
-  eval("var x = 0; typeof\u000Ax"),
+  typeof
+x,
   "number",
-  '#6: var x = 0; typeof\\u000Ax; x === "number".'
+  '#6: typeof\\u000Ax; x === "number".'
 );
 
 assert.sameValue(
-  eval("var x = 0; typeof\u000Dx"),
+  typeofx,
   "number",
-  '#7: var x = 0; typeof\\u000Dx; x === "number".'
+  '#7: typeof\\u000Dx; x === "number".'
 );
 
 assert.sameValue(
-  eval("var x = 0; typeof\u2028x"),
+  typeof x,
   "number",
-  '#8: var x = 0; typeof\\u2028x; x === "number".'
+  '#8: typeof\\u2028x; x === "number".'
 );
 
 assert.sameValue(
-  eval("var x = 0; typeof\u2029x"),
+  typeof x,
   "number",
-  '#9: var x = 0; typeof\\u2029x; x === "number".'
+  '#9: typeof\\u2029x; x === "number".'
 );
 
 assert.sameValue(
-  eval("var x = 0; typeof\u0009\u000B\u000C\u0020\u00A0\u000A\u000D\u2028\u2029x"),
+  typeof	  
+  x,
   "number",
-  '#10: var x = 0; typeof\\u0009\\u000B\\u000C\\u0020\\u00A0\\u000A\\u000D\\u2028\\u2029x; x === "number".'
+  '#10: typeof\\u0009\\u000B\\u000C\\u0020\\u00A0\\u000A\\u000D\\u2028\\u2029x; x === "number".'
 );
 
 assert.sameValue(
-  eval("typeof(0)"),
+  typeof(0),
   "number",
   'applied with grouping operator enclosing operand'
 );

@@ -4,36 +4,72 @@ Explanations behind the practices promoted by the project maintainers.
 
 ## Vestigial tests
 
-  - vestiges
-    - test which use `throw` statements inside of conditional statements rather
-      than assertions
-    - tests with meaningless file names, e.g.
-      https://github.com/tc39/test262/blob/main/test/built-ins/Array/15.4.5-1.js
-    - tests which use elaborate comment blocks to designate sections
-    - tests which use outdated harness functions (e.g. `verifyEnumerable`,
-      `verifyConfigurable`, and `verifyWritable`)
+Test262 has been maintained for many years, and the practices used to write
+tests have evolved alongside the needs of its consumers. When conventions
+change, old tests are typically updated to accommodate the new practices. That
+doesn't always happen, though, and one doesn't have to look very far to find
+examples of tests which contradict the preferred patterns.
+
+For example:
+
+- tests which use `throw` statements inside of conditional statements rather
+  than the assertions API implemented by the harness files (though this
+  explicitness will always been desirable when asserting the semantics of
+  conditional statements and `throw` statements themselves)
+- tests with file names derived from section numbers in the 5th edition of
+  ECMA262, e.g. `built-ins/Array/15.4.5-1.js`
+- tests which validate multiple behaviors, using elaborate comment blocks to
+  designate sections
+- tests which use outdated harness functions, e.g. `verifyEnumerable`,
+  `verifyConfigurable`, and `verifyWritable`
+
+Since existing tests do not necessarily reflect the project's current
+best-practices, it's especially important for test authors to familiarize
+themselves with the contribution guidelines.
 
 ## Test generation
 
-  - The feature was designed to promote uniformity of coverage, particularly
-    for parts of the grammar that are used in many productions. Specifically, I
-    had destructuring assignment in mind.
-  - please, use restraint! Today, about 10% of the test files are generated
-    tests for private fields. The feature is important, but that seems a bit
-    excessive to me.
+The project includes a software tool for generating test material from abstract
+templates. The generator was designed to promote uniformity of coverage,
+particularly for parts of the grammar that are used in many productions
+(specifically: the destructuring assignment patterns introduced in the 6th
+edition of ECMA262).
+
+This tool makes it easy to introduce enormous numbers of tests. Introducing
+more tests is not a goal unto itself, though. Test262 prioritizes coherence in
+its coverage of the specification, and it recognizes that the value of tests,
+as measured by their likelihood to identify defects, varies.
+
+For these reasons, the maintainers urge restraint in the application of the
+test generation tool.
 
 ## File structure
 
-    - the hardest part of the job is being able to answer the question: "do we
-      have coverage for this?"
-    - prefer flat directory hierarchy, based on the organization of the
-      specification
-    - use long, well-structured file names
-      https://github.com/tc39/test262/tree/main/test/built-ins/Promise/race
+For practical reasons, tests are organized in a tree structure according to the
+conventions of modern file systems. Unfortunately, this structure is not
+expressive enough to model the semantics of a rich and evolving programming
+language like ECMAScript. This means the common and crucial task of coverage
+assessment will likely always be a challenge, but strong conventions around
+file organization can help.
 
-Also, the importance of stability in file names
+Tests for syntax-derived operations are organized according to the language
+grammar, with directories used to describe non-terminals. Tests for built-in
+APIs are organized according to the identifiers by which they can be access,
+with directories used to describe the sequence of properties that can be used
+from the global scope.
+
+Directories are not generally applied beyond these limits; further
+differentiation is instead achieved through structured file names which follow
+ad-hoc conventions. This organization balances the need to group tests
+logically with the need to discover tests.
+
+Many consumers use file names as a way to compare test results across revisions
+and between implementations. For this reason, tests files are rarely
+re-organized after being accepted.
 
 ## Regression tests
+
+TODO(mike):
 
     - be comfortable turning away tests which, while technically valid, do not
       have explicit justification in the spec (implementers have their own test
@@ -47,10 +83,10 @@ Also, the importance of stability in file names
 Test262 tests are typically very focused. The vast majority exercise just one
 algorithm step/grammar production, and some are even more granular that that!
 
-Occasionally, we hear from test contributors who are uncomfortable splitting
-their work across files like this. It's certainly unlike the practices that are
-common in application development. In those settings, many tests are commonly
-grouped into the same file and separated by function boundaries.
+Some test contributors are uncomfortable splitting their work across files like
+this. It's certainly unlike the practices that are common in modern application
+development. In those settings, many tests are often grouped into the same file
+and separated by function boundaries.
 
 Test262 doesn't use the same approach as a typical application test suite in
 order to limit complexity. The guidance of "one test per file" means that
@@ -69,16 +105,17 @@ for a test to assert that the expected semantics are followed, even when they
 may already be covered elsewhere.
 
 There's some tension here because verifying semantics invariably requires
-inserting still more code, and that addition code may degrade the tests'
+inserting still more code, and that additional code may degrade the tests'
 precision for verifying syntax. There are probably cases where limiting the
 syntax is desirable, but I don't have any formal criteria.
 
-When considering this, you should be aware that TC39 maintains a separate
-project called test262-parser-tests [1]. This project was partially motivated
-by a desire to offer test material that isn't (and perhaps cannot be) related
-to any specific grammar production. The availability of that project may inform
-decisions about if, where, and how to include future tests for syntax in
-Test262.
+When considering this, you should be aware that TC39 maintains [a separate
+project called
+test262-parser-tests](https://github.com/tc39/test262-parser-tests). This
+project was partially motivated by a desire to offer test material that isn't
+(and perhaps cannot be) related to any specific grammar production. The
+availability of that project may inform decisions about if, where, and how to
+include future tests for syntax in Test262.
 
 ## Avoiding abstraction
 
@@ -98,11 +135,16 @@ One of abstraction's common motivations is its tendency to reduce maintenance
 costs by limiting duplication. As you know, ECMA262 has a commitment to never
 break backwards compatibility. This gives us a certain assurance in Test262
 that maintainers of other test suites do not enjoy: Test262's tests will never
-be invalidated [2]. We take advantage of this by using a more declarative,
+be invalidated\*. We take advantage of this by using a more declarative,
 readable, and verbose style.
 
 Of course, abstraction has other motivations, so there will always be room for
 it to some extent. If you feel the benefits of a specific proposal outweigh the
 drawbacks, then be sure that it is well documented and also well-tested.
-Test262 maintains tests for its "harness" abstractions in a dedicated directory
-within the test suite itself [3].
+Test262 maintains tests for its "harness" abstractions in [a dedicated
+directory within the test suite
+itself](https://github.com/tc39/test262/tree/main/test/harness).
+
+\* There are some exceptions for when TC39 intentionally reserves extensions
+   for future standardization, e.g. in the ImportCall production, but these
+   aren't common.

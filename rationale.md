@@ -10,17 +10,18 @@ change, old tests are typically updated to accommodate the new practices. That
 doesn't always happen, though, and one doesn't have to look very far to find
 examples of tests which contradict the preferred patterns.
 
-For example:
+For instance:
 
-- tests which use `throw` statements inside of conditional statements rather
-  than the assertions API implemented by the harness files (though this
-  explicitness will always been desirable when asserting the semantics of
-  conditional statements and `throw` statements themselves)
+- tests which expression expectations with `throw` statements inside of
+  conditional statements rather than the assertion API implemented by the
+  harness files (though this explicitness will always been desirable when
+  asserting the semantics of conditional statements and `throw` statements
+  themselves)
 - tests with file names derived from section numbers in the 5th edition of
   ECMA262, e.g. `built-ins/Array/15.4.5-1.js`
 - tests which validate multiple behaviors, using elaborate comment blocks to
   designate sections
-- tests which use outdated harness functions, e.g. `verifyEnumerable`,
+- tests which use deprecated harness functions, e.g. `verifyEnumerable`,
   `verifyConfigurable`, and `verifyWritable`
 
 Since existing tests do not necessarily reflect the project's current
@@ -54,7 +55,7 @@ file organization can help.
 
 Tests for syntax-derived operations are organized according to the language
 grammar, with directories used to describe non-terminals. Tests for built-in
-APIs are organized according to the identifiers by which they can be access,
+APIs are organized according to the identifiers by which they can be accessed,
 with directories used to describe the sequence of properties that can be used
 from the global scope.
 
@@ -69,16 +70,16 @@ re-organized after being accepted.
 
 ## Regression tests
 
-TODO(mike):
+It is possible to write tests for semantics which, while not explicitly
+specified by ECMA262, are nonetheless valid according to the normative text.
+Such tests are welcome in Test262, but their fitness is not a given. Consumers
+from many constituencies value the coherence and consistency of the test suite,
+and tests which disallow arbitrary extraneous behavior can degrade those
+qualities. Because Test262 is not maintained as a repository of regression
+tests, contributions which include these kinds of tests will be weighed against
+their likelihood of identifying error in a plurality of implementations.
 
-    - be comfortable turning away tests which, while technically valid, do not
-      have explicit justification in the spec (implementers have their own test
-      suites; Test262 is *not* intended to subsume them, ever)
-      - regression tests
-      - stress tests (except in those rare cases where the language is designed
-        to accommodate stress, e.g. tail call recursion, or weak maps)
-
-## Avoiding long tests
+## Large tests
 
 Test262 tests are typically very focused. The vast majority exercise just one
 algorithm step/grammar production, and some are even more granular that that!
@@ -99,30 +100,28 @@ to learn.
 
 When testing a syntactic feature of the language, it can be tempting to write
 tests which verify that some bit of source text does *not* produce a syntax
-error. In general, I try to push beyond verifying only the lack of a syntax
-error because almost all such tests also have observable semantics. It's better
-for a test to assert that the expected semantics are followed, even when they
-may already be covered elsewhere.
+error. Contributors should try to push beyond verifying only the lack of a
+syntax error because almost all such tests also have observable semantics. It's
+often better for a test to assert that the expected semantics are followed,
+even when they may already be covered elsewhere.
 
-There's some tension here because verifying semantics invariably requires
-inserting still more code, and that additional code may degrade the tests'
-precision for verifying syntax. There are probably cases where limiting the
-syntax is desirable, but I don't have any formal criteria.
+However, this is not always desirable because verifying semantics invariably
+requires inserting still more code, and that additional code may degrade the
+tests' precision for verifying syntax.
 
-When considering this, you should be aware that TC39 maintains [a separate
-project called
-test262-parser-tests](https://github.com/tc39/test262-parser-tests). This
-project was partially motivated by a desire to offer test material that isn't
-(and perhaps cannot be) related to any specific grammar production. The
+When considering this tension, be aware that TC39 maintains [a separate project
+called test262-parser-tests](https://github.com/tc39/test262-parser-tests).
+This project was partially motivated by a desire to offer test material that
+isn't (and perhaps cannot be) related to any specific grammar production. The
 availability of that project may inform decisions about if, where, and how to
-include future tests for syntax in Test262.
+include tests for syntax in Test262.
 
 ## Avoiding abstraction
 
 Contributors will occasionally suggest introducing new abstractions to reduce
-duplication in tests. We have historically set a pretty high bar for such
-practices, both due to their many drawbacks and due to the aspects of standards
-testing which limit their benefit.
+duplication in tests. The maintainers set a relatively high bar for such
+enhancements, both due to their many drawbacks and due to the aspects of
+standards testing which limit their benefit.
 
 The drawbacks to abstraction include:
 
@@ -132,10 +131,10 @@ The drawbacks to abstraction include:
   tested and what has failed
 
 One of abstraction's common motivations is its tendency to reduce maintenance
-costs by limiting duplication. As you know, ECMA262 has a commitment to never
-break backwards compatibility. This gives us a certain assurance in Test262
-that maintainers of other test suites do not enjoy: Test262's tests will never
-be invalidated\*. We take advantage of this by using a more declarative,
+costs by limiting duplication. TC39 has a very high standard for compatibility
+between revisions of ECMA262. This gives us a certain assurance in Test262 that
+maintainers of other test suites do not enjoy: Test262's tests are very rarely
+invalidated. The project takes advantage of this by using a more declarative,
 readable, and verbose style.
 
 Of course, abstraction has other motivations, so there will always be room for
@@ -144,7 +143,3 @@ drawbacks, then be sure that it is well documented and also well-tested.
 Test262 maintains tests for its "harness" abstractions in [a dedicated
 directory within the test suite
 itself](https://github.com/tc39/test262/tree/main/test/harness).
-
-\* There are some exceptions for when TC39 intentionally reserves extensions
-   for future standardization, e.g. in the ImportCall production, but these
-   aren't common.

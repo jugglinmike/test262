@@ -5,29 +5,11 @@
 esid: sec-intl.datetimeformat
 description: TODO
 info: TODO
+includes: [testIntl.js]
 locale: [en]
 ---*/
 
-const availableCalendars = [
-  "buddhist",
-  "chinese",
-  "coptic",
-  "dangi",
-  "ethioaa",
-  "ethiopic",
-  "gregory",
-  "hebrew",
-  "indian",
-  "islamic-civil",
-  "islamic-tbla",
-  "islamic-umalqura",
-  "iso8601",
-  "japanese",
-  "persian",
-  "roc",
-];
-
-for (const calendar of availableCalendars) {
+for (const calendar of allCalendars()) {
   const options = new Intl.DateTimeFormat('en', { calendar, day: 'numeric' }).resolvedOptions();
 
   assert(

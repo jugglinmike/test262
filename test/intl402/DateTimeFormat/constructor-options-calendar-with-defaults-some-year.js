@@ -45,4 +45,3 @@ for (const calendar of allCalendars()) {
     calendar + ': year (got "' + options.year + '")'
   );
 }
-

@@ -45,4 +45,3 @@ for (const calendar of allCalendars()) {
   );
   assert.sameValue('year' in options, false, calendar + ': year');
 }
-

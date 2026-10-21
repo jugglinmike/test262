@@ -3,8 +3,30 @@
 
 /*---
 esid: sec-intl.datetimeformat
-description: TODO
-info: TODO
+description: Day, month, and year are honored when specified
+info: |
+  11.1.1 Intl.DateTimeFormat ( [ locales [ , options ] ] )
+  [...]
+  2. Let dateTimeFormat be ? CreateDateTimeFormat(newTarget, locales, options, any, date).
+  [...]
+
+  11.1.2 CreateDateTimeFormat ( newTarget, locales, options, required, defaults )
+  [...]
+  31. Else,
+      [...]
+      e. For each property name propertyKey of propertyKeys, do
+         i. Let value be formatOptions.[[<propertyKey>]].
+         ii. If value is not undefined, set needDefaults to false.
+      f. If needDefaults is true, then
+         i. Let numericProperties be a new empty List.
+         [...]
+         iv. For each property name propertyKey of numericProperties, do
+             1. Set formatOptions.[[<propertyKey>]] to "numeric".
+      g. Let formats be resolvedLocaleData.[[formats]].[[<resolvedCalendar>]].
+      h. If formatMatcher is "basic", let bestFormat be
+         BasicFormatMatcher(formatOptions, formats); else let bestFormat be
+         BestFitFormatMatcher(formatOptions, formats).
+   [...]
 includes: [testIntl.js]
 locale: [en]
 ---*/
